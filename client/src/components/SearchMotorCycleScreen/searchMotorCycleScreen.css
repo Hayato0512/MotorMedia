@@ -1,0 +1,108 @@
+.searchMotorCycleScreenContainer{
+    width:100%;
+    height: 100%;
+    background-color: rgb(233, 250, 250);
+    border-left: 1px solid grey;
+}
+.searchMotorCyclePickersDiv{
+    display: flex;
+flex: 12;
+height: 80%;
+}
+.searchMotorCycleMakePickerDiv{
+    flex: 6;
+    
+}
+.searchMotorCycleModelPickerDiv{
+    flex: 6;
+}
+.searchMotorCycleScreenTitleDiv{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 20px;
+    margin: 5px;
+    font-size: 35px;
+}
+.searchMotorCycleScreenTitleText{
+    color: black;
+}
+.searchMotorCycleResult{
+    display: flex;
+    flex: 12;
+    background-color: rgb(233, 250, 250);
+    height: 100%;
+}
+.searchMotorCycleResultSpecDiv{
+    flex:9;
+    height: 100%;
+}
+.searchMotorCycleResultRightDiv{
+    flex:3;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid grey;
+}
+.searchMotorCycleResultRightDivWrapper{
+    display: flex;
+    flex-direction: column;
+    margin: 5px 5px 5px 5px;
+    align-items: center;
+
+}
+.searchMotorCycleResultBackButtonDiv{
+    background-color: aqua;
+    align-items: center;
+    justify-content: center;
+}
+.searchScreenOwnersList{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.divForAddModelToFavorite{
+    display: flex;
+    flex-direction:column;
+}
+.divForOwningTheModel{
+    margin-top: 20px;
+    display: flex;
+    flex-direction:column;
+}
+.searchScreenOwnButton{
+    border:none;
+    padding:7px;
+    border-radius:5px;
+    background-color: rgb(174, 201, 240);
+    font-weight: 500; 
+    margin-top: 10px;
+    cursor:pointer;
+    color: rgb(81, 80, 80);
+}
+.searchScreenOwnersListDiv{
+    margin-top: 20px;
+}
+.searchScreenOwnersListTitle{
+    display: flex;
+    justify-content: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+    background-color: white;
+}
+.searchMotorCycleResultGoBackButton{
+    margin-right: 50px;
+    border:none;
+    padding:7px;
+    border-radius:5px;
+    background-color: rgb(174, 201, 240);
+    font-weight: 500; 
+    cursor:pointer;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: rgb(81, 80, 80);
+    margin-left: 60px;
+}

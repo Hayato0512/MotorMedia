@@ -1,0 +1,28 @@
+
+.modelPicker{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+align-items: center;
+    justify-content: center;
+
+}
+.modelPickerForm{
+    margin-bottom: 150px;
+}
+.modelPickerText{
+    margin-top: 40px;
+    top: 120px;
+}
+.modelPickerContentWrapper{
+    margin-bottom: 220px;
+}
+.modelPickerWaiting{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.modelPickerWaitingTextDiv{
+    margin-bottom: 290px;
+}

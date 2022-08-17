@@ -1,0 +1,34 @@
+.favoriteBikes{
+    height: 100%;
+    display: flex;
+}
+.favoriteBikesWrapper{
+    display: flex;
+    flex-direction: column;
+    margin: 15px 15px;
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid grey;
+    background-color:white;
+}
+.favoriteBikesTitle{
+    margin: 10px;
+    margin-top: 10px;
+    border-radius: 20px;
+    font-size: 32px;
+    justify-content: center;
+    display: flex;
+    
+    border: 1px solid grey;
+}
+.favoriteBikesEntries{
+}
+.favoriteBikesEntry{
+    border-bottom: 1px solid grey;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.favoriteBikesMakeName{
+    margin-left: 5px;
+}

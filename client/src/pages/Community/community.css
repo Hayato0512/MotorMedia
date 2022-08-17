@@ -1,0 +1,259 @@
+.community{
+    display:flex;
+    width: 100%;
+    flex:12;
+    background-color: rgb(233, 250, 250);
+}
+.chosencommunity{
+    display:flex;
+    width: 100%;
+    flex:12;
+    background-color: rgb(233, 250, 250);
+}
+.chosencommunitySidebarContainer{
+    flex: 4;
+}
+
+.communityUnko{
+    background-color: rgb(233, 250, 250);
+}
+.communityRight{
+    background-color: rgb(233, 250, 250);
+}
+.chosencommunityRight{
+    background-color: rgb(233, 250, 250);
+    flex: 8;
+}
+.communityCover{
+    height: 320px;
+    position: relative;
+    background-color: black;
+}
+.chosencommunityCover{
+    height: 320px;
+    position: relative;
+}
+.communityCoverImg{
+    width: 100%;
+    height: 250px;
+    object-fit:cover;
+}
+.chosencommunityCoverImg{
+    width: 100%;
+    height: 250px;
+    object-fit:cover;
+    z-index:-1;
+}
+.chosencommunityGoBackButton{
+    position: absolute;
+    margin-top: 60px;
+    z-index:1;
+    left:20px;
+    border:none;
+    border-radius:5px;
+    background-color: rgb(225, 227, 229);
+    font-weight: 500; 
+    cursor:pointer;
+    color: rgb(81, 80, 80);
+    margin-left: 10px;
+    margin-right: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.communityRightCenter{
+    background-color: yellow;
+}
+.chosencommunityRightCenter{
+    background-color: rgb(233, 250, 250);
+    flex:8.5;
+}
+.communityRightCenterFeed{
+margin-right:50px;
+}
+.chosencommunityRightCenterFeed{
+margin-right:50px;
+}
+.chosenCommunityRightRight{
+    flex:3.5;
+    background-color: rgb(233, 250, 250);
+}
+.communityCreateButton{
+    
+    border:none;
+    border-radius:5px;
+    background-color: rgb(225, 227, 229);
+    font-weight: 500; 
+    cursor:pointer;
+    color: rgb(81, 80, 80);
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+}
+.communitySearchButton{
+    border:none;
+    border-radius:5px;
+    background-color: rgb(225, 227, 229);
+    font-weight: 500; 
+    cursor:pointer;
+    color: rgb(81, 80, 80);
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+
+}
+.communityEntryButton{
+    border:none;
+    border-radius:5px;
+    background-color: rgb(225, 227, 229);
+    font-weight: 500; 
+    cursor:pointer;
+    color: rgb(81, 80, 80);
+    margin-left: 20px;
+    margin-right: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+}
+
+.communityRightBottom{
+    display:flex;
+    margin-top:70px;
+}
+.chosencommunityRightBottom{
+    display:flex;
+    flex: 12;
+    margin-top:70px;
+}
+.communityTitle{
+    border-radius: 5px;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    width: 50%;
+    border: 2px solid black;
+    font-size: 40px;
+    margin: 10px;
+}
+.chosencommunityTitle{
+    border-radius: 5px;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+   padding: 10px 10px 30px 10px ;
+
+    color: black;
+    width: 90%;
+    border: 2px solid black;
+    font-size: 30px;
+    margin: 10px;
+}
+
+.communityTitleText{
+    color: black;
+}
+.communityUnko{
+    background-color: rgb(233, 250, 250);
+
+}
+.communityUpperDiv{
+    display: flex;
+    background-color: rgb(233, 250, 250);
+    width: 100%;
+    height: 110px;
+}
+.communitySearch{
+    background-color: white;
+    height: 60px;
+    align-items: center;
+    display: flex;
+    flex:12;
+    margin: 10px;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+.communitySearchTitle{
+    flex: 2;
+    padding: 3px;
+}
+.communitySearchButton{
+    margin-left: 20px;
+}
+.communitySearchInput{
+    margin-right:150px;
+}
+.communitySearchInputDivs{
+    flex: 10;
+    background-color: white;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    -webkit-box-shadow: 9px 9px 34px -22px rgba(0,0,0,0.75);
+-moz-box-shadow: 9px 9px 34px -22px rgba(0,0,0,0.75);
+box-shadow: 9px 9px 34px -22px rgba(0,0,0,0.75);
+}
+.communityEntries{
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin: 10px;
+    -webkit-box-shadow: 9px 9px 34px -22px rgba(0,0,0,0.75);
+-moz-box-shadow: 9px 9px 34px -22px rgba(0,0,0,0.75);
+box-shadow: 9px 9px 34px -22px rgba(0,0,0,0.75);
+}
+.communityEntry{
+    margin: 10px 0px;
+    border-bottom:1px solid grey;
+    display: flex;
+    justify-content: space-between;
+}
+.communityEntryName{
+    margin-left: 20px;
+}
+.communityEntryButton{
+    margin-right: 20px;
+}
+.communityCreateInputs{
+    background-color: white;
+    width: 50%;
+    margin: 10px;
+    border-radius: 8px;
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+}
+.communityCreateTitle{
+    background-color: white;
+    height: 30%;
+    font-size: 20px;
+    align-items: center;
+}
+.communityCreateInputDiv{
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.communityCreateInputField{
+
+}
+.communityGoBackButton{
+    position: absolute;
+    left:20px;
+}
+.comunitySideberWrapper{
+    flex:3;
+}
+.communityRightbarWrapper{
+    flex:2;
+}
+.communityUnko{
+    flex:7;
+}

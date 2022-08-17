@@ -1,0 +1,206 @@
+.sidebar{
+    flex:3;
+    height:calc(100vh - 50px);
+    overflow: scroll;
+    position:sticky;
+    top: 50px;
+}
+.sidebarWrapper{
+    padding:20px;
+}
+::-webkit-scrollbar{
+    width: 5px;
+
+}
+::-webkit-scrollbar-track{
+    background-color: aliceblue;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgb(200, 195, 195);
+}
+
+.sidebarList{
+    padding:0;
+    margin: 0;
+    list-style: none;
+    /* this will disable the dots */
+}
+
+.sidebarListItem{
+    display:flex;
+    align-items: center;
+    margin-bottom:  20px;
+}
+
+.sidebarIcon{
+    margin-left:15px;
+}
+
+.sidebarButton{
+    width:150px;
+    border:none;
+    background-color:aliceblue;
+    padding:10px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.sidebarHr{
+    margin:20px 0;
+}
+
+.sidebarFriendList{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+.sidebarFavoriteBikes{
+    height: 100%;
+}
+.sidebarListItemText{
+    color:black;
+}
+.sidebarIcon{
+    color:black;
+}
+/* 
+INSERT INTO patient1 VALUES (001, 'Hayato Koyama', "1111 hayato St", "12/05/1999", 2321232 );
+INSERT INTO patient1 VALUES (002, 'bob smith', "2222 bob St", "12/15/2004", 22323132 );
+INSERT INTO patient1 VALUES (003, 'Kento Kokubo', "2111 kento St", "12/06/1999", 83212232 );
+INSERT INTO patient1 VALUES (004, 'Yuki Koyama', "4111 hayato St", "12/05/1799", 93212232 );
+INSERT INTO patient1 VALUES (005, 'Takuya Koyama', "5111 hayato St", "12/05/1899", 6312232 );
+
+
+INSERT INTO employee VALUES(001, 'unko Koyama', "7111 hayato St", "13/05/1899", 12345);
+INSERT INTO employee VALUES (002, 'chinko Koyama', "5111 hayato St", "12225/1899",  12345);
+INSERT INTO employee  VALUES (003, 'ai Koyama', "7118 hayato St", "13/04/1899",  12345);
+INSERT INTO employee   VALUES (004, 'kouji Koyama', "7411 hayato St", "19/05/1899",  12345);
+INSERT INTO employee   VALUES (005, 'miki Koyama', "7171 hayato St", "19/05/1899",  12345);
+
+INSERT INTO pharmacist VALUES(001, 'unko Koyama', "7111 hayato St", "13/05/1899", 12345, "SFU");
+INSERT INTO pharmacist  VALUES (002, 'chinko Koyama', "5111 hayato St", "12225/1899",  12345 ,"SFU");
+INSERT INTO pharmacist  VALUES (003, 'ai Koyama', "7118 hayato St", "13/04/1899",  12345, "SFU");
+INSERT INTO pharmacist   VALUES (004, 'kouji Koyama', "7411 hayato St", "19/05/1899",  12345, "SFU");
+INSERT INTO pharmacist   VALUES (005, 'miki Koyama', "7171 hayato St", "19/05/1899",  12345, "SFU");
+
+INSERT INTO doctor VALUES(001, 'unko Koyama', "7111 hayato St", "13/05/1899", 12345, "phisician");
+INSERT INTO doctor  VALUES (002, 'chinko Koyama', "5111 hayato St", "12225/1899",  12345 ,"phisician");
+INSERT INTO doctor  VALUES (003, 'ai Koyama', "7118 hayato St", "13/04/1899",  12345, "phisician");
+INSERT INTO doctor   VALUES (004, 'kouji Koyama', "7411 hayato St", "19/05/1899",  12345, "phisician");
+INSERT INTO doctor   VALUES (005, 'miki Koyama', "7171 hayato St", "19/05/1899",  12345, "phisician");
+EID NAME Adress DateOfbirht phone school
+
+INSERT INTO patient2 VALUES ("12/05/1999", 12 );
+INSERT INTO patient2 VALUES ("12/15/2004", 13 );
+INSERT INTO patient2 VALUES ("12/06/1999", 14 );
+INSERT INTO patient2 VALUES ("12/05/1799", 15 );
+INSERT INTO patient2 VALUES ("12/05/1899", 16 );
+
+MedID ActiveCompound
+
+INSERT INTO medication1 VALUES (1, "MDMA" );
+INSERT INTO medication1 VALUES (2, "hDMA" );
+INSERT INTO medication1 VALUES (3, "ODMA" );
+INSERT INTO medication1 VALUES (4, "KDMA" );
+INSERT INTO medication1 VALUES (5, "LDMA" );
+
+INSERT INTO medication2 VALUES ("MDMA",1  );
+INSERT INTO medication2 VALUES ("hDMA", 1 );
+INSERT INTO medication2 VALUES ("HDMA", 1 );
+INSERT INTO medication2 VALUES ("KDMA", 1 );
+INSERT INTO medication2 VALUES ("LDMA", 1 );
+
+IID name
+
+INSERT INTO insurer VALUES (1, "a" );
+INSERT INTO insurer VALUES (2, "b" );
+INSERT INTO insurer VALUES (3, "c" );
+INSERT INTO insurer VALUES (4, "d" );
+INSERT INTO insurer VALUES (5, "e" );
+
+MedID IID coverage
+
+INSERT INTO covers VALUES (1,2, 10 );
+INSERT INTO covers VALUES (2,1, 10 );
+INSERT INTO covers VALUES (3,3, 10 );
+INSERT INTO covers VALUES (4,2, 10 );
+INSERT INTO covers VALUES (5,2, 10 );
+
+PID name address
+
+INSERT INTO pharmacy VALUES (1,"a pharmacy", "1 sfu st" );
+INSERT INTO pharmacy VALUES (2,"b pharmacy", "2 sfu st" );
+INSERT INTO pharmacy VALUES (3,"c pharmacy", "3 sfu st" );
+INSERT INTO pharmacy VALUES (4,"d pharmacy", "4 sfu st" );
+INSERT INTO pharmacy VALUES (5,"e pharmacy", "5 sfu st" );
+
+DocEID PHN MedID PID PhaEID Date
+
+INSERT INTO fill_prescription VALUES (001,001,1,1, 001, "13/05/1899" );
+INSERT INTO fill_prescription VALUES (002,002,2,2, 002, "12/05/1899" );
+INSERT INTO fill_prescription VALUES (003,003,3,3, 003, "14/05/1899" );
+INSERT INTO fill_prescription VALUES (004,004,4,4, 004, "17/05/1899" );
+INSERT INTO fill_prescription VALUES (005,005,5,5, 005, "15/05/1899" );
+
+PHN name birth
+
+
+INSERT INTO has_children VALUES (001,"jorge", "14/09/2020" );
+INSERT INTO has_children VALUES (002,"mary", "15/09/2020" );
+INSERT INTO has_children VALUES (003,"ore", "16/09/2020" );
+INSERT INTO has_children VALUES (004,"ken", "19/09/2020" );
+INSERT INTO has_children VALUES (005,"jin", "10/09/2020" );
+
+HID name adress
+INSERT INTO hospital VALUES (1,"A hospital", "A street" );
+INSERT INTO hospital VALUES (2,"B hospital", "B street" );
+INSERT INTO hospital VALUES (3,"C hospital", "C street" );
+INSERT INTO hospital VALUES (4,"D hospital", "D street" );
+INSERT INTO hospital VALUES (5,"E hospital", "E street" );
+
+IID PHN Deductive EndDate
+
+INSERT INTO insures VALUES (1,001, "deductive 1", "12/12/2023" );
+INSERT INTO insures VALUES (2,002, "deductive 2", "12/12/2223" );
+INSERT INTO insures VALUES (3,003, "deductive 3", "13/12/2023" );
+INSERT INTO insures VALUES (4,004, "deductive 4", "02/12/2023" );
+INSERT INTO insures VALUES (5,005, "deductive 5", "18/12/2023" );
+
+MID NAME Adress
+
+INSERT INTO manufacturer VALUES (1,"A manufacturer", "A street" );
+INSERT INTO  manufacturer VALUES (2,"B manufacturer", "B street" );
+INSERT INTO manufacturer VALUES (3,"C manufacturer", "C street" );
+INSERT INTO manufacturer VALUES (4,"D manufacturer", "D street" );
+INSERT INTO manufacturer VALUES (5,"E manufacturer", "E street" );
+
+MedID MID
+
+INSERT INTO makes VALUES (1,1 );
+INSERT INTO makes VALUES (2,2 );
+INSERT INTO makes VALUES (3,3 );
+INSERT INTO makes VALUES (4,4 );
+INSERT INTO makes VALUES (5,5 );
+
+EID PHN MedID Dosage Quantity
+
+INSERT INTO prescribes VALUES (001,001, 1, "2", "1" );
+INSERT INTO prescribes VALUES (002,002, 2, "2", "2" );
+INSERT INTO prescribes VALUES (003,003, 3, "3", "3" );
+INSERT INTO prescribes VALUES (004,004, 4, "4", "4" );
+INSERT INTO prescribes VALUES (005,005, 5, "5", "5" );
+PHN MedID
+
+INSERT INTO takes VALUES (001, 1);
+INSERT INTO takes VALUES (002, 2);
+INSERT INTO takes VALUES (003, 3);
+INSERT INTO takes VALUES (004, 4);
+INSERT INTO takes VALUES (005, 5);
+
+EID PHN HID Date
+
+INSERT INTO treats VALUES (001, 001, 1, "12/12/2022");
+INSERT INTO treats VALUES (002, 002, 2, "22/12/2022");
+INSERT INTO treats VALUES (003, 003, 3, "13/12/2022");
+INSERT INTO treats VALUES (004, 004, 4, "14/12/2022");
+INSERT INTO treats VALUES (005, 005, 5, "15/12/2022"); */

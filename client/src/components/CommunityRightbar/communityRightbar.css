@@ -1,0 +1,71 @@
+
+.communityRightbar{
+    flex:3.5;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.communityRightBarUserImage{
+    width: 24px;
+    object-fit: cover;
+    height: 24px;
+    border-radius:50%;
+}
+.communityRightbarWrapper{
+    padding: 20px 20px 0 0;
+background-color: white;    
+display: flex;
+flex-direction: column;
+    border: 1px solid grey;
+    border-radius: 20px;
+    margin: 20px 10px 0px 10px;
+    -webkit-box-shadow: 9px 9px 34px -22px rgba(0,0,0,0.75);
+-moz-box-shadow: 9px 9px 34px -22px rgba(0,0,0,0.75);
+box-shadow: 9px 9px 34px -22px rgba(0,0,0,0.75);
+}
+.communityRightbarMembers{
+    display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+
+.communityDeleteLeaveButton{
+   margin-top: 30px;
+    border:none;
+    border-radius:5px;
+    background-color: rgb(225, 227, 229);
+    font-weight: 500; 
+    cursor:pointer;
+    color: rgb(81, 80, 80);
+    margin-left: 40px;
+    margin-right: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.communityRightbarMember{
+    display:flex;
+    width: 100%;
+    margin-bottom:20px;
+    cursor:pointer;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+.communityRightbarUsername{
+}
+.communityRightbarMembersTitle{
+    display: flex;
+    align-items:  center;
+    justify-content: center;
+    font-size: 28px;
+    margin:10px;
+    border-bottom: 1px gray solid;
+}
+.communityRightBarUserImage{
+    margin-bottom: 5px;
+}
+.communityRightbarUsername{
+    color: black;
+}

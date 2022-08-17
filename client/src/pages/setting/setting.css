@@ -1,0 +1,128 @@
+.setting{
+    background-color: rgb(233, 250, 250);
+    height: 700px;
+    width: 100%;
+    display: flex;
+}
+.settingWrapper{
+    background-color: rgb(233, 250, 250);
+    margin: 20px;
+    border-radius: 20px;
+    width: 100%;
+    display: flex;
+}
+.settingInputs{
+    display: flex;
+flex: 12;
+}
+.settingLeft{
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid grey;
+    flex:4;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.settingImage{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    justify-content: center;
+    flex:2;
+    background-color: white;
+    border: 1px solid grey;
+    margin: 15px;
+}
+.settingLeftBottom{
+    flex:2;
+    display: flex;
+    flex-direction: column;
+
+}
+.settingRight{
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 20px;
+    flex:8;
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+.settingRightInputs{
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+
+}
+.settingRightUpperInputs{
+    flex: 4;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+}
+.settingRightLowerInputs{
+    flex: 3;
+    display: flex;
+    justify-content: space-around;
+}
+.settingInputBioWrapp{
+}
+.settingInput{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.settingInputBio{
+    margin: 10px;
+    margin-right:100px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.settingInputField{
+    margin-left: 20px;
+}
+.settingInputFieldBio{
+    padding: 20px 10px; 
+    line-height: 28px;
+    margin-left: 20px;
+}
+.settingInputWrapper{
+    margin: 10px;
+}
+.settingRightButtonSection{
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+.updateButtonContainer{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    height: 100%;
+    justify-content: center;
+}
+.updateButton{
+    margin-right: 40px;
+}
+
+.settingImg{
+    width: 200px;
+    height:200px;
+    border-radius: 50% ;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.settingImgeInput{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    border-radius:20px;
+    background-color: white;
+}

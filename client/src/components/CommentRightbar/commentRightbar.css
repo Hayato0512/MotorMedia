@@ -1,0 +1,101 @@
+.commentRightbar{
+    background-color: rgb(233, 250, 250);
+    width: 100%;
+}
+.commentRightbarWrapper2{
+    background-color: rgb(233, 250, 250);
+    margin: 10px;
+height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 12;
+}
+.commentRightbarUserInfo{
+    flex: 6;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.commentRightbarUserInfoTitle{
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin:10px 10px  10px 10px;
+}
+.commentRightbarCommentersList{
+    flex: 6;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: white;
+    margin:10px 0px  10px 0px;
+
+}
+.commentRightbarCommentersListTitle{
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin:10px 10px  10px 10px;
+}
+.commentRightbarUserImgDiv{ 
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.commentRightbarUserImg{
+    object-fit: cover;
+    border-radius:50%;
+    width: 250px;
+    height:250px;
+}
+.commentRightbarUserInfoKey{
+    margin-right: 10px;
+    font-size: 20px;
+}
+.commentRightbarUsername{
+    font-size: 20px;
+}
+.commentRightbarUserCity{
+    font-size: 20px;
+}
+.commentRightbarUserFrom{
+    font-size: 20px;
+}
+.commentRightbarUserAge{
+    font-size: 20px;
+}
+
+
+.commentRightbarUserinfoItem{
+    display: flex;
+    width: 70%;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.commentRightbarCommenterImg{
+    width: 40px;
+    height: 40px;
+    object-fit:  cover;
+    border-radius: 50%;
+}
+.commentRightbarCommenterImgDiv{
+    margin-left: 20px;
+}
+.commentRightbarCommenter{
+    display: flex;
+    align-items: center;
+    width: 70%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    color: black;
+}
+.commentRightbarCommenterUsername{
+    font-size: 24px;
+}

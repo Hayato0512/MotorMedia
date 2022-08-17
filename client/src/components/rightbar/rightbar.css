@@ -1,0 +1,219 @@
+
+.rightbar{
+    flex:3.5;
+}
+
+.rightbarWrapper{
+    padding: 20px 20px 0 0;
+}
+
+.birthdayContainer{
+    display:flex;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-left: 30px;
+}
+
+.birthdayImg{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.birthdayText{
+    font-weight:300;
+    font-size:15px;
+}
+
+.rightbarTitle{
+    margin-bottom: 20px;
+    margin-left: 30px;
+    color: black;
+}
+.rightbarTitleUserFriend{
+    border-bottom: 1px solid grey;
+    font-size: 24px;
+    color: black;
+    margin: 10px;
+}
+.rightbarFriendList{
+    
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
+.rightbarTitle{
+    font-size:18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.rightbarInfo{
+    margin-bottom:30px;
+
+}
+
+.rightbarInfoItem{
+    margin-bottom:10px;
+}
+.rightbarFavoriteModelsEntry{
+    border-bottom: 1px solid grey;
+    font-size: 18px;
+}
+
+.rightbarInfoKey{
+    font-weight: 500;
+    margin-right: 15px;
+     color:#555;
+}
+.rightbarInfoValue{
+    font-weight: 200;
+}
+
+.rightbarFollowings{
+    display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 20px;
+    width: 98%;
+    margin: 5px;
+
+}
+.rightbarTitle{
+
+    border-bottom: 1px solid grey;
+    font-size: 24px;
+    color:black;
+    margin: 5px;
+    margin-left: 10px;
+}
+
+.rightbarFollowingsTitle{
+    font-size: 32px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rightbarFollowing{
+    display:flex;
+    margin-bottom:20px;
+    cursor:pointer;
+    border-bottom: 1px solid grey;
+    margin: 0px 10px 20px 10px;
+    align-items: center;
+}
+
+.rightbarFollowingImg{
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius:50%;
+
+}
+.rightbarFollowingName{
+    color: black;
+    margin-left: 10px;
+}
+
+.rightbarFollowButton{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border: none;
+    color: rgb(81, 80, 80);
+    border-radius:5px;
+    padding: 5px 10px;
+    display: flex;
+    background-color: rgb(174, 201, 240);
+    align-items: center;
+    font-size:16px; 
+    font-weight: 500;
+    cursor: pointer;
+}
+.rightbarChatStartButton{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: rgb(174, 201, 240);
+    color: rgb(81, 80, 80);
+    border-radius:5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    font-size:16px; 
+    font-weight: 500;
+    cursor: pointer;
+}
+.rightbarFavorites{
+    display: flex;
+}
+.rightbarFavoritesWrapper{
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 20px;
+    width: 100%;
+    margin: 5px;
+}
+.rightbarFavoriteMakes{
+    border: 1px solid grey;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+}
+.rightbarFavoriteModels{
+    border: 1px solid grey;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+}
+.rightbarFavoriteMakesTitle{
+    border-bottom: 1px solid grey;
+    font-size: 24px;
+    color: black;
+}
+.rightbarFavoriteModelsTitle{
+    border-bottom: 1px solid grey;
+    font-size: 24px;
+    color: black;
+}
+.rightbarCommunities{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid grey;
+    margin: 5px;
+}
+.rightbarCommunitiesTitle{
+    background-color: white;
+    margin: 5px;
+    margin-left: 10px;
+    border-bottom: 1px solid grey;
+    font-size: 24px;
+    color: black;
+}
+.rightbarCommunityEntry{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.rightbarUserInfoTitle{
+    color: black;
+    border-bottom: 1px solid grey;
+    width: 80%;
+}
+.rightbarButtonsWrapper{
+    display: flex;
+    justify-content: space-around;
+}
+.rightbarCommunityEntries{
+    margin: 3px;
+    border-bottom: 1px solid grey;
+}
+.rightbarCommunityEntry{
+    border-bottom: 1px solid grey;
+    margin-right: 10px;
+}

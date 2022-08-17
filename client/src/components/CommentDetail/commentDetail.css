@@ -1,0 +1,47 @@
+.commentDetail{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.commentCenterComment{
+    font-size: 22px;
+    margin-left: 30px;
+}
+.commentDetailUpper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px dashed grey;
+
+}
+.commentDetailUpperRight{
+
+    display: flex;
+    align-items: center;
+}
+.commentCenterCommentUserPicrure{
+    margin-right: 20px;
+}
+.commentCenterCommentDeleteButtonDiv{
+    display: flex;
+    float:right;
+}
+
+.commentCenterCommentDeleteButton{
+    
+    margin-left: 20px;
+    border: none;
+    color: rgb(81, 80, 80);
+    border-radius:5px;
+    padding: 5px 10px;
+    background-color: rgb(225, 227, 229);
+    align-items: center;
+    font-size:16px; 
+    font-weight: 500;
+    cursor: pointer;
+}

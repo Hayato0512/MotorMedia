@@ -1,0 +1,18 @@
+.makePicker{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+align-items: center;
+    justify-content: center;
+
+}
+.makePickerForm{
+    margin-bottom: 150px;
+}
+.makePickerText{
+    margin-top: 40px;
+    top: 120px;
+}
+.makePickerContentWrapper{
+    margin-bottom: 220px;
+}
