@@ -88,7 +88,7 @@ To do:
 
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+Created by [@HayatoKoyama](https://github.com/Hayato0512) - feel free to contact me!
 
 
 <!-- Optional -->
