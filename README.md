@@ -65,15 +65,18 @@ Provide various use cases and code examples here.
 
 
 ## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
+Project is: _in progress_ .
 
 
 ## Room for Improvement
 Include areas you believe need improvement / could be improved. Also add TODOs for future development.
 
 Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
+- Events page under construction
+- Courses page under construction
+- Bookmark page under construction
+- Question Forum page under construction
+- Jobs page under construction
 
 To do:
 - Feature to be added 1
@@ -81,10 +84,7 @@ To do:
 
 
 ## Acknowledgements
-Give credit here.
-- This project was inspired by...
-- This project was based on [this tutorial](https://www.example.com).
-- Many thanks to...
+- This project was inspired by  [React Node.js Social Media App Tutorial](https://www.youtube.com/watch?v=pFHyZvVxce0&t=4961s).
 
 
 ## Contact
