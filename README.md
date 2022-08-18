@@ -30,11 +30,10 @@
 
 
 ## Technologies Used
-- React.js - version 1.0
-- Node.js - version 2.0
-- MongoDB - version 3.0
-- socket.io - version 3.0
--
+- React.js - version 18.1.0
+- Node.js - version 15.x
+- socket.io - version 4.5.1
+- MongoDB 
 
 
 ## Features
