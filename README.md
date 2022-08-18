@@ -89,7 +89,7 @@ To do:
 
 
 ## Contact
-Created by [@HayatoKoyama](https://github.com/Hayato0512) - feel free to contact me!
+Created by [@HayatoKoyama](https://github.com/Hayato0512) - feel free to contact me at khayato0512.canada@gmail.com 
 
 
 <!-- Optional -->
