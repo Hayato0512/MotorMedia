@@ -57,10 +57,16 @@
 
 
 ## Screenshots
+HOME PAGE
 ![Example screenshot](./images/MMS1.png)
 
+PROFILE PAGE
 ![Example screenshot2](./images/MMS2.png)
+
+COMMUNITY PAGE
 ![Example screenshot5](./images/MMS5.png)
+
+REAL TIME CHAT PAGE
 ![Example screenshot6](./images/MMS6.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
