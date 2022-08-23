@@ -36,7 +36,7 @@
 
 
 ## Motivation
-- What problem does it (intend to) solove?
+> What problem does it intend to solove?
 - 1, to make you feel more connected by having smaller communities
 - nowadays almost all the social media(instagram, FB, snapchat etc) are too big, too broad, too much of a distruction. so this application specifically focus on motorcyclists, to first make community size smaller than those huge social media to let people feel more connected(too big community is difficult manage, and engage in .)
 - 2, to reduce any unnessessary distruction as much as possible, to serve you
