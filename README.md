@@ -17,19 +17,22 @@
 * [Setup](#setup)
 * [Usage](#usage)
 -->
-
+<!--  what is it? for what ? and how??  -->
 ## General Information
-- what is it? for what ? and how?? a social media that is designed to help users feel connected and cultivate their interest at fullest degree all at once.
-- find people with the same interest, connect with communities of certain interest, and share your experiences with your favorite motorcycle. 
+- social media that is designed to help motorcyclists feel connected and cultivate their interest at the fullest degree all at once.
+- find people that you like, connect with communities of certain interests, and share your experiences with your favorite motorcycle. 
 - ask questions to people who have been riding the motor cycle you have been wanting to buy, and you can go to motorcycle trip with them.
 
+<!-- what to say? chat, connect with community, search motorcycle and connect with people who has those. find jobs, host an event, provide some courses -->
 ## Features
-List the ready features here:
 - share your thoughts with photos
 - craete/join a community with a specific interest
-- Real time chat features
+- Real time chat with friends
 - browse motorcycles from motorcycle database(more than 35,000 moto models)
 - register your favorite/owned/wishList motorcycle, so that people can see it to connect with you.
+- find jobs in motor cycle industry
+- host an event
+- provide/take motor cycle courses
 
 
 ## Motivation
