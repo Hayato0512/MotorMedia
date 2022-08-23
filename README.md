@@ -98,11 +98,6 @@ Room for improvement:
 - Question Forum page under construction
 - Jobs page under construction
 
-To do:
-- Feature to be added 1
-- Feature to be added 2
-
-
 ## Acknowledgements
 - This project was inspired by  [React Node.js Social Media App Tutorial](https://www.youtube.com/watch?v=pFHyZvVxce0&t=4961s).
 
