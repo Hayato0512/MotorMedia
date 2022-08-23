@@ -5,7 +5,7 @@
 ## Table of Contents
 * [General Info](#general-information)
 * [Features](#features)
-* [Motivation](#motivation)
+* [Motivation](#motivation - what problem does it intend to solve?)
 * [Technologies Used](#technologies-used)
 * [Screenshots](#screenshots)
 * [Project Status](#project-status)
@@ -35,7 +35,7 @@
 - provide/take motor cycle courses
 
 
-## Motivation
+## Motivation - what problem does it intend to solve?
 
 > 1. to make you feel more connected by having smaller communities
 - nowadays almost all the social media(instagram, FB, snapchat etc) are too big, too broad, too much of a distruction. so this application specifically focus on motorcyclists, to first make community size smaller than those huge social media to let people feel more connected(too big community is difficult manage, and engage in .)
