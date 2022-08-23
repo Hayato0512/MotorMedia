@@ -5,7 +5,7 @@
 ## Table of Contents
 * [General Info](#general-information)
 * [Features](#features)
-* [Motivation](#motivation - what problem does it intend to solve?)
+* [Motivation](#motivation--what-problem-does-it-intend-to-solve?)
 * [Technologies Used](#technologies-used)
 * [Screenshots](#screenshots)
 * [Project Status](#project-status)
