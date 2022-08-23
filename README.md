@@ -41,9 +41,8 @@
 - nowadays almost all the social media(instagram, FB, snapchat etc) are too big, too broad, too much of a distruction. so this application specifically focus on motorcyclists, to first make community size smaller than those huge social media to let people feel more connected(too big community is difficult manage, and engage in .)
 > 2. to reduce any unnessessary distruction as much as possible, to serve you
 -   secondly to reduce any sort of commercial distruction as much as possible (purpose of a social media should be connecting people and making them feel secure, belong to a community, rather than trick their brains and behavior to make them buy stuff).  
-- What is the purpose of your project?
-- to let people feel connected, feel secure and focus on their cool interest all at once.
-- Why did you undertake it?
+
+> Why did you undertake it?
 - because personally I have been sick of those huge social media out there(instagram, facebook, snapchat etc) as their way of maximizing their profit is to make people hooked with their clever attention engineered service, and I think it is really bad. so I wanted to make a social media that merely serves them, intead of using them.
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
