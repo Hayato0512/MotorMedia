@@ -5,6 +5,7 @@
 ## Table of Contents
 * [General Info](#general-information)
 * [Features](#features)
+* * [Motivation](#motivation)
 * [Technologies Used](#technologies-used)
 * [Screenshots](#screenshots)
 * [Project Status](#project-status)
@@ -22,8 +23,16 @@
 - find people with the same interest, connect with communities of certain interest, and share your experiences with your favorite motorcycle. 
 - ask questions to people who have been riding the motor cycle you have been wanting to buy, and you can go to motorcycle trip with them.
 
+## Features
+List the ready features here:
+- share your thoughts with photos
+- craete/join a community with a specific interest
+- Real time chat features
+- browse motorcycles from motorcycle database(more than 35,000 moto models)
+- register your favorite/owned/wishList motorcycle, so that people can see it to connect with you.
 
-##Motivation
+
+## Motivation
 - What problem does it (intend to) solve? 
 - nowadays almost all the social media(instagram, FB, snapchat etc) are too big, too broad, too much of a distruction. so this application specifically focus on motorcyclists, to first make community size smaller than those huge social media to let people feel more connected(too big community is difficult manage, and engage in .) secondly to reduce any sort of commercial distruction as much as possible (purpose of a social media should be connecting people and making them feel secure, belong to a community, rather than trick their brains and behavior to make them buy stuff).  
 - What is the purpose of your project?
@@ -32,13 +41,7 @@
 - because personally I have been sick of those huge social media out there(instagram, facebook, snapchat etc) as their way of maximizing their profit is to make people hooked with their clever attention engineered service, and I think it is really bad. so I wanted to make a social media that merely serves them, intead of using them.
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
-## Features
-List the ready features here:
-- share your thoughts with photos
-- craete/join a community with a specific interest
-- Real time chat features
-- browse motorcycles from motorcycle database(more than 35,000 moto models)
-- register your favorite/owned/wishList motorcycle, so that people can see it to connect with you.
+
 
 
 ## Technologies Used
