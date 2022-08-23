@@ -35,11 +35,11 @@
 - provide/take motor cycle courses
 
 
-## Motivation
-> What problem does it intend to solove?
-- 1, to make you feel more connected by having smaller communities
+## Motivation - What problem does it intend to solove?
+
+> 1. to make you feel more connected by having smaller communities
 - nowadays almost all the social media(instagram, FB, snapchat etc) are too big, too broad, too much of a distruction. so this application specifically focus on motorcyclists, to first make community size smaller than those huge social media to let people feel more connected(too big community is difficult manage, and engage in .)
-- 2, to reduce any unnessessary distruction as much as possible, to serve you
+> 2. to reduce any unnessessary distruction as much as possible, to serve you
 -   secondly to reduce any sort of commercial distruction as much as possible (purpose of a social media should be connecting people and making them feel secure, belong to a community, rather than trick their brains and behavior to make them buy stuff).  
 - What is the purpose of your project?
 - to let people feel connected, feel secure and focus on their cool interest all at once.
