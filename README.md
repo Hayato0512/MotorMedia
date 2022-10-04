@@ -33,6 +33,7 @@
 - find jobs in motor cycle industry
 - host an event
 - provide/take motor cycle courses
+- Fully responsive from Desktop to Mobile screen with Material-ui responsive design.
 
 
 ## Motivation - what problem does it intend to solve?
@@ -54,6 +55,7 @@
 - Node.js - version 15.x
 - socket.io - version 4.5.1
 - MongoDB 
+- MUI
 
 
 ## DESKTOP Screenshots
