@@ -56,18 +56,40 @@
 - MongoDB 
 
 
-## Screenshots
+## DESKTOP Screenshots
 HOME PAGE
-![Example screenshot](./images/MMS1.png)
+![Example screenshot](./images/RES1.png)
 
 PROFILE PAGE
-![Example screenshot2](./images/MMS2.png)
+![Example screenshot2](./images/RES2.png)
 
 COMMUNITY PAGE
-![Example screenshot5](./images/MMS5.png)
+![Example screenshot5](./images/RES3.png)
 
 REAL TIME CHAT PAGE
-![Example screenshot6](./images/MMS6.png)
+![Example screenshot6](./images/RES4.png)
+
+SEARCH MOTORCYCLE PAGE
+![Example screenshot6](./images/RES4.png)
+
+## MOBILE  Screenshots
+HOME PAGE
+![Example screenshot](./images/RES6.png)
+
+HOME PAGE SIDE BAR
+![Example screenshot](./images/RES7.png)
+
+COMMUNITY LIST PAGE
+![Example screenshot2](./images/RES8.png)
+
+COMMUNITY PAGE
+![Example screenshot5](./images/RES9.png)
+
+REAL TIME CHAT PAGE
+![Example screenshot6](./images/RES10.png)
+
+SEARCH MOTORCYCLE PAGE
+![Example screenshot6](./images/RES11.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 <!--
