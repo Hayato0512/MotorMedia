@@ -1,6 +1,6 @@
 # Motor Media
 > Social Media for Motor Cycle Enthusiasts to explore people, communities, events, jobs and many more.
-> Live demo [Website](https://precious-quokka-f56d55.netlify.app)
+> Live demo [Website](https://cheerful-fairy-1eee98.netlify.app/)
 
 ## Table of Contents
 * [General Info](#general-information)
