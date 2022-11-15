@@ -119,6 +119,7 @@ Room for improvement:
 - Bookmark page under construction
 - Question Forum page under construction
 - Jobs page under construction
+- Shift to TypeScript
 
 ## Acknowledgements
 - This project was inspired by  [React Node.js Social Media App Tutorial](https://www.youtube.com/watch?v=pFHyZvVxce0&t=4961s).
