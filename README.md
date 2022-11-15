@@ -44,7 +44,7 @@
 -   Secondly to reduce any sort of commercial distruction as much as possible (purpose of a social media should be connecting people and making them feel secure, belong to a community, rather than trick their brains and behavior to make them buy stuff).  
 
 > Why did I undertake it?
-- Because personally I have been sick of those huge social media out there(instagram, facebook, snapchat etc) as their way of maximizing their profit is to make people hooked with their clever attention engineered service, and I think it is really bad. so I wanted to make a social media that merely serves them, intead of using them.
+- Because personally I have been sick of those huge social media out there(instagram, facebook, snapchat etc) as their way of maximizing their profit is to make people hooked with their clever attention engineered service, and I think it has been really challenging problem for any generations especially younger generations. So I wanted to make a social media that merely serves them, intead of using them.
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
