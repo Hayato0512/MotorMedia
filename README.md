@@ -38,13 +38,13 @@
 
 ## Motivation - what problem does it intend to solve?
 
-> 1. To make you feel more connected by having smaller communities
-- Nowadays almost all the social media(instagram, FB, snapchat etc) are too big, too broad, too much of a distruction. so this application specifically focus on motorcyclists, to first make community size smaller than those huge social media to let people feel more connected(too big community is difficult manage, and engage in .)
-> 2. To reduce any unnessessary distruction as much as possible, to serve you
--   Secondly to reduce any sort of commercial distruction as much as possible (purpose of a social media should be connecting people and making them feel secure, belong to a community, rather than trick their brains and behavior to make them buy stuff).  
+> 1. To make users feel more connected by having smaller communities
+- Nowadays almost all the social media(instagram, FB, snapchat etc) are too big, too broad, too much of distruction. This application specifically focuses on motorcyclists, to make community size smaller to let people feel more connected(too big community is difficult to manage, feel connected and engage in .)
+> 2. To reduce any commercial distruction as much as possible, to serve users
+-   I want the purpose of a social media to be connecting people and making them feel secure, belong to a community, instead of tricking users brains and behaviors to make them buy stuff).  
 
 > Why did I undertake it?
-- Because personally I have been sick of those huge social media out there(instagram, facebook, snapchat etc) as their way of maximizing their profit is to make people hooked with their clever attention engineered service, and I think it has been really challenging problem for any generations especially younger generations. So I wanted to make a social media that merely serves them, intead of using them.
+- Because personally I have not been a fun of huge social media out there(instagram, facebook, snapchat etc) as their way of maximizing their company seems to be making users hooked with their services by attention-engineering, and I think it has been really challenging problem for any generations especially younger ones. Therefore I wanted to make a social media that merely serves them, intead of using their attention.
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
@@ -122,7 +122,7 @@ Room for improvement:
 - Shift to TypeScript
 
 ## Acknowledgements
-- This project was inspired by  [React Node.js Social Media App Tutorial](https://www.youtube.com/watch?v=pFHyZvVxce0&t=4961s).
+- This project was inspired by [React Node.js Social Media App Tutorial](https://www.youtube.com/watch?v=pFHyZvVxce0&t=4961s).
 
 
 ## Contact
