@@ -1,7 +1,6 @@
 # Motor Media
 > Social Media for Motor Cycle Enthusiasts to explore people, communities, events, jobs and many more.
 >  [Newest Website](https://cheerful-fairy-1eee98.netlify.app/) (having an issue with CORS policy on the server side, and I'm working on it.)
-> [Legacy Website](https://cheerful-fairy-1eee98.netlify.app/)
 ## Table of Contents
 * [General Info](#general-information)
 * [Features](#features)
