@@ -59,7 +59,7 @@ export default function Login() {
           <h3 className="loginLogo">MotorMedia</h3>
           <span className="loginDesc">
             Welcome. this is a place where you meet cool people. If you are not
-            one, then Fuck off.
+            Heyheyhey one, then Fuck off.
           </span>
         </div>
         <div className="loginRight">
