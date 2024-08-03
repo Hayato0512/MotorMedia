@@ -48,8 +48,8 @@ export default function CommentRightbar({ userOfThePost, commenters }) {
         <div className="commentRightbarCommentersList">
           <div className="commentRightbarCommentersListTitle">Commenters</div>
           {commenters ? (
-            commenters.map((commenter) => (
-              <>
+            commenters.map((commenter, i) => (
+              <div key={commenter.data.username ? commenter.data.username : i}>
                 <Link
                   to={"/profile/" + commenter.data.username}
                   style={{ textDecoration: "none" }}
@@ -75,7 +75,7 @@ export default function CommentRightbar({ userOfThePost, commenters }) {
                     </div>
                   </div>
                 </Link>
-              </>
+              </div>
             ))
           ) : (
             <></>

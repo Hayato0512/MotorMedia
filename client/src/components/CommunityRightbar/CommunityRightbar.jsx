@@ -127,8 +127,8 @@ export default function CommunityRightbar({ chosenCommunity, hidden }) {
         <div className="communityRightbarWrapper">
           <div className="communityRightbarMembersTitle">Member List</div>
           <div className="communityRightbarMembers">
-            {members.map((member) => (
-              <>
+            {members.map((member, i) => (
+              <div key={member._id ? member._id : i}>
                 <Link
                   to={"/profile/" + member.data.username}
                   style={{ textDecoration: "none" }}
@@ -149,7 +149,7 @@ export default function CommunityRightbar({ chosenCommunity, hidden }) {
                     </h3>
                   </div>
                 </Link>
-              </>
+              </div>
             ))}
           </div>
         </div>

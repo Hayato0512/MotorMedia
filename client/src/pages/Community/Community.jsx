@@ -264,10 +264,10 @@ export default function Comunity() {
           </div>
 
           <div className="communityEntries">
-            {communities.map((c) => {
+            {communities.map((c, i) => {
               return (
-                <div className="communityEntry">
-                  <h3 className="communityEntryName" key={c.data}>
+                <div className="communityEntry" key={c && c.id ? c.id : i}>
+                  <h3 className="communityEntryName" key={c.data.id}>
                     {c.data.communityName}
                   </h3>
                   <button

@@ -98,12 +98,16 @@ export default function Comment() {
   };
   useEffect(() => {
     const getUsernameAsync = async () => {
-      const res = await axiosInstance.get(`/users?userId=${post.userId}`);
-      console.log("res.data is like this in Community page", res.data);
-      const theUser = res.data;
-      setPostUser(theUser);
-      console.log(`will setPostUser`);
-      console.log(`this is getUsername, ${theUser.username}`);
+      try {
+        if (post) {
+          const res = await axiosInstance.get(`/users?userId=${post.userId}`);
+          console.log("res.data is like this in Community page", res.data);
+          const theUser = res.data;
+          setPostUser(theUser);
+          console.log(`will setPostUser`);
+          console.log(`this is getUsername, ${theUser.username}`);
+        }
+      } catch (e) {}
     };
     getUsernameAsync();
   }, [post]);
@@ -150,10 +154,11 @@ export default function Comment() {
                     </button>
                   </div>
                   <div className="commentCenterComments">
-                    {comments.map((comment) => (
+                    {comments.map((comment, i) => (
                       <div
                         className="commentCenterCommentDetailWrapper
                     "
+                        key={comment._id ? comment._id : i}
                       >
                         <CommentDetail comment={comment} />
                       </div>
