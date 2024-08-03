@@ -10,7 +10,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { axiosInstance } from "../../config";
 import { useNavigate } from "react-router-dom";
 export default function Rightbar({ user }) {
-  console.log("debug: inRightBar, user is like this", user);
+  console.log("debug: inRightBar, user is like this", user); //UNDEFINED
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const [communities, setCommunities] = useState([]);
@@ -24,23 +24,19 @@ export default function Rightbar({ user }) {
   const [followed, setFollowed] = useState(
     currentUser.followings.includes(user?._id)
   );
-  console.log(
-    "when this rightbar starts, currentUser(michelle).followings.includes(hayato) is this ",
-    currentUser.followings.includes(user?._id)
-  );
-  //becuase thsi is undefined, so the follow/unfollow thing doesn't change.
+  // console.log(
+  //   "when this rightbar starts, currentUser(michelle).followings.includes(hayato) is this ",
+  //   currentUser.followings.includes(user?._id)
+  // );
   console.log(
     "when this rightbar starts, currentUser.followiongs is like this",
     currentUser.followings
   );
-  //true なのに false になってるここ
-  // useEffect(() => {
-  //   setFollowed(currentUser.followings.includes(user?.id));
-  // }, [user]); //or [currentUser, user.id]
 
   useEffect(() => {
     //go through user's favIDs, and then fetch bike object, put that into list using Promise.all and then setFavortiteBikes. look at the sidber
     const fetchFavBikes = async () => {
+      console.log("fetchFavBikes. user is ", user);
       const favoriteBikeIds = user.favoriteMotorCycles;
       const favoriteMakes = user.favoriteMakes;
       const list = await Promise.all(
@@ -52,7 +48,9 @@ export default function Rightbar({ user }) {
       setFavoriteMakes(favoriteMakes);
       console.log("list[0] is like this", list[0]);
     };
-    fetchFavBikes();
+    if (user) {
+      fetchFavBikes();
+    }
   }, [user]);
   useEffect(() => {
     // const fetchUser = async () => {
@@ -61,7 +59,9 @@ export default function Rightbar({ user }) {
     setTimeout(() => {
       console.log("after 1000 time out, user?_id is like this", user?._id);
 
-      setFollowed(currentUser2.followings.includes(user?._id));
+      if (user) {
+        setFollowed(currentUser2.followings.includes(user?._id));
+      }
       console.log(
         "check, does currentuser have user._id as followisn??",
         currentUser2.followings

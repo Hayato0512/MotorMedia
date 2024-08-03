@@ -11,9 +11,10 @@ import { AuthContext } from "../../context/AuthContext";
 import { axiosInstance } from "../../config";
 
 export default function FavoriteBikes() {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext); //this user is undefined.
+  console.log("FavoriteBikes: user", user);
   const [favoriteBikes, setFavoriteBikes] = useState([]);
-  const favoriteBikeIds = user.favoriteMotorCycles;
+  const favoriteBikeIds = user?.favoriteMotorCycles;
 
   useEffect(() => {
     //go through user's favIDs, and then fetch bike object, put that into list using Promise.all and then setFavortiteBikes. look at the sidber
@@ -32,13 +33,14 @@ export default function FavoriteBikes() {
   useEffect(() => {
     const fetchSpec = async () => {
       console.log(`let's fetch the bikes information from the rapid API. `);
-      console.log(
-        `specId is like this in FavoriteBikes.jsx ${favoriteBikes[4].data.specId} `
-      );
-      const fetchedSpec = await fetchSpecById(favoriteBikes[4].data.specId);
-      console.log(
-        `ok, i just got fetchedSpec by ID. like this ${fetchedSpec.data.articleCompleteInfo.makeName}`
-      );
+      // console
+      //   .log
+      // `specId is like this in FavoriteBikes.jsx ${favoriteBikes[4].data.specId} `
+      // ();
+      // const fetchedSpec = await fetchSpecById(favoriteBikes[4].data.specId);
+      // console.log(
+      //   // `ok, i just got fetchedSpec by ID. like this ${fetchedSpec.data.articleCompleteInfo.makeName}`
+      // );
     };
     fetchSpec();
     //so throw this spec id, to get the all the spec with the given Id.

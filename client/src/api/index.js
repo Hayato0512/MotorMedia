@@ -52,12 +52,9 @@ export const fetchSpec = async (makeAndModel) => {
     urlWithMakeAndModel = `${urlWithMake}${make}/model/${model}`;
     options4.url = urlWithMakeAndModel;
     try {
-      const spec = await axios.request(options4);
-      //console.log('returned spec looks like this', spec.data[0]);
+      const spec = await axios.request(options4); //this is not working.
+      console.log("fetchSpec: spec is ", spec);
       return spec.data[0];
-      //ok fucking awesome.
-      //next session, we will pass this spec data
-      // and then show that in the page. see you soon.
     } catch (error) {
       console.log(error);
     }
@@ -80,7 +77,13 @@ export const fetchSpecById = async (specId) => {
       return spec;
       //who needs this information?? modelPicker.jsx.
       //so in modelPicker.jsx, import fetchModels from './api' or somethnig
-    } catch (error) {}
+    } catch (error) {
+      console.log(
+        "fetchSpecById: error occured hereherehrehrrh. error is ",
+        error
+      );
+      return null;
+    }
   } else {
     return "hang on...";
   }

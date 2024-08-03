@@ -19,8 +19,6 @@ import "./makePicker.css";
  * once we get the data of specs, we can pass that to the next html page,
  * to show specs using a whole page.
  *
- *
- *
  */
 
 //get all the makes, and put that as options in the dropDownMenu. that is it.
@@ -37,15 +35,16 @@ const MakePicker = ({ handleMakeChange }) => {
     fetchAPI();
   }, []);
 
-  /*useEffect(() => {
-        makeList().then(res => {
-            // check status for response and set data accordingly
-            setFetchedMakes(res.data)
-            // log the data
-        })
-      },[])*/
+  const fetchMakes = () => {
+    if (fetchedMakes) {
+      return fetchedMakes.map((fetchedMake) => (
+        <option key={fetchedMake}>{fetchedMake}</option>
+      ));
+    } else {
+      return <option key={"placeholder"}>No option available</option>;
+    }
+  };
 
-  //超絶ナイス。
   return (
     <div className="makePicker">
       <div className="makePickerContentWrapper">
@@ -57,9 +56,7 @@ const MakePicker = ({ handleMakeChange }) => {
               onChange={(e) => handleMakeChange(e.target.value)}
             >
               <option>Select...</option>
-              {fetchedMakes.map((fetchedMake) => (
-                <option key={fetchedMake}>{fetchedMake}</option>
-              ))}
+              {fetchMakes()}
             </NativeSelect>
           </FormControl>
         </div>

@@ -20,10 +20,14 @@ export default function FavoriteBike({ bike }) {
       console.log(`let's fetch the bikes information from the rapid API. `);
       console.log(`specId is like this in FavoriteBikes.jsx ${specId} `);
       const fetchedSpec = await fetchSpecById(specId);
-      console.log(
-        `ok, i just got fetchedSpec by ID. like this ${fetchedSpec.data.articleCompleteInfo.makeName}`
-      );
-      setMake(fetchedSpec.data.articleCompleteInfo.makeName);
+      // console.log(
+      //   `ok, i just got fetchedSpec by ID. like this ${fetchedSpec.data.articleCompleteInfo.makeName}`
+      // );
+      if (fetchedSpec) {
+        setMake(fetchedSpec.data.articleCompleteInfo.makeName);
+      } else {
+        console.log("fetchSpec in FavoriteBike.jsx. got null for fetchedSpec");
+      }
     };
     if (specId) {
       fetchSpec();
