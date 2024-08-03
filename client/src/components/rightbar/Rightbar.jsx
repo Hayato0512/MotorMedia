@@ -39,14 +39,18 @@ export default function Rightbar({ user }) {
       console.log("fetchFavBikes. user is ", user);
       const favoriteBikeIds = user.favoriteMotorCycles;
       const favoriteMakes = user.favoriteMakes;
-      const list = await Promise.all(
-        favoriteBikeIds.map(
-          async (id) => await axiosInstance.get("/motors?motorId=" + id)
-        )
-      );
-      setFavoriteBikes(list);
-      setFavoriteMakes(favoriteMakes);
-      console.log("list[0] is like this", list[0]);
+      try {
+        const list = await Promise.all(
+          favoriteBikeIds.map(
+            async (id) => await axiosInstance.get("/motors?motorId=" + id)
+          )
+        );
+        setFavoriteBikes(list);
+        setFavoriteMakes(favoriteMakes);
+        console.log("list[0] is like this", list[0]);
+      } catch (e) {
+        console.log("fetchFavBikes: Rightbar.jsx: error received: ", e);
+      }
     };
     if (user) {
       fetchFavBikes();
@@ -59,7 +63,7 @@ export default function Rightbar({ user }) {
     setTimeout(() => {
       console.log("after 1000 time out, user?_id is like this", user?._id);
 
-      if (user) {
+      if (user && currentUser2.followings) {
         setFollowed(currentUser2.followings.includes(user?._id));
       }
       console.log(
@@ -288,10 +292,15 @@ export default function Rightbar({ user }) {
               </div>
             </div>
             <div className="rightbarFavoriteModels">
-              <div className="rightbarFavoriteModelsTitle">Favorite Models</div>
-              <div className="rightbarFavoriteModelsEntries">
-                {favoriteBikes.map((bike) => (
-                  <div className="rightbarFavoriteModelsEntry">
+              <div className="rightbarFavoriteModelsTitle" key={"title"}>
+                Favorite Models
+              </div>
+              <div className="rightbarFavoriteModelsEntries" key={"entries"}>
+                {favoriteBikes.map((bike, i) => (
+                  <div
+                    className="rightbarFavoriteModelsEntry"
+                    key={bike.id ? bike.id : i}
+                  >
                     {bike.data.motorName}
                   </div>
                 ))}
