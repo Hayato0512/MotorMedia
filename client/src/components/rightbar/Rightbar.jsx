@@ -80,18 +80,22 @@ export default function Rightbar({ user }) {
   useEffect(() => {
     const fetchCommunities = async () => {
       try {
-        var currentUser2 = await axiosInstance.get(`/users?userId=${user._id}`);
-        console.log(
-          `in fetch communities, currentUSe2 is ${currentUser2.data.communities}`
-        );
-        const list = await Promise.all(
-          currentUser2.data.communities.map(
-            async (communityId) =>
-              await axiosInstance(`/communities?communityId=${communityId}`)
-          )
-        );
-        console.log(`list is like this ${list}`);
-        setCommunities(list);
+        if (user._id) {
+          var currentUser2 = await axiosInstance.get(
+            `/users?userId=${user._id}`
+          );
+          console.log(
+            `in fetch communities, currentUSe2 is ${currentUser2.data.communities}`
+          );
+          const list = await Promise.all(
+            currentUser2.data.communities.map(
+              async (communityId) =>
+                await axiosInstance(`/communities?communityId=${communityId}`)
+            )
+          );
+          console.log(`list is like this ${list}`);
+          setCommunities(list);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -134,19 +138,15 @@ export default function Rightbar({ user }) {
     const getFriends = async () => {
       try {
         console.log(`getFriends just before the axios `);
-        if (user) {
-          console.log(
-            `user._id is like this before the axios call  ${user._id}`
+        if (currentUser2._id) {
+          const friendList = await axiosInstance.get(
+            "/users/friends/" + currentUser2._id
           );
+          console.log(`getFriends just after the axios `);
+          setFriends(friendList.data);
+          console.log(`just setFriends. they are like ${friendList.data}`);
         } else {
-          console.log(`user is nu ll`);
         }
-        const friendList = await axiosInstance.get(
-          "/users/friends/" + currentUser2._id
-        );
-        console.log(`getFriends just after the axios `);
-        setFriends(friendList.data);
-        console.log(`just setFriends. they are like ${friendList.data}`);
       } catch (error) {
         console.log(`error occured in trycatch block in getFriends()`);
         console.log(error);
