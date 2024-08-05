@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./communityRightbar.css";
 import { AuthContext } from "../../context/AuthContext";
 import { axiosInstance } from "../../config";
+import { Modal, Button, Form } from "react-bootstrap";
 export default function CommunityRightbar({ chosenCommunity, hidden }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
@@ -12,6 +13,10 @@ export default function CommunityRightbar({ chosenCommunity, hidden }) {
   console.log("in CommunityRightbar, user._id is liek this ", user._id);
   console.log(chosenCommunity.leaderId);
   const navigate = useNavigate();
+
+  //for pop up for community deletion
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     if (user._id === chosenCommunity.leaderId) {
@@ -81,6 +86,11 @@ export default function CommunityRightbar({ chosenCommunity, hidden }) {
       // );
     }
   };
+
+  const deleteCancelClicked = () => {
+    setShow(false);
+  };
+
   const leaveGroupButtonClicked = async () => {
     console.log(`leave button clicekd`);
     //first, get rid of current user ID from chosenCommunity.members
@@ -149,11 +159,22 @@ export default function CommunityRightbar({ chosenCommunity, hidden }) {
             ))}
           </div>
         </div>
+        <Modal show={show}>
+          <Modal.Header closeButton>
+            <Modal.Title>delete the community?</Modal.Title>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={deleteGroupButtonClicked}>
+              delete
+            </Button>
+
+            <Button variant="secondary" onClick={deleteCancelClicked}>
+              cancel
+            </Button>
+          </Modal.Footer>
+        </Modal>
         {isLeader ? (
-          <button
-            onClick={deleteGroupButtonClicked}
-            className="communityDeleteLeaveButton"
-          >
+          <button onClick={handleShow} className="communityDeleteLeaveButton">
             delete the group
           </button>
         ) : (
