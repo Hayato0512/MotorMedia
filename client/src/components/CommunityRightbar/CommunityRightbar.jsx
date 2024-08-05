@@ -1,5 +1,6 @@
 import { React, useRef, useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./communityRightbar.css";
 import { AuthContext } from "../../context/AuthContext";
 import { axiosInstance } from "../../config";
@@ -10,6 +11,7 @@ export default function CommunityRightbar({ chosenCommunity, hidden }) {
   const [members, setMembers] = useState([]);
   console.log("in CommunityRightbar, user._id is liek this ", user._id);
   console.log(chosenCommunity.leaderId);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user._id === chosenCommunity.leaderId) {
@@ -35,22 +37,16 @@ export default function CommunityRightbar({ chosenCommunity, hidden }) {
   }, [chosenCommunity]);
 
   const deleteGroupButtonClicked = async () => {
-    console.log(`delete button clicekd`);
-    console.log(
-      `this guy is the leader, so , let's delete the group, and also we need to go through each member's community list to get rid of this communityID. can we do something like DELETE ON CASCADE`
-    );
     //first, go through everyone, and then take the community List,
     console.log(chosenCommunity.members);
     try {
+      //First, remove this community from every members personal data.
       const list = await Promise.all(
         chosenCommunity.members.map(
           async (member) => await axiosInstance.get(`/users?username=${member}`)
         )
       );
-      console.log(
-        `fetched all the members. the list is ${JSON.stringify(list)}`
-      );
-      //list is the array of userObject.
+
       list.map(async (member) => {
         const originalCommunityArray = member.data.communities;
         const newCommunityArray = originalCommunityArray.filter(
@@ -68,11 +64,15 @@ export default function CommunityRightbar({ chosenCommunity, hidden }) {
         } catch (error) {
           console.log(error);
         }
+
         //then delete the community from communityDB
         const res = await axiosInstance.delete(
           `/communities/${chosenCommunity._id}/${user._id}`
         );
         console.log(`after the deletion, the res is liek this ${res.data}`);
+        //Here, I want to exit this community detailed page, open community page with the updated list of community(the removed comunity shouldn't be there.)
+        //I guess, I can just navigate to Community page.
+        navigate("/community");
         //use this id, to update the users community array.
       });
     } catch (error) {
