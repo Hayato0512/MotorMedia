@@ -100,17 +100,4 @@ router.get("/allComments/:postId", async (req, res) => {
   }
 });
 
-// //get user's all posts
-// router.get("/profile/:username", async (req, res) => {
-//   try {
-//     console.log("now /profile/:username");
-//     const user = await User.findOne({ username: req.params.username });
-//     const posts = await Post.find({ userId: user._id });
-//     res.status(200).json(posts);
-//   } catch (err) {
-//     res.status(500).json(err);
-//     console.log(err);
-//     console.log("are?");
-//   }
-// });
 module.exports = router;
