@@ -9,7 +9,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { axiosInstance } from "../../config";
 import { Modal, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-export default function Post({ post }) {
+export default function Post({ post, onChange }) {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
@@ -86,7 +86,7 @@ export default function Post({ post }) {
       );
       console.log(res);
       setShow(false);
-      window.location.reload(false);
+      onChange();
     } catch (error) {
       console.log(error);
     }
@@ -101,7 +101,6 @@ export default function Post({ post }) {
       isProfile: false,
       isHome: false,
     };
-    // navigate(-1);
     navigate("/comment", { state: objectToPassToComment });
   };
   return (

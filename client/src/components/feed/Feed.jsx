@@ -8,9 +8,14 @@ import { AuthContext } from "../../context/AuthContext";
 
 //username is not coming. if username is coming, that just means it is home page. if coming, that is profile page.
 export default function Feed({ username }) {
+  const { user } = useContext(AuthContext);
+
   const [posts, setPosts] = useState([]);
   const [text, setText] = useState("");
-  const { user } = useContext(AuthContext);
+
+  //FLAGS - used to trigger re-rendering when post gets deleted
+  const [postChanged, setPostChanged] = useState(false);
+
   useEffect(() => {
     const fetchPosts = async () => {
       console.log("username is like this", username);
@@ -26,19 +31,25 @@ export default function Feed({ username }) {
       );
     };
     fetchPosts();
-  }, [username, user._id]);
+  }, [username, user._id, postChanged]);
   //this [] mean, run this useEffect, only once when render feed.
   //dont listen to changes//so if i do [text], everytime text changes,
   //this will run.
+
+  const handlePostUpdate = () => {
+    setPostChanged(!postChanged);
+  };
 
   //<input type="text" onChange={(e) => setText(e.target.value)} />
   return (
     <div className="feed">
       <div className="feedWrapper">
-        {(!username || username === user.username) && <Share />}
+        {(!username || username === user.username) && (
+          <Share onPostCreation={handlePostUpdate} />
+        )}
 
         {posts.map((p) => (
-          <Post key={p._id} post={p} />
+          <Post key={p._id} post={p} onChange={handlePostUpdate} />
         ))}
       </div>
     </div>

@@ -11,7 +11,7 @@ import { useContext, useRef, useState } from "react";
 import { axiosInstance } from "../../config";
 // import axios from "axios";
 
-export default function Share() {
+export default function Share({ onPostCreation }) {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const desc = useRef();
@@ -48,7 +48,9 @@ export default function Share() {
       await axiosInstance.post("/posts", newPost);
       //これ消してもちゃんと、public に行く。
 
-      window.location.reload();
+      onPostCreation();
+      desc.current.value = "";
+      //To-DO, clear the text field uponsucessfull post creation
       //installed multer and path to upload photos
       //multer is node.js middleware for uploading files
     } catch (error) {
@@ -69,6 +71,7 @@ export default function Share() {
             className="shareImage"
           />
           <input
+            id="mainInput"
             placeholder={"What's in your mind " + user.username + "?"}
             className="shareInput"
             ref={desc}
