@@ -2,13 +2,9 @@ import React from "react";
 import { useState, useEffect, useContext, useRef } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Rightbar from "../../components/rightbar/Rightbar";
-import { MoreVert, FavoriteBorder, TwoWheeler } from "@material-ui/icons";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
-import { format } from "timeago.js";
 import CommentDetail from "../../components/CommentDetail/CommentDetail";
 import "./comment.css";
-import { Link } from "react-router-dom";
 import { axiosInstance } from "../../config";
 import CommentRightbar from "../../components/CommentRightbar/CommentRightbar";
 import { AuthContext } from "../../context/AuthContext";
@@ -21,6 +17,7 @@ export default function Comment() {
   const [post, setPost] = useState(null);
   const [postUser, setPostUser] = useState(null);
   const [comments, setComments] = useState([]);
+  const [commentChanged, setCommentChanged] = useState(false);
   const [commenters, setCommenters] = useState([]);
   const inputRef = useRef();
   useEffect(() => {
@@ -48,6 +45,7 @@ export default function Comment() {
     };
     fetchCommenters();
   }, [comments]);
+
   useEffect(() => {
     console.log(
       `hey this is comment.jsx. so , window.location.href is ${window.location.href}`
@@ -76,7 +74,7 @@ export default function Comment() {
       }
     };
     fetchComments();
-  }, [post]);
+  }, [post, commentChanged]);
   const commentSendButtonClicked = async () => {
     console.log(
       `comment button clicked, so , user is ${user.username}, and then postId ${post._id}, and the comment is ${inputRef.current.value}`
@@ -88,10 +86,14 @@ export default function Comment() {
       postId: post._id,
       desc: inputRef.current.value,
     };
+
     try {
       const res = await axiosInstance.post("/comments", newComment);
-      console.log(`creating a new commentthe res.data is ${res.data}`);
-      window.location.reload(false);
+      console.log(
+        `creating a new commentthe res.data is ${JSON.stringify(res.data)}`
+      );
+      // window.location.reload(false);
+      setCommentChanged(!commentChanged);
     } catch (error) {
       console.log(error);
     }
@@ -113,6 +115,10 @@ export default function Comment() {
   }, [post]);
   const goBackButtonClicked = () => {
     navigate(-1);
+  };
+
+  const handleCommentDeletion = () => {
+    setCommentChanged(!commentChanged);
   };
   return (
     <>
@@ -160,7 +166,10 @@ export default function Comment() {
                     "
                         key={comment._id ? comment._id : i}
                       >
-                        <CommentDetail comment={comment} />
+                        <CommentDetail
+                          comment={comment}
+                          onDelete={handleCommentDeletion}
+                        />
                       </div>
                     ))}
                   </div>

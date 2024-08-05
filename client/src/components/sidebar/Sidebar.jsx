@@ -37,20 +37,6 @@ export default function Sidebar() {
       setFollowings(list);
     };
     fetchFollowings();
-    // const fetchFollowings = async () => {
-    //   followingsList.map(async (id) => {
-    //     try {
-    //       const theUser = await axiosInstance.get(`/users?userId=${id}`);
-    //       if (followings.includes(theUser.data)) {
-    //       } else {
-    //         setFollowings((prev) => [...prev, theUser.data]);
-    //       }
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   });
-    // };
-    // fetchFollowings();
   }, [user]);
   return (
     <div className="sidebar">

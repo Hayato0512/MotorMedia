@@ -3,7 +3,7 @@ import "./commentDetail.css";
 import { useState, useEffect, useContext, useRef } from "react";
 import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
-export default function CommentDetail({ comment }) {
+export default function CommentDetail({ comment, onDelete }) {
   const [user, setUser] = useState(null);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -45,7 +45,8 @@ export default function CommentDetail({ comment }) {
         );
         console.log(`deletion success. `);
       }
-      //   const res = await axiosInstance.delete("/comments/", newComment);
+      onDelete();
+      //Here, I wanna update the UI. but only the comment component. not the whole screen.
     } catch (error) {
       console.log(error);
     }

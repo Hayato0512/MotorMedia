@@ -1,11 +1,5 @@
 import React, { Component, useContext, useState, useEffect } from "react";
 import FavoriteBike from "../FavoriteBike/FavoriteBike";
-import {
-  fetchData,
-  fetchModels,
-  fetchSpec,
-  fetchSpecById,
-} from "../../api/index";
 import "./favoriteBikes.css";
 import { AuthContext } from "../../context/AuthContext";
 import { axiosInstance } from "../../config";

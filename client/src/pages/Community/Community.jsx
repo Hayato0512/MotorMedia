@@ -1,14 +1,4 @@
 import { React, useRef, useContext, useState, useEffect } from "react";
-import {
-  Typography,
-  Grid,
-  Toolbar,
-  Container,
-  Button,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-} from "@material-ui/core";
 import CommunityList from "../../components/CommunityList/CommunityList";
 import CommunityFeed from "../../components/CommunityFeed/CommunityFeed";
 import { AuthContext } from "../../context/AuthContext";
@@ -51,63 +41,10 @@ export default function Comunity() {
       );
       console.log(`list is like this ${list} in Community`);
       setCommunities(list);
-      // res.data.communities.map(async (communityId) => {
-      //   //should be 4 of them
-      //   try {
-      //     const community = await axiosInstance(
-      //       `/communities?communityId=${communityId}`
-      //     );
-      //     console.log(
-      //       "community is like this hahahhahahHSAHAHAHAH",
-      //       community.data
-      //     );
-      //     ///before putting the new data into the array, print array everytime to see if the duplicate actually exists
-      //     console.log(
-      //       `before putting new communityData ${community.data}, the communities array look like ${communities}`
-      //     );
-      //     console.log(
-      //       `before the if statement. communityNames ->${communityNames}, communityNameComeing is ${community.data.communityName}`
-      //     );
-
-      //     if (checkIfExist(community.data.communityName)) {
-      //       console.log(
-      //         `${community.data} is already in the array. so don't set it.`
-      //       );
-      //     } else {
-      //       console.log(
-      //         `${community.data.communityName} is not there yet. So, will set`
-      //       );
-      //       setCommunities((prev) => [...prev, community.data]);
-      //       // communityNames.push(community.data.communityName);
-      //       communitiesGlobal.push(community.data.communityName);
-      //       // setCommunityNames((prev) => [
-      //       //   ...prev,
-      //       //   community.data.communityName,
-      //       // ]);
-      //     }
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // });
     };
     fetchUserAndSetCommunities();
   }, [user]);
-  // useEffect(() => {
-  //   console.log("communities just changed to like this", communities);
-  //   //   //     setCommunities(communityObjectArrayTemp);
-  //   //   //     setCurrentUser(theUser);
-  // }, [communities]);
-  // const checkIfExist = (communityName) => {
-  //   if (communitiesGlobal.includes(communityName)) {
-  //     console.log("yes, it includes. so don't put this one in the state array");
-  //     return true;
-  //   } else {
-  //     console.log(
-  //       "yes, the array don't include this. so don't put this one in the state array"
-  //     );
-  //     return false;
-  //   }
-  // };
+
   const communityCreateButtonClicked = async () => {
     console.log(
       "createButtonClicked, now, the ref is this",
@@ -290,5 +227,3 @@ export default function Comunity() {
     </>
   );
 }
-
-// <CommunityList communities={communitiesGlobal} />

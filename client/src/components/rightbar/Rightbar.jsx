@@ -2,10 +2,6 @@ import "./rightbar.css";
 import { Add, Remove } from "@material-ui/icons";
 import React, { Component, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { CardGiftcard } from "@material-ui/icons";
-import { Users } from "../../dummyData";
-import Online from "../online/Online";
-import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import { axiosInstance } from "../../config";
 import { useNavigate } from "react-router-dom";
@@ -236,9 +232,6 @@ export default function Rightbar({ user }) {
         );
         navigate(`/messenger`);
       }
-      // const res = await axiosInstance.post("/conversations", bodyToPass);
-      // console.log(`res is like this ${res.data}`);
-      // navigate(`/messenger`);
     } catch (error) {
       console.log(error);
     }

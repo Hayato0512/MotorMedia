@@ -116,10 +116,6 @@ export default function CommunityRightbar({ chosenCommunity, hidden }) {
       );
       console.log(`res.data is like this ${res.data}`);
     } catch (error) {}
-    // console.log(`newMembers are like ${newMembers}`);
-    // console.log(`OldCommunities are like ${user.communities}`);
-    // console.log(`newCommunities are like ${newCommunities}`);
-    //next, get rid of communityID from user's communities
   };
   if (chosenCommunity) {
     return (
