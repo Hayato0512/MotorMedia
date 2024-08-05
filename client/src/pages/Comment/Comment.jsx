@@ -75,6 +75,7 @@ export default function Comment() {
     };
     fetchComments();
   }, [post, commentChanged]);
+
   const commentSendButtonClicked = async () => {
     console.log(
       `comment button clicked, so , user is ${user.username}, and then postId ${post._id}, and the comment is ${inputRef.current.value}`
