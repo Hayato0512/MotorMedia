@@ -19,6 +19,7 @@ export default function Comunity() {
   const [currentUser, setCurrentUser] = useState(null);
   const [communities, setCommunities] = useState([]);
   const [communityNames, setCommunityNames] = useState([]);
+  const [communityListUpdated, setCommunityListUpdated] = useState(false);
   const [chosenCommunity, setChosenCommunity] = useState(null);
   const inputRefName = useRef();
   const { user } = useContext(AuthContext);
@@ -40,10 +41,13 @@ export default function Comunity() {
         )
       );
       console.log(`list is like this ${list} in Community`);
-      setCommunities(list);
+
+      const uniqueList = filterDupliate(list);
+      setCommunities(uniqueList);
     };
     fetchUserAndSetCommunities();
   }, [user]);
+  //so What I want is, re-render the component when fetching the list of community is done. before axios http request is done, the initial rendering happens I think.
 
   const communityCreateButtonClicked = async () => {
     console.log(
@@ -136,6 +140,14 @@ export default function Comunity() {
     console.log("let's go back.");
     setChosenCommunity(null);
     // navigate(`/community`);
+  };
+
+  const filterDupliate = (list) => {
+    //here, filter the list to get rid of duplicate
+    const uniqueList = Array.from(
+      list.reduce((map, obj) => map.set(obj.id, obj), new Map()).values()
+    );
+    return uniqueList;
   };
 
   return chosenCommunity ? (
