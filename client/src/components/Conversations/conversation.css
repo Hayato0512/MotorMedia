@@ -1,24 +1,28 @@
-.conversation{
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-    margin-top: 20px;
+.conversation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 20px;
 }
-.conversation:hover{
-    background-color: rgb(255, 231, 96);
-}
-
-.conversationImg{
-    width:40px;
-    height: 40px;
-    border-radius:  50%; 
-    object-fit: cover;
-    margin-right: 20px;
+.conversation:hover {
+  background-color: rgb(255, 231, 96);
 }
 
-.conversationName{
-    font-weight: 500;
+.conversationThreeDots {
 }
-    /* align-items: center;  center item like, Y - axis way.*/
-    /*  this is to make is horizontal display: flex; */
+
+.conversationImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.conversationName {
+  font-weight: 500;
+}
+/* align-items: center;  center item like, Y - axis way.*/
+/*  this is to make is horizontal display: flex; */
