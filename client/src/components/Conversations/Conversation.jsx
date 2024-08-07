@@ -32,31 +32,24 @@ export default function Conversation({ conversation, currentUser }) {
 
   //Next time, start from here. What I need to do, is get the conversation id to delete. I think that is it. then I can delete all the messages as well as the converation itself. not difficult at all. Very nice
   const deleteClicked = async (e) => {
-    e.preventDefault(); //what is this for?
-    // console.log(
-    //   "debug: delete clicked, let's delete post by doing axiosInstance.delete(ostkjkjk )",
-    //   post._id
-    // );
-    // //get the post ID
-    // console.log("currentUser._id", currentUser._id);
-    // const data = new FormData();
-    // data.append("userId", currentUser._id);
-    // const bodyToPass = {
-    //   userId: currentUser._id,
-    // };
-    // try {
-    //   const res = await axiosInstance.delete(
-    //     `/posts/${post._id}/${currentUser._id}`,
-    //     {
-    //       userId: currentUser._id,
-    //     }
-    //   );
-    //   console.log(res);
-    //   setShow(false);
-    //   window.location.reload(false);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    e.preventDefault();
+    //get the conversation ID
+    try {
+      const res = await axiosInstance.delete(
+        `/conversations/${conversation._id}`
+      );
+      console.log(res);
+      if (res.status == 200) {
+        setShow(false);
+      } else {
+        console.log(
+          "Conversation Deletion Failed : Conversation.jsx:deleteClicked"
+        );
+      }
+      window.location.reload(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deleteCancelClicked = () => {
