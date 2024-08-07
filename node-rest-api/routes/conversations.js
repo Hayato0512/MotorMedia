@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Conversation = require("../models/Conversation");
+const Message = require("../models/Message");
 
 //create a new conversation
 router.post("/", async (req, res) => {
@@ -36,6 +37,29 @@ router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
     res.status(200).json(conversation);
   } catch (error) {
     res.status(500).json(null);
+  }
+});
+
+//delete conversation
+router.delete("/:conversationId", async (req, res) => {
+  //first, delete specified conversation from the Conversation schema
+  try {
+    const conversation = await Conversation.findById(req.params.conversationId);
+    await conversation.deleteOne();
+
+    //Second, delete all the messages from message schema whose conversation Id is the deleted one
+    try {
+      await Message.deleteMany({ conversationId: req.params.conversationId });
+      res
+        .status(200)
+        .json("The conversation and its messages have been deleted");
+    } catch (error) {
+      res
+        .status(500)
+        .json("Failed to delete the messages associated with the conversation");
+    }
+  } catch (error) {
+    res.status(500).json("Failed to delete the conversation");
   }
 });
 module.exports = router;

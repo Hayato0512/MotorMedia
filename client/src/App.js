@@ -54,7 +54,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        // <Route exact path="/" element={user ? <Home /> : <Register />} />
+        //{" "}
+        <Route exact path="/" element={user ? <Home /> : <QuestionForum />} />
         <Route
           exact
           path="/login"
