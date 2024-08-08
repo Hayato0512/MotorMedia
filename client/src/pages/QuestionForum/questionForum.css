@@ -1,0 +1,68 @@
+.questionForum {
+  display: flex;
+  flex-direction: column;
+  background-color: bisque;
+  width: 100%;
+  flex: 12;
+  height: 100vh;
+}
+
+.questionForumContainer {
+  border-radius: 10px;
+  border-color: black;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(238, 226, 210);
+  height: 100%;
+  width: auto;
+  margin: 10px;
+}
+
+.questionForumTitleContainer {
+  margin: 20px 20px 20px 20px;
+  border-radius: 10px;
+  background-color: lightpink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.questionForumTitle {
+  padding: 20px;
+  display: flex;
+  font-size: 40px;
+}
+
+.questionCreateButtonDiv {
+  display: flex;
+  width: auto;
+  margin: 10px;
+  align-items: center;
+  justify-content: right;
+  padding-right: 20px;
+}
+
+.questionCreateButton {
+  display: flex;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.questionSearchInputDiv {
+  display: flex;
+  width: auto;
+  margin: 10px;
+  margin-left: 30px;
+}
+
+.questionSearchInputField {
+  border-radius: 5px;
+}
+.questionSearchButton {
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.questionForumFilterContainer {
+  padding: 10px;
+  width: 30%;
+}
