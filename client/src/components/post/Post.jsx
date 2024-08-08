@@ -33,13 +33,6 @@ export default function Post({ post, onChange }) {
     fetchUser();
   }, [post.userId]);
 
-  // var chosenUser = null;
-  // er.map((user) => {
-  //   if (user.id === post.userId) {
-  //     chosenUser = user;
-  //   }
-  // });
-
   const likeHandler = async () => {
     try {
       await axiosInstance.put("/posts/" + post._id + "/like", {

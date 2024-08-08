@@ -1,0 +1,86 @@
+.question {
+  width: auto;
+  border-radius: 10px;
+  margin: 30px;
+  -webkit-box-shadow: 9px 9px 34px -22px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 9px 9px 34px -22px rgba(0, 0, 0, 0.75);
+  box-shadow: 9px 9px 34px -22px rgba(0, 0, 0, 0.75);
+  background-color: white;
+}
+
+.questionWrapper {
+  padding: 10px;
+}
+.questionTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.questionThreeDots {
+  cursor: pointer;
+}
+
+.questionProfileImg {
+  width: 32px;
+  object-fit: cover;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.questionUsername {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 10px;
+}
+
+.questionDate {
+  font-size: 12px;
+}
+
+.questionCenter {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+.questionTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.questionDesc {
+  font-size: 18px;
+  color: rgb(118, 118, 118);
+}
+.questionImg {
+  margin-top: 20px;
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+.questionBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.questionBottomLeft {
+  display: flex;
+  align-items: center;
+}
+
+.likeIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.questionLikeCounter {
+  font-size: 15px;
+}
+.questionCommentText {
+  cursor: pointer;
+  border-bottom: 1px dashed gray;
+}
+.questionList {
+  overflow: hidden;
+  overflow-y: scroll;
+}
