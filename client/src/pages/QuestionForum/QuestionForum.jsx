@@ -10,8 +10,11 @@ import Question from "../../components/question/Question";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Rightbar from "../../components/rightbar/Rightbar";
+import QuestionDialog from "../../components/questionDialog/QuestionDialog";
 export default function QuestionForum() {
   const [age, setAge] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const inputRefName = useRef();
 
   const handleChange = (event) => {
@@ -23,6 +26,11 @@ export default function QuestionForum() {
       "questionCreateClicked, now, the ref is this",
       inputRefName.current.value
     );
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
   };
 
   return (
@@ -87,6 +95,7 @@ export default function QuestionForum() {
         </div>
         <Rightbar />
       </div>
+      <QuestionDialog isOpen={isDialogOpen} onClose={handleCloseDialog} />
     </>
   );
 }
