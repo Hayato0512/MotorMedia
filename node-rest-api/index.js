@@ -14,6 +14,7 @@ const communityPostRoute = require("./routes/communityPosts");
 const conversationPostRoute = require("./routes/conversations");
 const messagePostRoute = require("./routes/messages");
 const commentRoute = require("./routes/comments");
+const questionRoute = require("./routes/questions");
 const multer = require("multer");
 const path = require("path");
 var cors = require("cors");
@@ -132,6 +133,7 @@ app.use("/api/communityPosts", communityPostRoute);
 app.use("/api/conversations", conversationPostRoute);
 app.use("/api/messages", messagePostRoute);
 app.use("/api/comments", commentRoute);
+app.use("/api/questions", questionRoute);
 // app.get("/", (req, res) => {
 //   res.send("welcome to Home");
 // });
