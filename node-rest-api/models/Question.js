@@ -9,15 +9,11 @@ const questionSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    questionId: {
-      type: String,
-      require: true,
-    },
     title: {
       type: String,
       max: 100,
     },
-    desc: {
+    body: {
       type: String,
       max: 500,
     },
@@ -33,6 +29,10 @@ const questionSchema = new mongoose.Schema(
       type: Boolean,
       require: true,
     },
+    tags: {
+      type: Array,
+      default: [],
+    },
   },
 
   { timestamps: true }
@@ -40,5 +40,5 @@ const questionSchema = new mongoose.Schema(
 
 //this is a model
 
-module.exports = mongoose.model("Comment", commentSchema);
+module.exports = mongoose.model("Question", questionSchema);
 //this is how we export in node.js

@@ -11,6 +11,18 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import { AuthContext } from "../../context/AuthContext";
+import { axiosInstance } from "../../config";
+import "./questionDialog.css";
+import {
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  TextField,
+  keyframes,
+} from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -18,14 +30,58 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function QuestionDialog({ isOpen, onClose }) {
   const [open, setOpen] = React.useState(false);
-
-  console.log("QuestionDialog: Opened");
+  const [tags, setTags] = React.useState([]);
+  const [title, setTitle] = React.useState("");
+  const [body, setBody] = React.useState("");
+  const [tagTextFieldValue, setTagTextFieldValue] = React.useState("");
+  const { user: currentUser } = React.useContext(AuthContext);
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleTagDeletion = (tagToDelete) => {
+    console.log("QuestionDialog: before setTag, tags are like this , ", tags);
+    setTags((prevTags) => prevTags.filter((tag) => tag !== tagToDelete));
+    console.log("QuestionDialog: after setTag, tags are like this , ", tags);
+    // setOpen(false);
+  };
+
+  const addTag = () => {
+    setTags((prevTags) => [...prevTags, tagTextFieldValue]);
+    //clear the field
+    setTagTextFieldValue("");
+  };
+
+  const handleSubmission = async () => {
+    console.log(
+      "handleSubmission: title " + title + " and body " + body + " and tags ",
+      tags
+    );
+    const newQuestion = {
+      userId: currentUser._id,
+      title: title,
+      body: body,
+      upvotes: [],
+      downvotes: [],
+      isResolved: false,
+      tags: tags,
+    };
+    //here, let's submit.
+    try {
+      const res = await axiosInstance.post("/questions", newQuestion);
+      console.log(
+        `SUCCESS. creating a new commentthe res.data is ${JSON.stringify(
+          res.data
+        )}`
+      );
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -50,25 +106,87 @@ export default function QuestionDialog({ isOpen, onClose }) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Sound
+              Create Question
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
-              save
+              Post
             </Button>
           </Toolbar>
         </AppBar>
-        <List>
-          <ListItemButton>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItemButton>
-          <Divider />
-          <ListItemButton>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
-            />
-          </ListItemButton>
-        </List>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here.
+            We will send updates occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="email"
+            label="Title"
+            type="email"
+            fullWidth
+            variant="standard"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+
+          <TextField
+            id="outlined-multiline-flexible"
+            label="Body"
+            multiline
+            fullWidth
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            sx={{
+              height: "200px", // Set the height of the TextField
+              "& .MuiOutlinedInput-root": {
+                height: "100%", // Ensure the outlined input field takes the full height
+                alignItems: "flex-start", // Aligns the input content to the top
+              },
+              "& .MuiOutlinedInput-input": {
+                height: "100%", // Ensure the input area takes the full height
+                overflowY: "scroll", // Enable vertical scrolling for overflowing content
+                boxSizing: "border-box", // Ensure padding is considered inside the height
+              },
+            }}
+          />
+
+          <Stack direction="row" spacing={1}>
+            {tags.map((tag) => (
+              <Chip label={tag} onDelete={() => handleTagDeletion(tag)} />
+            ))}
+          </Stack>
+
+          <TextField
+            id="outlined-multiline-flexible"
+            label="tags"
+            multiline
+            value={tagTextFieldValue}
+            fullWidth
+            onChange={(e) => setTagTextFieldValue(e.target.value)}
+            sx={{
+              height: "40px", // Set the height of the TextField
+              "& .MuiOutlinedInput-root": {
+                height: "100%", // Ensure the outlined input field takes the full height
+                alignItems: "flex-start", // Aligns the input content to the top
+              },
+              "& .MuiOutlinedInput-input": {
+                height: "100%", // Ensure the input area takes the full height
+                overflowY: "scroll", // Enable vertical scrolling for overflowing content
+                boxSizing: "border-box", // Ensure padding is considered inside the height
+              },
+            }}
+          ></TextField>
+          <Button onClick={addTag}>Add Tag</Button>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button type="submit" onClick={handleSubmission}>
+            Subscribe
+          </Button>
+        </DialogActions>
       </Dialog>
     </React.Fragment>
   );
