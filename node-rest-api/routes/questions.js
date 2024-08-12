@@ -98,4 +98,30 @@ router.get("/allQuestions/:userId", async (req, res) => {
   }
 });
 
+router.get("/feed/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Fetch the current user with followers
+    const currentUser = await User.findById(userId);
+
+    if (!currentUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Get the userId array to include the current user's ID and the IDs of the users they follow
+    const userIdsToQuery = [userId, ...currentUser.followings];
+
+    // Fetch questions where the userId is in the array
+    const allQuestionsOfTheUser = await Question.find({
+      userId: { $in: userIdsToQuery },
+    });
+
+    res.json(allQuestionsOfTheUser);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
 module.exports = router;

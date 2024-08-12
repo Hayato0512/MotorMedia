@@ -115,8 +115,8 @@ export default function Question({ question, onChange }) {
                 className="questionProfileImg"
               />
             </Link>
-            <span className="questionUsername">{"Hayato Koyama"}</span>
-            <span className="questionDate">{"2024-08-08"}</span>
+            <span className="questionUsername">{question.userId}</span>
+            <span className="questionDate">{question.createdAt}</span>
           </div>
           <div className="questionTopRight">
             <MoreVert className="questionThreeDots" onClick={handleShow} />
@@ -142,13 +142,9 @@ export default function Question({ question, onChange }) {
             style={{ textDecoration: "none" }}
             // key={commenter.data.username}
           >
-            <span className="questionTitle">{"Question Title Comes here"}</span>
+            <span className="questionTitle">{question.title}</span>
           </Link>
-          <span className="questionDesc">
-            {
-              "WHat is sfajlkdfjaslkfja sasdflsakjfsa sjflkasdfsajfofijasf askdfjasf ksldfsf jsdkjfaseflkjvca dfajklfd;afesf jsdfs sldkfjsadflkasjf dsf arigato"
-            }
-          </span>
+          <span className="questionDesc">{question.body}</span>
           {/* <img src={PF + "posts/" + post.img} alt="" className="postImg" /> */}
           <img alt="" className="questionImg" />
         </div>

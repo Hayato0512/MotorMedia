@@ -1,4 +1,4 @@
-import { React, useRef, useState } from "react";
+import { React, useEffect, useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 // import FormControl from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
@@ -11,11 +11,25 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Rightbar from "../../components/rightbar/Rightbar";
 import QuestionDialog from "../../components/questionDialog/QuestionDialog";
+import { axiosInstance } from "../../config";
+import { AuthContext } from "../../context/AuthContext";
+
 export default function QuestionForum() {
   const [age, setAge] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [questionList, setQuestionList] = useState([]);
+  const { user: currentUser } = useContext(AuthContext);
 
   const inputRefName = useRef();
+
+  useEffect(() => {
+    const fetchFeedQuestions = async () => {
+      const res = await axiosInstance.get("/questions/feed/" + currentUser._id);
+      console.log("QuestionForum: fetchFeedQuestions. res is ", res.data);
+      setQuestionList(res.data);
+    };
+    fetchFeedQuestions();
+  }, [currentUser]);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -83,14 +97,9 @@ export default function QuestionForum() {
             </FormControl>
           </div>
           <div className="questionList">
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
+            {questionList.map((question) => (
+              <Question question={question} />
+            ))}
           </div>
         </div>
         <Rightbar />
