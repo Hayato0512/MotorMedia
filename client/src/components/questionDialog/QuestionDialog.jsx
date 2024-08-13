@@ -41,6 +41,7 @@ export default function QuestionDialog({ isOpen, onClose }) {
 
   const handleClose = () => {
     setOpen(false);
+    onClose();
   };
 
   const handleTagDeletion = (tagToDelete) => {
@@ -95,7 +96,7 @@ export default function QuestionDialog({ isOpen, onClose }) {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: "relative" }}>
+        <AppBar sx={{ position: "relative", bgcolor: "#ffc0cb" }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -108,9 +109,6 @@ export default function QuestionDialog({ isOpen, onClose }) {
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               Create Question
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              Post
-            </Button>
           </Toolbar>
         </AppBar>
         <DialogContent>
@@ -182,9 +180,8 @@ export default function QuestionDialog({ isOpen, onClose }) {
           <Button onClick={addTag}>Add Tag</Button>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit" onClick={handleSubmission}>
-            Subscribe
+            Post
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,111 +1,104 @@
-.topbarContainer{
-    height:50px;
-    width:100%;
-    background-color:pink;
-    display: flex;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index: 999 ;
+.topbarContainer {
+  height: 50px;
+  width: 100%;
+  background-color: #ffc0cb;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
-.topbarLeft{
-    flex:3;
+.topbarLeft {
+  flex: 3;
 }
-.logo{
-    font-size:24px;
-    margin-left:20px;
-    font-weight:bold;
-    color:black;
-    cursor:pointer;
-
-}
-
-.searchbar{
-    width: 100%;
-    height: 30px;
-    border-radius:30px;
-    display:flex; 
-    align-items: center;
-}
-.topbarCenter{
-    flex:5;
+.logo {
+  font-size: 24px;
+  margin-left: 20px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
 }
 
-.searchIcon{
-    font-size:20px !important;
-    margin-left: 10px;
-    
+.searchbar {
+  width: 100%;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
 }
-.searchInput{
-    border:none;
-    width:70%;
-    border-radius:30px;
-
-}
-.topbarChatIcon{
-    color:black;
-}
-.topbarSetting{
-    color:black;
-}
-.friendRequestIcon{
-    color: black;
-}
-.topbarSearchButton{
-    margin-left: 20px;
-    border: none;
-    color: rgb(81, 80, 80);
-    border-radius:5px;
-    padding: 5px 10px;
-    display: flex;
-    background-color: rgb(174, 201, 240);
-    align-items: center;
-    font-size:16px; 
-    font-weight: 500;
-    cursor: pointer;
-}
-.logoutButton{
-    margin-left: 20px;
-    border: none;
-    color: rgb(81, 80, 80);
-    border-radius:5px;
-    padding: 5px 10px;
-    display: flex;
-    background-color: rgb(174, 201, 240);
-    align-items: center;
-    font-size:16px; 
-    font-weight: 500;
-    cursor: pointer;
-}
-.searchInput:focus{
-    outline:none;
-}
-.topbarRight{
-    flex:4;
-    display: flex;
-    align-items:center;
-    justify-content: space-around;
-    /* space-between */
-    
+.topbarCenter {
+  flex: 5;
 }
 
-.topbarLink{
-    margin-right :10px;
-    font-size:14px;
-    cursor:pointer;
-    
-    
+.searchIcon {
+  font-size: 20px !important;
+  margin-left: 10px;
 }
-.topbarIcons{
+.searchInput {
+  border: none;
+  width: 70%;
+  border-radius: 30px;
+}
+.topbarChatIcon {
+  color: black;
+}
+.topbarSetting {
+  color: black;
+}
+.friendRequestIcon {
+  color: black;
+}
+.topbarSearchButton {
+  margin-left: 20px;
+  border: none;
+  color: rgb(81, 80, 80);
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  background-color: rgb(174, 201, 240);
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.logoutButton {
+  margin-left: 20px;
+  border: none;
+  color: rgb(81, 80, 80);
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  background-color: rgb(174, 201, 240);
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.searchInput:focus {
+  outline: none;
+}
+.topbarRight {
+  flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* space-between */
+}
 
-    display: flex;
+.topbarLink {
+  margin-right: 10px;
+  font-size: 14px;
+  cursor: pointer;
 }
-.topbarIconItem{
-    margin-right:15px;
-    cursor:pointer;
-    position:relative;
-    /* becuase the badge will be absolute, we can position items according to the badge. */
+.topbarIcons {
+  display: flex;
+}
+.topbarIconItem {
+  margin-right: 15px;
+  cursor: pointer;
+  position: relative;
+  /* becuase the badge will be absolute, we can position items according to the badge. */
 }
 /* .topbarIconBadge{
 
@@ -123,12 +116,11 @@
     font-size:12px;
 } */
 
-.topbarImg{
-
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-    /* what happens without object-fit , => image is squisuhed, not good*/
-    cursor: pointer;    
+.topbarImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* what happens without object-fit , => image is squisuhed, not good*/
+  cursor: pointer;
 }
