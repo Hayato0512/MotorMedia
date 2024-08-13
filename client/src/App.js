@@ -26,6 +26,7 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import SearchMotorCycle from "./pages/SearchMotorCycle/SearchMotorCycle";
 import FriendRequest from "./pages/FriendRequest/FriendRequest";
+import QuestionDetail from "./pages/QuestionDetail/QuestionDetail";
 
 //        <Route exact path="/" element={user ? <Home /> : <Register />} />
 function App() {
@@ -75,6 +76,7 @@ function App() {
         <Route exact path="/comment" element={<Comment />} />
         <Route exact path="/bookmark" element={<Bookmark />} />
         <Route exact path="/questionForum" element={<QuestionForum />} />
+        <Route exact path="/questionDetail" element={<QuestionDetail />} />
         <Route exact path="/job" element={<Job />} />
         <Route exact path="/events" element={<Events />} />
         <Route exact path="/courses" element={<Courses />} />

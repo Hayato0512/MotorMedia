@@ -99,6 +99,10 @@ export default function Question({ question, onChange }) {
     //   navigate("/comment", { state: objectToPassToComment });
   };
 
+  var questionDetailsObject = {
+    questionId: question._id,
+  };
+
   return (
     <div className="question">
       <div className="questionWrapper">
@@ -138,7 +142,11 @@ export default function Question({ question, onChange }) {
             </Modal.Footer>
           </Modal>
           <Link
-            // to={"/profile/" + commenter.data.username}
+            to={{
+              pathname: "/questionDetail/",
+              state: questionDetailsObject,
+            }}
+            // navigate("/comment", { state: objectToPassToComment });
             style={{ textDecoration: "none" }}
             // key={commenter.data.username}
           >
