@@ -13,13 +13,14 @@ export default function QuestionDetail() {
   const [question, setQuestion] = useState(null);
   //get currentUesr
   const { user: currentUser } = useContext(AuthContext);
-
   const { state } = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (state) {
       setQuestionId(state.questionId);
+      console.log("QuestionDetail.jsx: state is ", state);
+    } else {
+      console.log("QuestionDetail.jsx: state is null");
     }
 
     //get Question Http Request
@@ -35,6 +36,7 @@ export default function QuestionDetail() {
         }
       } catch (error) {}
     };
+    fetchQuestion();
   }, [state]);
 
   // render using useEffect
