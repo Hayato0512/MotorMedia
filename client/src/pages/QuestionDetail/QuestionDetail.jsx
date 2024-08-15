@@ -22,6 +22,7 @@ export default function QuestionDetail() {
     } else {
       console.log("QuestionDetail.jsx: state is null");
     }
+    console.log("QuestionDetail: HEHEHEHHEHHE");
 
     //get Question Http Request
     const fetchQuestion = async () => {
@@ -37,7 +38,20 @@ export default function QuestionDetail() {
       } catch (error) {}
     };
     fetchQuestion();
-  }, [state]);
+  }, [state, questionId]);
+  //if I set quesetionId, no infinite loop even though I also change questionId by setQuestionId. maybe if the new value is the same as old one, it doesn't make this re-render.
+  //On the other hand, every single res might be different. that is why even though I am fetching the same data from cloud, it's not quite the same.
+
+  useEffect(() => {
+    const fetchSpec = async () => {
+      console.log(`let's fetch the bikes information from the rapid API. `);
+    };
+    fetchSpec();
+  }, [state, question]);
+
+  const getQuestionTitle = () => {
+    return;
+  };
 
   // render using useEffect
   return (
