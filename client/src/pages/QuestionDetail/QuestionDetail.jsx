@@ -63,6 +63,17 @@ export default function QuestionDetail() {
           <div className="questionDetailTitle">
             {question ? question.title : "Loading..."}
           </div>
+          <div className="questionDetailBody">
+            <div className="questionDetailBodyText">
+              {question ? question.body : "Loading..."}
+            </div>
+            <div className="questionDetailBodyUserInfo ">
+              user icon and name comes here
+            </div>
+          </div>
+          <div className="questionDetailCommentContainer">
+            List of Comments come here.
+          </div>
         </div>
       </div>
     </div>
