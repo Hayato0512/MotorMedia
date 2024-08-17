@@ -6,6 +6,8 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { axiosInstance } from "../../config";
+import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
+import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
 
 // get questionID as a parameter. questionId
 export default function QuestionDetail() {
@@ -13,6 +15,7 @@ export default function QuestionDetail() {
   const [question, setQuestion] = useState(null);
   //get currentUesr
   const { user: currentUser } = useContext(AuthContext);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { state } = useLocation();
 
   useEffect(() => {
@@ -63,12 +66,32 @@ export default function QuestionDetail() {
           <div className="questionDetailTitle">
             {question ? question.title : "Loading..."}
           </div>
+          <hr class="solid" />
           <div className="questionDetailBody">
+            <div className="questionDetailBodyVoteIconsContainer">
+              <ThumbUpAltRoundedIcon className="upvoteIcon" />
+              <div className="questionDetailBodyVoteCount">12</div>
+              <ThumbDownRoundedIcon className="downvoteIcon" />
+            </div>
             <div className="questionDetailBodyText">
               {question ? question.body : "Loading..."}
             </div>
             <div className="questionDetailBodyUserInfo ">
-              user icon and name comes here
+              <div questionDetailBodyAskedDate>asked Feb 3, 2024</div>
+              <div className="questionDetailBodyUserInfoLower">
+                <img
+                  src={
+                    currentUser.profilePicture
+                      ? PF + "person/" + currentUser.profilePicture
+                      : PF + "person/" + "andrew.jpg"
+                  }
+                  alt=""
+                  className="postProfileImg"
+                />
+                <div className="questionDetailBodyUserName">
+                  {currentUser.username}
+                </div>
+              </div>
             </div>
           </div>
           <div className="questionDetailCommentContainer">

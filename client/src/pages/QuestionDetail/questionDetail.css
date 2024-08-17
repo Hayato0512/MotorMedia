@@ -16,6 +16,7 @@
   font-size: 32px;
   flex: 1;
 }
+
 .questionDetailBody {
   flex: 6;
   position: relative;
@@ -25,18 +26,57 @@
 }
 .questionDetailBodyText {
   padding: 12px;
-  background-color: rgb(27, 122, 143);
+  font-size: 24px;
 }
 
 .questionDetailBodyUserInfo {
   position: absolute;
   padding: 12px;
-  background-color: rgb(183, 183, 183);
+  background-color: rgb(199, 232, 246);
   display: flex;
+  flex-direction: column;
   bottom: 0;
   right: 0;
+  margin: 10px;
+  border-radius: 5px;
+}
+.questionDetailBodyUserInfoLower {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  border-radius: 5px;
+  align-items: center;
 }
 .questionDetailCommentContainer {
   flex: 2;
   background-color: rgb(249, 214, 214);
+}
+
+.questionDetailBodyVoteIconsContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  border-right: 1px solid grey;
+  margin-right: 10px;
+}
+.upvoteIcon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.upvoteIcon:hover {
+  color: aqua;
+}
+
+.downvoteIcon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.downvoteIcon:hover {
+  color: aqua;
+}
+.questionDetailBodyUserName {
+  margin-left: 10px;
 }
