@@ -129,7 +129,9 @@ export default function QuestionDetail() {
     }
   };
 
-  const handleCommentDeletion = async () => {};
+  const handleCommentDeletion = async () => {
+    setCommentChanged(!commentChanged);
+  };
   // render using useEffect
   return (
     <div className="questionDetail">
