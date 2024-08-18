@@ -1,7 +1,7 @@
 .questionDetailContainer {
   display: flex;
   flex: 12;
-  height: 100%;
+  height: auto;
 }
 .questionDetailCenter {
   flex: 9;
@@ -79,4 +79,8 @@
 }
 .questionDetailBodyUserName {
   margin-left: 10px;
+}
+.questionDetailsComments {
+  height: 100%;
+  overflow: scroll;
 }

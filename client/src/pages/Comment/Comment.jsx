@@ -95,6 +95,7 @@ export default function Comment() {
       );
       // window.location.reload(false);
       setCommentChanged(!commentChanged);
+      inputRef.current.value = "";
     } catch (error) {
       console.log(error);
     }
