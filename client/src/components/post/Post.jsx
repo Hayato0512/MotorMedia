@@ -38,7 +38,6 @@ export default function Post({ post, onChange }) {
       await axiosInstance.put("/posts/" + post._id + "/like", {
         userId: currentUser._id,
       });
-      console.log("alright");
     } catch (error) {}
     if (isLiked) {
       setLike(like - 1);

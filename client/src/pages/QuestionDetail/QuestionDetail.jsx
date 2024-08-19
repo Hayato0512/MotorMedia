@@ -22,6 +22,44 @@ export default function QuestionDetail() {
   const { user: currentUser } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { state } = useLocation();
+  const [upvote, setUpvote] = useState(0);
+  const [downvote, setDownvote] = useState(0);
+  const [isUpvoted, setIsUpvoted] = useState(false);
+  const [isDownvoted, setIsDownvoted] = useState(false);
+
+  //
+  const upvoteHandler = async () => {
+    try {
+      await axiosInstance.put("/questions/" + question._id + "/upvote", {
+        userId: currentUser._id,
+      });
+    } catch (error) {}
+    if (isUpvoted) {
+      setUpvote(upvote - 1);
+      setIsUpvoted(false);
+    } else {
+      //if it is not,
+      setUpvote(upvote + 1);
+      setIsUpvoted(true);
+    }
+    // setLike(isLiked ? like - 1 : like + 1);
+  };
+  const downvoteHandler = async () => {
+    try {
+      await axiosInstance.put("/questions/" + question._id + "/downvote", {
+        userId: currentUser._id,
+      });
+    } catch (error) {}
+    if (isDownvoted) {
+      setDownvote(downvote - 1);
+      setIsDownvoted(false);
+    } else {
+      //if it is not,
+      setDownvote(downvote + 1);
+      setIsDownvoted(true);
+    }
+    // setLike(isLiked ? like - 1 : like + 1);
+  };
 
   useEffect(() => {
     if (state) {
@@ -42,6 +80,11 @@ export default function QuestionDetail() {
             res.data
           );
           setQuestion(res.data);
+          setIsUpvoted(question.upvotes.includes(currentUser._id));
+          setUpvote(question.upvotes.length);
+          setDownvote(question.downvotes.length);
+          setIsDownvoted(question.downvotes.includes(currentUser._id));
+          //is postLIkes includes the current user, then it will be false
         }
       } catch (error) {}
     };
@@ -49,13 +92,6 @@ export default function QuestionDetail() {
   }, [state, questionId]);
   //if I set quesetionId, no infinite loop even though I also change questionId by setQuestionId. maybe if the new value is the same as old one, it doesn't make this re-render.
   //On the other hand, every single res might be different. that is why even though I am fetching the same data from cloud, it's not quite the same.
-
-  useEffect(() => {
-    const fetchSpec = async () => {
-      console.log(`let's fetch the bikes information from the rapid API. `);
-    };
-    fetchSpec();
-  }, [state, question]);
 
   useEffect(() => {
     //set commenters
@@ -145,9 +181,15 @@ export default function QuestionDetail() {
           <hr class="solid" />
           <div className="questionDetailBody">
             <div className="questionDetailBodyVoteIconsContainer">
-              <ThumbUpAltRoundedIcon className="upvoteIcon" />
-              <div className="questionDetailBodyVoteCount">12</div>
-              <ThumbDownRoundedIcon className="downvoteIcon" />
+              <ThumbUpAltRoundedIcon
+                className="upvoteIcon"
+                onClick={upvoteHandler}
+              />
+              <div className="questionDetailBodyVoteCount">{upvote}</div>
+              <ThumbDownRoundedIcon
+                className="downvoteIcon"
+                onClick={downvoteHandler}
+              />
             </div>
             <div className="questionDetailBodyText">
               {question ? question.body : "Loading..."}

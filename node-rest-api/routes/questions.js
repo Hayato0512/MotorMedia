@@ -124,4 +124,52 @@ router.get("/feed/:userId", async (req, res) => {
   }
 });
 
+//upvote a question
+router.put("/:id/upvote", async (req, res) => {
+  try {
+    //if id not in upvote array, , add it to the array,
+    const question = await Question.findById(req.params.id);
+
+    if (!question.upvotes.includes(req.body.userId)) {
+      await question.updateOne({ $push: { upvotes: req.body.userId } }); //push
+      //and check if the id exist in downvote, if so, remove it.
+      if (question.downvotes.includes(req.body.userId)) {
+        await question.updateOne({ $pull: { downvotes: req.body.userId } });
+      }
+
+      res.status(200).json("the question has been upvoted");
+    } else {
+      // if id already in the array, remove it.
+      await question.updateOne({ $pull: { upvotes: req.body.userId } }); //pull
+      res.status(403).json("the question has been unvoted");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//downvote a question
+router.put("/:id/downvote", async (req, res) => {
+  try {
+    const question = await Question.findById(req.params.id);
+
+    //if id not in downvote array, add it to the array,
+    if (!question.downvotes.includes(req.body.userId)) {
+      await question.updateOne({ $push: { downvotes: req.body.userId } }); //push
+      //and check if the id exist in upvote, if so, remove it
+      if (question.upvotes.includes(req.body.userId)) {
+        await question.updateOne({ $pull: { upvotes: req.body.userId } });
+      }
+
+      res.status(200).json("the question has been downvoted");
+    } else {
+      //if id already in the array, remove it.
+      await question.updateOne({ $pull: { downvotes: req.body.userId } }); //pull
+      res.status(403).json("the question has been unvoted");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
