@@ -27,7 +27,6 @@ export default function QuestionDetail() {
   const [isUpvoted, setIsUpvoted] = useState(false);
   const [isDownvoted, setIsDownvoted] = useState(false);
 
-  //
   const upvoteHandler = async () => {
     try {
       await axiosInstance.put("/questions/" + question._id + "/upvote", {
@@ -39,11 +38,16 @@ export default function QuestionDetail() {
       setIsUpvoted(false);
     } else {
       //if it is not,
+      if (isDownvoted) {
+        setDownvote(downvote - 1);
+        setIsDownvoted(false);
+      }
       setUpvote(upvote + 1);
       setIsUpvoted(true);
     }
     // setLike(isLiked ? like - 1 : like + 1);
   };
+
   const downvoteHandler = async () => {
     try {
       await axiosInstance.put("/questions/" + question._id + "/downvote", {
@@ -55,6 +59,10 @@ export default function QuestionDetail() {
       setIsDownvoted(false);
     } else {
       //if it is not,
+      if (isUpvoted) {
+        setUpvote(upvote - 1);
+        setIsUpvoted(false);
+      }
       setDownvote(downvote + 1);
       setIsDownvoted(true);
     }
@@ -64,11 +72,9 @@ export default function QuestionDetail() {
   useEffect(() => {
     if (state) {
       setQuestionId(state.questionId);
-      console.log("QuestionDetail.jsx: state is ", state);
     } else {
       console.log("QuestionDetail.jsx: state is null");
     }
-    console.log("QuestionDetail: HEHEHEHHEHHE");
 
     //get Question Http Request
     const fetchQuestion = async () => {
@@ -80,11 +86,12 @@ export default function QuestionDetail() {
             res.data
           );
           setQuestion(res.data);
-          setIsUpvoted(question.upvotes.includes(currentUser._id));
-          setUpvote(question.upvotes.length);
-          setDownvote(question.downvotes.length);
-          setIsDownvoted(question.downvotes.includes(currentUser._id));
           //is postLIkes includes the current user, then it will be false
+          //is postLIkes includes the current user, then it will be false
+          setIsUpvoted(res.data.upvotes.includes(currentUser._id));
+          setUpvote(res.data.upvotes.length);
+          setDownvote(res.data.downvotes.length);
+          setIsDownvoted(res.data.downvotes.includes(currentUser._id));
         }
       } catch (error) {}
     };
@@ -136,10 +143,6 @@ export default function QuestionDetail() {
     fetchComments();
   }, [question, commentChanged]);
 
-  const getQuestionTitle = () => {
-    return;
-  };
-
   const commentSendButtonClicked = async () => {
     console.log(
       `comment button clicked, so , user is ${currentUser.username}, and then questionId ${questionId}, and the comment is ${inputRef.current.value}`
@@ -168,6 +171,7 @@ export default function QuestionDetail() {
   const handleCommentDeletion = async () => {
     setCommentChanged(!commentChanged);
   };
+
   // render using useEffect
   return (
     <div className="questionDetail">

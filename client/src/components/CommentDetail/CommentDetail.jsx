@@ -3,11 +3,20 @@ import "./commentDetail.css";
 import { useState, useEffect, useContext, useRef } from "react";
 import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
+import { Modal, Button } from "react-bootstrap";
 export default function CommentDetail({ comment, onDelete }) {
   const [user, setUser] = useState(null);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user: currentUser } = useContext(AuthContext);
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+
+  const deleteCancelClicked = () => {
+    setShow(false);
+  };
+
   useEffect(() => {
     const getUsernameAsync = async () => {
       const userId = comment.userId;
@@ -28,9 +37,9 @@ export default function CommentDetail({ comment, onDelete }) {
   }, [comment]);
 
   const commentDeleteButtonClicked = async (event) => {
-    console.log(
-      `delete clicked. the current user is ${user._id}, and then the user who commented is ${event.target.id} `
-    );
+    // console.log(
+    //   `delete clicked. the current user is ${currentUser._id}, and then the user who commented is ${event.target.id} `
+    // );
     //this try catch just fetch the comment
     try {
       const res = await axiosInstance.get(`/comments/${event.target.id}`);
@@ -72,11 +81,28 @@ export default function CommentDetail({ comment, onDelete }) {
         </div>
         {showDeleteButton ? (
           <>
+            <Modal show={show}>
+              <Modal.Header closeButton>
+                <Modal.Title>delete the comment?</Modal.Title>
+              </Modal.Header>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  id={comment._id}
+                  onClick={commentDeleteButtonClicked}
+                >
+                  delete
+                </Button>
+
+                <Button variant="secondary" onClick={deleteCancelClicked}>
+                  cancel
+                </Button>
+              </Modal.Footer>
+            </Modal>
             <div className="commentCenterCommentDeleteButtonDiv">
               <button
                 className="commentCenterCommentDeleteButton"
-                id={comment._id}
-                onClick={commentDeleteButtonClicked}
+                onClick={handleShow}
               >
                 delete
               </button>
