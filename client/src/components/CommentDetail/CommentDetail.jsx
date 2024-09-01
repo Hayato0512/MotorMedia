@@ -37,9 +37,6 @@ export default function CommentDetail({ comment, onDelete }) {
   }, [comment]);
 
   const commentDeleteButtonClicked = async (event) => {
-    // console.log(
-    //   `delete clicked. the current user is ${currentUser._id}, and then the user who commented is ${event.target.id} `
-    // );
     //this try catch just fetch the comment
     try {
       const res = await axiosInstance.get(`/comments/${event.target.id}`);
@@ -82,7 +79,7 @@ export default function CommentDetail({ comment, onDelete }) {
         {showDeleteButton ? (
           <>
             <Modal show={show}>
-              <Modal.Header closeButton>
+              <Modal.Header>
                 <Modal.Title>delete the comment?</Modal.Title>
               </Modal.Header>
               <Modal.Footer>
