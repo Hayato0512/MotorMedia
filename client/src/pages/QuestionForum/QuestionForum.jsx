@@ -15,7 +15,7 @@ import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function QuestionForum() {
-  const [age, setAge] = useState("");
+  const [order, setOrder] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [questionList, setQuestionList] = useState([]);
   const { user: currentUser } = useContext(AuthContext);
@@ -32,7 +32,33 @@ export default function QuestionForum() {
   }, [currentUser]);
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setOrder(event.target.value);
+    console.log(
+      "QuestionForum: order has been changed to ",
+      event.target.value
+    );
+  };
+  useEffect(() => {
+    //here, rearrnge the questionList depending on the order.
+    const orderedQuestionList = orderQuestionList(order);
+    setQuestionList(orderedQuestionList);
+  }, [order]);
+
+  const orderQuestionList = (order) => {
+    let newQuestionList = questionList;
+    if (order == "newest") {
+      newQuestionList.sort(
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+      );
+    } else if (order == "oldest") {
+      newQuestionList.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+    } else if (order == "popular") {
+      newQuestionList.sort((a, b) => b.upvotes.length - a.upvotes.length);
+    }
+
+    return newQuestionList;
   };
 
   const questionCreateClicked = () => {
@@ -86,13 +112,13 @@ export default function QuestionForum() {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={age}
-                label="Age"
+                value={order}
+                label="Order"
                 onChange={handleChange}
               >
-                <MenuItem value={10}>oldest</MenuItem>
-                <MenuItem value={20}>most popular</MenuItem>
-                <MenuItem value={30}>newest</MenuItem>
+                <MenuItem value={"oldest"}>oldest</MenuItem>
+                <MenuItem value={"popular"}>most popular</MenuItem>
+                <MenuItem value={"newest"}>newest</MenuItem>
               </Select>
             </FormControl>
           </div>
