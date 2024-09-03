@@ -40,24 +40,35 @@ export default function QuestionForum() {
   };
   useEffect(() => {
     //here, rearrnge the questionList depending on the order.
-    const orderedQuestionList = orderQuestionList(order);
-    setQuestionList(orderedQuestionList);
+    const updateQuestionList = () => {
+      const orderedQuestionList = orderQuestionList(order);
+      setQuestionList(orderedQuestionList); //the orderedQuestionList has the correct order. so is it some sort of delay ?
+    };
+    updateQuestionList();
   }, [order]);
 
   const orderQuestionList = (order) => {
-    let newQuestionList = questionList;
+    let newQuestionList = [...questionList];
+    console.log(
+      "before sort, the questionList looks like this ",
+      newQuestionList
+    );
     if (order == "newest") {
       newQuestionList.sort(
-        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
     } else if (order == "oldest") {
       newQuestionList.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
       );
     } else if (order == "popular") {
       newQuestionList.sort((a, b) => b.upvotes.length - a.upvotes.length);
     }
 
+    console.log(
+      "after sort, the questionList looks like this ",
+      newQuestionList
+    );
     return newQuestionList;
   };
 
