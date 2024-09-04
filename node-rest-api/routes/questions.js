@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const Question = require("../models/Question");
 const User = require("../models/User");
+const { body, validationResult } = require("express-validator");
+
 // we just used it to check if it is connected or not
 
 //create a question
@@ -97,6 +99,38 @@ router.get("/allQuestions/:userId", async (req, res) => {
     console.log("are?");
   }
 });
+
+// get all the questions of the user
+router.post(
+  "/tags",
+  body("tags").isArray().withMessage("Tags should be an array."),
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
+      const tags = req.body.tags;
+      // tags = tags.flat();
+      console.log("Tags to search:", tags);
+
+      //Ensure the tags is array
+      if (!Array.isArray(tags)) {
+        return res.status(400).json({ message: "Tags should be an array" });
+      }
+      const allQuestionsWithTags = await Question.find({
+        tags: { $all: tags },
+      });
+
+      console.log("allQuestionsWithTags", allQuestionsWithTags);
+      res.json(allQuestionsWithTags);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+      console.error(err);
+    }
+  }
+);
 
 router.get("/feed/:userId", async (req, res) => {
   try {

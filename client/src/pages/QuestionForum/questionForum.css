@@ -63,5 +63,9 @@
 }
 .questionForumFilterContainer {
   padding: 10px;
-  width: 30%;
+  width: 100%;
+  display: flex;
+}
+.questionForumTagsContainer {
+  width: 100%;
 }

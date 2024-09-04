@@ -13,9 +13,15 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import QuestionDialog from "../../components/questionDialog/QuestionDialog";
 import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
+import Chip from "@mui/material/Chip";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { TextField } from "@mui/material";
 
 export default function QuestionForum() {
   const [order, setOrder] = useState("");
+  const [tags, setTags] = useState([]);
+  const [tagTextFieldValue, setTagTextFieldValue] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [questionList, setQuestionList] = useState([]);
   const { user: currentUser } = useContext(AuthContext);
@@ -30,6 +36,22 @@ export default function QuestionForum() {
     };
     fetchFeedQuestions();
   }, [currentUser]);
+
+  useEffect(() => {
+    const fetchTaggedQuestions = async () => {
+      console.log(
+        "fetchTaggedQuestions. before axios call, tags are like this ",
+        tags
+      );
+      const bodyToPass = {
+        tags: tags,
+      };
+      const res = await axiosInstance.post("/questions/tags", bodyToPass);
+      console.log("QuestionForum: fetchTaggedQuestions. res is ", res.data);
+      setQuestionList(res.data);
+    };
+    fetchTaggedQuestions();
+  }, [tags]);
 
   const handleChange = (event) => {
     setOrder(event.target.value);
@@ -84,6 +106,19 @@ export default function QuestionForum() {
     setIsDialogOpen(false);
   };
 
+  const handleTagDeletion = (tagToDelete) => {
+    console.log("QuestionDialog: before setTag, tags are like this , ", tags);
+    setTags((prevTags) => prevTags.filter((tag) => tag !== tagToDelete));
+    console.log("QuestionDialog: after setTag, tags are like this , ", tags);
+    // setOpen(false);
+  };
+
+  const addTag = () => {
+    setTags((prevTags) => [...prevTags, tagTextFieldValue]);
+    //clear the field
+    setTagTextFieldValue("");
+  };
+
   return (
     <>
       <Topbar />
@@ -118,7 +153,7 @@ export default function QuestionForum() {
             </button>
           </div>
           <div className="questionForumFilterContainer">
-            <FormControl fullWidth>
+            <FormControl sx={{ width: "30%" }}>
               <InputLabel id="demo-simple-select-label">Filter</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -132,6 +167,36 @@ export default function QuestionForum() {
                 <MenuItem value={"newest"}>newest</MenuItem>
               </Select>
             </FormControl>
+
+            <div className="questionForumTagsContainer">
+              <Stack direction="row" spacing={1}>
+                {tags.map((tag) => (
+                  <Chip label={tag} onDelete={() => handleTagDeletion(tag)} />
+                ))}
+              </Stack>
+
+              <TextField
+                id="outlined-multiline-flexible"
+                label="tags"
+                multiline
+                value={tagTextFieldValue}
+                fullWidth
+                onChange={(e) => setTagTextFieldValue(e.target.value)}
+                sx={{
+                  height: "40px", // Set the height of the TextField
+                  "& .MuiOutlinedInput-root": {
+                    height: "100%", // Ensure the outlined input field takes the full height
+                    alignItems: "flex-start", // Aligns the input content to the top
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    height: "100%", // Ensure the input area takes the full height
+                    overflowY: "scroll", // Enable vertical scrolling for overflowing content
+                    boxSizing: "border-box", // Ensure padding is considered inside the height
+                  },
+                }}
+              ></TextField>
+              <Button onClick={addTag}>Add Tag</Button>
+            </div>
           </div>
           <div className="questionList">
             {questionList.map((question) => (
