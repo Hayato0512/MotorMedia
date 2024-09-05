@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Question = require("../models/Question");
+const Tag = require("../models/Tag");
 const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 
@@ -9,10 +10,19 @@ const { body, validationResult } = require("express-validator");
 router.post("/", async (req, res) => {
   const newQuestion = Question(req.body); //what does this post() do??
   //I see get the request, and make a new post object with data, and assign it to a variable
+  const { tags } = req.body;
   try {
     console.log("let's post");
     const savedQuestion = await newQuestion.save();
     //this will save newPost in the post dataBase.
+
+    for (const tag of tags) {
+      await Tag.updateOne(
+        { name: tag }, // Query condition: find the document where name matches the tag
+        { name: tag }, // Update operation: update the document with the new tag name (or leave it the same if it already exists)
+        { upsert: true } // create a tag if it doesn't already exist
+      );
+    }
     res.status(200).json(savedQuestion);
   } catch (err) {
     res.status(500).json(err);
