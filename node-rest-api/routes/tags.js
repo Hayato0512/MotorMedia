@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 router.get("/suggest", async (req, res) => {
   try {
-    const userInput = req.query.q; // e.g., 'h'
+    const userInput = req.query.search; // e.g., 'h'
 
     if (!userInput) {
       // nice, always add this kind of extra error check
