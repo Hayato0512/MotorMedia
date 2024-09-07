@@ -1,4 +1,11 @@
-import { React, useEffect, useRef, useState, useContext } from "react";
+import {
+  React,
+  useEffect,
+  useRef,
+  useState,
+  useContext,
+  useCallback,
+} from "react";
 import "../../pages/QuestionForum/questionForum.css";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
@@ -12,10 +19,19 @@ export default function TagSearch({ onChange }) {
   // know that the tag is changed as well as the new set of tags. how should I do it?
   const [tagTextFieldValue, setTagTextFieldValue] = useState("");
   const [suggestions, setSuggestions] = useState([]); // Matching tag suggestions
+  const [cache, setCache] = useState({}); // to store input
 
   // Debounced function to handle input changes
   const debouncedFetchTags = debounce(async (value) => {
     if (value.trim()) {
+      if (cache[value]) {
+        console.log(
+          "TagSearch: since the input already exist in the cache, no need to make api calls. "
+        );
+        setSuggestions(cache[value]);
+        return;
+      }
+
       try {
         const response = await axiosInstance.get(
           `/tags/suggest?search=${value}`
@@ -29,6 +45,15 @@ export default function TagSearch({ onChange }) {
           }
         }
 
+        setCache((prevCache) => ({
+          ...prevCache,
+          [value]: response.data,
+        }));
+        console.log(
+          "TagSearch: since newly input tag wasn't in cache, just added in the cache",
+          [value],
+          response.data
+        );
         setSuggestions(response.data); // Assuming response.data contains the matched tags
       } catch (err) {
         console.error("Error fetching tag suggestions", err);
@@ -38,9 +63,15 @@ export default function TagSearch({ onChange }) {
     }
   }, 300); // 300ms debounce
 
+  const memoizedFetchTags = useCallback(
+    (value) => debouncedFetchTags(value),
+    [cache]
+  );
+
   // Effect to fetch suggestions when the input changes
   useEffect(() => {
-    debouncedFetchTags(tagTextFieldValue);
+    memoizedFetchTags(tagTextFieldValue);
+    // debouncedFetchTags(tagTextFieldValue);
     return () => debouncedFetchTags.cancel(); // Cleanup debounce on unmount
   }, [tagTextFieldValue]);
 
@@ -70,7 +101,7 @@ export default function TagSearch({ onChange }) {
     <div className="questionForumTagsContainer">
       <Stack direction="row" spacing={1}>
         {tags.map((tag) => (
-          <Chip label={tag} onDelete={() => handleTagDeletion(tag)} />
+          <Chip key={tag} label={tag} onDelete={() => handleTagDeletion(tag)} />
         ))}
       </Stack>
 
