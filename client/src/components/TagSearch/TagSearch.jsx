@@ -72,14 +72,13 @@ export default function TagSearch({ onChange }) {
   // Effect to fetch suggestions when the input changes
   useEffect(() => {
     memoizedFetchTags(tagTextFieldValue);
-    // debouncedFetchTags(tagTextFieldValue);
     return () => debouncedFetchTags.cancel(); // Cleanup debounce on unmount
   }, [tagTextFieldValue]);
 
-  const addTag = () => {
-    onChange([...tags, tagTextFieldValue]); // to let QuestionForum.jsx know that tag has changed
-    if (tagTextFieldValue.trim() && !tags.includes(tagTextFieldValue)) {
-      setTags((prevTags) => [...prevTags, tagTextFieldValue]);
+  const addTag = (value) => {
+    if (value.trim() && !tags.includes(value)) {
+      setTags((prevTags) => [...prevTags, value]);
+      onChange([...tags, value]); // to let QuestionForum.jsx know that tag has changed
       setTagTextFieldValue(""); // Clear the input after adding a tag
       setSuggestions([]); // Clear suggestions after adding the tag
     }
@@ -94,8 +93,9 @@ export default function TagSearch({ onChange }) {
   };
 
   const selectSuggestion = (tag) => {
-    setTagTextFieldValue(tag); // Fill the input with the selected tag
-    setSuggestions([]); // Hide suggestions after selecting
+    // setTagTextFieldValue(tag); // Fill the input with the selected tag
+    addTag(tag);
+    // setSuggestions([]); // Hide suggestions after selecting
   };
 
   return (
@@ -144,7 +144,7 @@ export default function TagSearch({ onChange }) {
           ))}
         </List>
       )}
-      <Button onClick={addTag}>Add Tag</Button>
+      <Button onClick={() => addTag(tagTextFieldValue)}>Add Tag</Button>
     </div>
   );
 }
