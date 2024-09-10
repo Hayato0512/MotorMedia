@@ -192,6 +192,62 @@ router.put("/:id/upvote", async (req, res) => {
   }
 });
 
+router.get("/suggest", async (req, res) => {
+  console.log("questions:0 ");
+  try {
+    const userInput = req.query.search;
+    console.log("questions:1 ");
+    if (!userInput) {
+      return res.status(400).json({ message: "INVALID INPUT" });
+    }
+    console.log("questions:2 ");
+    const escapeRegex = (input) => {
+      return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escape special characters
+    };
+
+    const safeInput = escapeRegex(userInput);
+
+    console.log("questions:3 ");
+    const matchingQuestions = await Question.find({
+      title: { $regex: safeInput, $options: "i" },
+    }).limit(20);
+
+    console.log("questions:4 ");
+    res.json(matchingQuestions);
+  } catch (error) {
+    console.error("FUFFUFUFUUFFFUUFF");
+    res.status(400).json({ message: "Server error" });
+  }
+});
+
+// router.get("/suggest", async (req, res) => {
+//   console.log("questions:0 ");
+//   try {
+//     const userInput = req.query.search;
+//     console.log("questions:1 ");
+//     if (!userInput) {
+//       return res.status(400).json({ message: "INVALID INPUT" });
+//     }
+//     console.log("questions:2 ");
+//     const escapeRegex = (input) => {
+//       return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escape special characters
+//     };
+
+//     const safeInput = escapeRegex(userInput);
+
+//     console.log("questions:3 ");
+//     const matchingQuestions = await Question.find({
+//       title: { $regex: safeInput, $options: "i" },
+//     }).limit(20);
+
+//     console.log("questions:4 ");
+//     res.json(matchingQuestions);
+//   } catch (error) {
+//     console.error("FUFFUFUFUUFFFUUFF");
+//     res.status(400).json({ message: "Server error" });
+//   }
+// });
+
 //downvote a question
 router.put("/:id/downvote", async (req, res) => {
   try {
@@ -215,5 +271,7 @@ router.put("/:id/downvote", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// not even come in.
 
 module.exports = router;

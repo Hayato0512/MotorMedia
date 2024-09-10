@@ -38,6 +38,8 @@ const questionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+questionSchema.index({ title: "text" }); // Create a text index on the title field
+
 //this is a model
 
 module.exports = mongoose.model("Question", questionSchema);

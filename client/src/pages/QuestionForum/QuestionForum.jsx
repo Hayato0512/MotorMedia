@@ -18,6 +18,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { TextField } from "@mui/material";
 import TagSearch from "../../components/TagSearch/TagSearch";
+import QuestionTextSearch from "../../components/QuestionTextSearch/QuestionTextSearch";
 
 export default function QuestionForum() {
   const [tags, setTags] = useState([]); //so I need these tags here, to show the chips. but also I wanna let the parent component
@@ -133,18 +134,7 @@ export default function QuestionForum() {
             </div>
           </div>
           <div className="questionSearchInputDiv">
-            <input
-              type="text"
-              ref={inputRefName}
-              placeholder="Search Question"
-              className="questionSearchInputField"
-            />
-            <button
-              onClick={questionCreateClicked}
-              className="questionSearchButton"
-            >
-              create
-            </button>
+            <QuestionTextSearch />
           </div>
           <div className="questionForumFilterContainer">
             <FormControl sx={{ width: "30%" }}>
