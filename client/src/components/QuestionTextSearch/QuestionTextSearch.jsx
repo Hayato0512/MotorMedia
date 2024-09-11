@@ -3,11 +3,14 @@ import "../../pages/QuestionForum/questionForum.css";
 import { TextField, List, ListItem, ListItemButton } from "@mui/material";
 import { axiosInstance } from "../../config";
 import debounce from "lodash.debounce"; // Install lodash for debounce functionality
+import { useNavigate } from "react-router-dom";
 
 export default function QuestionTextSearch({ onChange }) {
   const [tagTextFieldValue, setTagTextFieldValue] = useState("");
   const [suggestions, setSuggestions] = useState([]); // Matching tag suggestions
   const [cache, setCache] = useState({}); // to store input
+
+  const navigate = useNavigate();
 
   // Debounced function to handle input changes
   const debouncedFetchQuestions = debounce(async (value) => {
@@ -58,15 +61,16 @@ export default function QuestionTextSearch({ onChange }) {
     return () => debouncedFetchQuestions.cancel(); // Cleanup debounce on unmount
   }, [tagTextFieldValue]);
 
-  const selectSuggestion = (tag) => {
+  const selectSuggestion = (id) => {
     //directly take the user to the QuestionDetail page here
+    navigate("/questionDetail", { state: { questionId: id } });
   };
 
   return (
     <div className="questionForumTagsContainer">
       <TextField
         id="outlined-multiline-flexible"
-        label="tags"
+        label="Search"
         multiline
         value={tagTextFieldValue}
         fullWidth
