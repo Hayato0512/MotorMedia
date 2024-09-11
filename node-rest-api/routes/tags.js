@@ -2,6 +2,10 @@ const Tag = require("../models/Tag");
 
 const router = require("express").Router();
 
+router.get("/feed2", async (req, res) => {
+  console.log("feed2 here letxs go working");
+});
+
 router.get("/suggest", async (req, res) => {
   try {
     const userInput = req.query.search; // e.g., 'h'

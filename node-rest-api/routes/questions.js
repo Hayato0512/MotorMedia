@@ -4,8 +4,6 @@ const Tag = require("../models/Tag");
 const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 
-// we just used it to check if it is connected or not
-
 //create a question
 router.post("/", async (req, res) => {
   const newQuestion = Question(req.body); //what does this post() do??
@@ -65,33 +63,28 @@ router.delete("/:questionId/:userId", async (req, res) => {
   }
 });
 
-// //like a post
-// router.put("/:id/like", async (req, res) => {
-//   try {
-//     const post = await Post.findById(req.params.id);
-//     //find a post that has the userID. what if the user has multile?
-//     console.log(`when like, req.body.userId is ${req.body.userId}`);
-//     if (!post.likes.includes(req.body.userId)) {
-//       //if body user hasn't liked it yet,
-//       await post.updateOne({ $push: { likes: req.body.userId } }); //push
-//       //the post now has the user in like list.
-//       res.status(200).json("the post has been liked");
-//     } else {
-//       await post.updateOne({ $pull: { likes: req.body.userId } }); //pull
-//       res.status(403).json("the post has been disliked");
-//     }
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-//get a question
-router.get("/:id", async (req, res) => {
+router.get("/suggest", async (req, res) => {
+  console.log("questions:0 ");
   try {
-    const question = await Question.findById(req.params.id);
-    res.status(200).json(question);
-  } catch (err) {
-    res.status(500).json(err);
+    const userInput = req.query.search;
+    console.log("questions:1 ");
+    if (!userInput) {
+      return res.status(400).json({ message: "INVALID INPUT" });
+    }
+    console.log("questions:2 ");
+    const escapeRegex = (input) => {
+      return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escape special characters
+    };
+    const safeInput = escapeRegex(userInput);
+    console.log("questions:3 ");
+    const matchingQuestions = await Question.find({
+      title: { $regex: safeInput, $options: "i" },
+    }).limit(20);
+    console.log("questions:4 ");
+    res.json(matchingQuestions);
+  } catch (error) {
+    console.error("FUFFUFUFUUFFFUUFF");
+    res.status(400).json({ message: "Server error" });
   }
 });
 
@@ -192,62 +185,6 @@ router.put("/:id/upvote", async (req, res) => {
   }
 });
 
-router.get("/suggest", async (req, res) => {
-  console.log("questions:0 ");
-  try {
-    const userInput = req.query.search;
-    console.log("questions:1 ");
-    if (!userInput) {
-      return res.status(400).json({ message: "INVALID INPUT" });
-    }
-    console.log("questions:2 ");
-    const escapeRegex = (input) => {
-      return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escape special characters
-    };
-
-    const safeInput = escapeRegex(userInput);
-
-    console.log("questions:3 ");
-    const matchingQuestions = await Question.find({
-      title: { $regex: safeInput, $options: "i" },
-    }).limit(20);
-
-    console.log("questions:4 ");
-    res.json(matchingQuestions);
-  } catch (error) {
-    console.error("FUFFUFUFUUFFFUUFF");
-    res.status(400).json({ message: "Server error" });
-  }
-});
-
-// router.get("/suggest", async (req, res) => {
-//   console.log("questions:0 ");
-//   try {
-//     const userInput = req.query.search;
-//     console.log("questions:1 ");
-//     if (!userInput) {
-//       return res.status(400).json({ message: "INVALID INPUT" });
-//     }
-//     console.log("questions:2 ");
-//     const escapeRegex = (input) => {
-//       return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escape special characters
-//     };
-
-//     const safeInput = escapeRegex(userInput);
-
-//     console.log("questions:3 ");
-//     const matchingQuestions = await Question.find({
-//       title: { $regex: safeInput, $options: "i" },
-//     }).limit(20);
-
-//     console.log("questions:4 ");
-//     res.json(matchingQuestions);
-//   } catch (error) {
-//     console.error("FUFFUFUFUUFFFUUFF");
-//     res.status(400).json({ message: "Server error" });
-//   }
-// });
-
 //downvote a question
 router.put("/:id/downvote", async (req, res) => {
   try {
@@ -272,6 +209,14 @@ router.put("/:id/downvote", async (req, res) => {
   }
 });
 
-// not even come in.
+//get a question
+router.get("/:id", async (req, res) => {
+  try {
+    const question = await Question.findById(req.params.id);
+    res.status(200).json(question);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
