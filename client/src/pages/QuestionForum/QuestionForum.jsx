@@ -103,10 +103,10 @@ export default function QuestionForum() {
   };
 
   const questionCreateClicked = () => {
-    console.log(
-      "questionCreateClicked, now, the ref is this",
-      inputRefName.current.value
-    );
+    // console.log(
+    //   "questionCreateClicked, now, the ref is this",
+    //   inputRefName.current.value
+    // );
     setIsDialogOpen(true);
   };
 

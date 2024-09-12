@@ -23,6 +23,7 @@ import {
   TextField,
   keyframes,
 } from "@mui/material";
+import TagSearch from "../TagSearch/TagSearch";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -151,7 +152,8 @@ export default function QuestionDialog({ isOpen, onClose }) {
             }}
           />
 
-          <Stack direction="row" spacing={1}>
+          <TagSearch onChange={setTags} />
+          {/* <Stack direction="row" spacing={1}>
             {tags.map((tag) => (
               <Chip label={tag} onDelete={() => handleTagDeletion(tag)} />
             ))}
@@ -177,7 +179,7 @@ export default function QuestionDialog({ isOpen, onClose }) {
               },
             }}
           ></TextField>
-          <Button onClick={addTag}>Add Tag</Button>
+          <Button onClick={addTag}>Add Tag</Button> */}
         </DialogContent>
         <DialogActions>
           <Button type="submit" onClick={handleSubmission}>
