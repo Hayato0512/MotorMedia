@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { TextField, List, ListItem, ListItemButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./questionRightbar.css";
+import { logMessage } from "../../util/logging";
 
 //fetch the currentUser, and fetch all the questions from the current user, and then show them. That is it
 
@@ -25,11 +26,18 @@ export default function QuestionRightbar({ isQuestionPosted }) {
             "/questions/own/" + currentUser._id
           );
           setQuestions(res.data);
+          logMessage(
+            "Success in fetching user's own question",
+            "INFO",
+            "QuestionRightbar"
+          );
         } catch (error) {
-          //search for a best practice to log
-          //Create a helper functfirstion for logging that takes the type of log and message. and then it gives a consistent log.
           //https://medium.com/@seniruabeywickrama/5-best-practices-for-logging-in-react-js-6cc26e7c7e94
-          console.error("QuestionRightbar: hahahahaha");
+          logMessage(
+            "Error in fetching user's own question",
+            "ERROR",
+            "QuestionRightbar"
+          );
         }
       }
     };
