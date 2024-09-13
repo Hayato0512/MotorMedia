@@ -29,7 +29,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function QuestionDialog({ isOpen, onClose }) {
+export default function QuestionDialog({ isOpen, onClose, onPost }) {
   const [open, setOpen] = React.useState(false);
   const [tags, setTags] = React.useState([]);
   const [title, setTitle] = React.useState("");
@@ -80,6 +80,7 @@ export default function QuestionDialog({ isOpen, onClose }) {
           res.data
         )}`
       );
+      onPost((prev) => !prev);
       handleClose();
     } catch (error) {
       console.log(error);

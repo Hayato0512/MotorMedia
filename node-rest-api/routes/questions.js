@@ -1,49 +1,9 @@
 const router = require("express").Router();
+const { default: mongoose } = require("mongoose");
 const Question = require("../models/Question");
 const Tag = require("../models/Tag");
 const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
-
-//create a question
-router.post("/", async (req, res) => {
-  const newQuestion = Question(req.body); //what does this post() do??
-  //I see get the request, and make a new post object with data, and assign it to a variable
-  const { tags } = req.body;
-  try {
-    console.log("let's post");
-    const savedQuestion = await newQuestion.save();
-    //this will save newPost in the post dataBase.
-
-    for (const tag of tags) {
-      await Tag.updateOne(
-        { name: tag }, // Query condition: find the document where name matches the tag
-        { name: tag }, // Update operation: update the document with the new tag name (or leave it the same if it already exists)
-        { upsert: true } // create a tag if it doesn't already exist
-      );
-    }
-    res.status(200).json(savedQuestion);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-//update a comment
-router.put("/:id", async (req, res) => {
-  try {
-    const question = await Question.findById(req.params.id);
-    //find a post that has the userID. what if the user has multile?
-    if (question.userId === req.body.userId) {
-      await question.updateOne({ $set: req.body });
-      res.status(200).json("the question has been posted");
-    } else {
-      res
-        .status(403)
-        .json("userID doesn't match. you can only update your own questions");
-    }
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 //delete a question
 router.delete("/:questionId/:userId", async (req, res) => {
@@ -60,6 +20,28 @@ router.delete("/:questionId/:userId", async (req, res) => {
     }
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.get("/own/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid userId format" });
+    }
+
+    const questions = await Question.find({ userId });
+
+    // Check if any questions were found
+    if (questions.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No questions found for this userId" });
+    }
+    res.status(200).json(questions);
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 });
 
@@ -214,6 +196,47 @@ router.get("/:id", async (req, res) => {
   try {
     const question = await Question.findById(req.params.id);
     res.status(200).json(question);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//create a question
+router.post("/", async (req, res) => {
+  const newQuestion = Question(req.body); //what does this post() do??
+  //I see get the request, and make a new post object with data, and assign it to a variable
+  const { tags } = req.body;
+  try {
+    console.log("let's post");
+    const savedQuestion = await newQuestion.save();
+    //this will save newPost in the post dataBase.
+
+    for (const tag of tags) {
+      await Tag.updateOne(
+        { name: tag }, // Query condition: find the document where name matches the tag
+        { name: tag }, // Update operation: update the document with the new tag name (or leave it the same if it already exists)
+        { upsert: true } // create a tag if it doesn't already exist
+      );
+    }
+    res.status(200).json(savedQuestion);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//update a comment
+router.put("/:id", async (req, res) => {
+  try {
+    const question = await Question.findById(req.params.id);
+    //find a post that has the userID. what if the user has multile?
+    if (question.userId === req.body.userId) {
+      await question.updateOne({ $set: req.body });
+      res.status(200).json("the question has been posted");
+    } else {
+      res
+        .status(403)
+        .json("userID doesn't match. you can only update your own questions");
+    }
   } catch (err) {
     res.status(500).json(err);
   }

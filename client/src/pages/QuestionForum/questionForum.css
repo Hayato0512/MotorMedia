@@ -9,7 +9,7 @@
 .questionForumContainer {
   border-radius: 10px;
   border-color: black;
-  flex: 7.5;
+  flex: 5.5;
   display: flex;
   flex-direction: column;
   background-color: rgb(238, 226, 210);

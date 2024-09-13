@@ -1,0 +1,9 @@
+.questionRightbar {
+  height: calc(100vh - 50px);
+  overflow: scroll;
+  position: sticky;
+  top: 50px;
+  flex: 2.5;
+  width: 100%;
+  background-color: aliceblue;
+}

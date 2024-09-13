@@ -19,11 +19,13 @@ import Stack from "@mui/material/Stack";
 import { TextField } from "@mui/material";
 import TagSearch from "../../components/TagSearch/TagSearch";
 import QuestionTextSearch from "../../components/QuestionTextSearch/QuestionTextSearch";
+import QuestionRightbar from "../../components/QuestionRightbar/QuestionRightbar";
 
 export default function QuestionForum() {
   const [tags, setTags] = useState([]); //so I need these tags here, to show the chips. but also I wanna let the parent component
   const [order, setOrder] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isQuestionPosted, setIsQuestionPosted] = useState(false);
   const [questionList, setQuestionList] = useState([]);
   const { user: currentUser } = useContext(AuthContext);
 
@@ -159,9 +161,13 @@ export default function QuestionForum() {
             ))}
           </div>
         </div>
-        <Rightbar />
+        <QuestionRightbar isQuestionPosted={isQuestionPosted} />
       </div>
-      <QuestionDialog isOpen={isDialogOpen} onClose={handleCloseDialog} />
+      <QuestionDialog
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+        onPost={setIsQuestionPosted}
+      />
     </>
   );
 }
