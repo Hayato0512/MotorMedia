@@ -32,6 +32,7 @@ export default function QuestionRightbar({ isQuestionPosted }) {
             "QuestionRightbar"
           );
         } catch (error) {
+          //asdf
           //https://medium.com/@seniruabeywickrama/5-best-practices-for-logging-in-react-js-6cc26e7c7e94
           logMessage(
             "Error in fetching user's own question",
