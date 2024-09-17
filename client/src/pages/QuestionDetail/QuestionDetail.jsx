@@ -1,14 +1,16 @@
 import React from "react";
-import "./questionDetail.css";
-import { useState, useEffect, useContext, useRef } from "react";
-import Topbar from "../../components/topbar/Topbar";
-import Sidebar from "../../components/sidebar/Sidebar";
-import { useNavigate, useLocation } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import { axiosInstance } from "../../config";
+import { useState, useEffect, useContext, useRef, useCallback } from "react";
+import { useLocation } from "react-router-dom";
+
 import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
+
+import Topbar from "../../components/topbar/Topbar";
+import Sidebar from "../../components/sidebar/Sidebar";
+import { AuthContext } from "../../context/AuthContext";
+import { axiosInstance } from "../../config";
 import CommentDetail from "../../components/CommentDetail/CommentDetail";
+import "./questionDetail.css";
 
 // get questionID as a parameter. questionId
 export default function QuestionDetail() {
@@ -37,7 +39,6 @@ export default function QuestionDetail() {
       setUpvote(upvote - 1);
       setIsUpvoted(false);
     } else {
-      //if it is not,
       if (isDownvoted) {
         setDownvote(downvote - 1);
         setIsDownvoted(false);
@@ -45,7 +46,6 @@ export default function QuestionDetail() {
       setUpvote(upvote + 1);
       setIsUpvoted(true);
     }
-    // setLike(isLiked ? like - 1 : like + 1);
   };
 
   const downvoteHandler = async () => {
@@ -66,8 +66,25 @@ export default function QuestionDetail() {
       setDownvote(downvote + 1);
       setIsDownvoted(true);
     }
-    // setLike(isLiked ? like - 1 : like + 1);
   };
+
+  //get Question Http Request
+  const fetchQuestion = useCallback(async () => {
+    try {
+      if (questionId != "") {
+        const res = await axiosInstance.get(`/questions/${questionId}`);
+        console.log(
+          "QuestionDetail: fetched question is as follows: ",
+          res.data
+        );
+        setQuestion(res.data);
+        setIsUpvoted(res.data.upvotes.includes(currentUser._id));
+        setUpvote(res.data.upvotes.length);
+        setDownvote(res.data.downvotes.length);
+        setIsDownvoted(res.data.downvotes.includes(currentUser._id));
+      }
+    } catch (error) {}
+  }, [state, questionId]);
 
   useEffect(() => {
     if (state) {
@@ -76,72 +93,55 @@ export default function QuestionDetail() {
       console.log("QuestionDetail.jsx: state is null");
     }
 
-    //get Question Http Request
-    const fetchQuestion = async () => {
-      try {
-        if (questionId != "") {
-          const res = await axiosInstance.get(`/questions/${questionId}`);
-          console.log(
-            "QuestionDetail: fetched question is as follows: ",
-            res.data
-          );
-          setQuestion(res.data);
-          //is postLIkes includes the current user, then it will be false
-          //is postLIkes includes the current user, then it will be false
-          setIsUpvoted(res.data.upvotes.includes(currentUser._id));
-          setUpvote(res.data.upvotes.length);
-          setDownvote(res.data.downvotes.length);
-          setIsDownvoted(res.data.downvotes.includes(currentUser._id));
-        }
-      } catch (error) {}
-    };
     fetchQuestion();
-  }, [state, questionId]);
+  }, [fetchQuestion]);
   //if I set quesetionId, no infinite loop even though I also change questionId by setQuestionId. maybe if the new value is the same as old one, it doesn't make this re-render.
   //On the other hand, every single res might be different. that is why even though I am fetching the same data from cloud, it's not quite the same.
 
-  useEffect(() => {
-    //set commenters
-    const fetchCommenters = async () => {
-      const userIds = [];
-      comments.map((comment) => {
-        if (!userIds.includes(comment.userId)) {
-          userIds.push(comment.userId);
-        }
-      });
-      const list = await Promise.all(
-        userIds.map(
-          async (userId) => await axiosInstance.get("/users?userId=" + userId)
-        )
-      );
-      console.log(JSON.stringify(list));
-      setCommenters(list);
-    };
-    fetchCommenters();
+  const fetchCommenters = useCallback(async () => {
+    const userIds = [];
+    comments.map((comment) => {
+      if (!userIds.includes(comment.userId)) {
+        userIds.push(comment.userId);
+      }
+    });
+    const list = await Promise.all(
+      userIds.map(
+        async (userId) => await axiosInstance.get("/users?userId=" + userId)
+      )
+    );
+    console.log(JSON.stringify(list));
+    setCommenters(list);
   }, [comments]);
 
   useEffect(() => {
-    //get all the comments of the psot
-    const fetchComments = async () => {
-      if (question !== null) {
-        try {
-          const res = await axiosInstance.get(
-            `/comments/allComments/${question._id}`
-          );
-          console.log(
-            `all the comments of this post is ${JSON.stringify(res.data)}`
-          );
-          res.data.map((comment) => {
-            console.log("aaa" + JSON.stringify(comment));
-          });
-          setComments(res.data);
-        } catch (error) {
-          console.log(error);
-        }
+    //set commenters
+    fetchCommenters();
+  }, [fetchCommenters]);
+
+  const fetchComments = useCallback(async () => {
+    if (question !== null) {
+      try {
+        const res = await axiosInstance.get(
+          `/comments/allComments/${question._id}`
+        );
+        console.log(
+          `all the comments of this post is ${JSON.stringify(res.data)}`
+        );
+        res.data.map((comment) => {
+          console.log("aaa" + JSON.stringify(comment));
+        });
+        setComments(res.data);
+      } catch (error) {
+        console.log(error);
       }
-    };
-    fetchComments();
+    }
   }, [question, commentChanged]);
+
+  useEffect(() => {
+    //get all the comments of the psot
+    fetchComments();
+  }, [fetchComments]);
 
   const commentSendButtonClicked = async () => {
     console.log(

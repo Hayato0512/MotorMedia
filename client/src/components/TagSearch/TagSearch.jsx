@@ -1,22 +1,17 @@
-import {
-  React,
-  useEffect,
-  useRef,
-  useState,
-  useContext,
-  useCallback,
-} from "react";
-import "../../pages/QuestionForum/questionForum.css";
+import { React, useEffect, useState, useCallback } from "react";
+
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { TextField, List, ListItem, ListItemButton } from "@mui/material";
-import { axiosInstance } from "../../config";
+
 import debounce from "lodash.debounce"; // Install lodash for debounce functionality
 
+import { axiosInstance } from "../../config";
+import "../../pages/QuestionForum/questionForum.css";
+
 export default function TagSearch({ onChange }) {
-  const [tags, setTags] = useState([]); //so I need these tags here, to show the chips. but also I wanna let the parent component
-  // know that the tag is changed as well as the new set of tags. how should I do it?
+  const [tags, setTags] = useState([]);
   const [tagTextFieldValue, setTagTextFieldValue] = useState("");
   const [suggestions, setSuggestions] = useState([]); // Matching tag suggestions
   const [cache, setCache] = useState({}); // to store input
@@ -37,7 +32,6 @@ export default function TagSearch({ onChange }) {
           `/tags/suggest?search=${value}`
         );
 
-        //asdfasdf
         for (let suggestion of response.data) {
           if (suggestion.name.trim() == tagTextFieldValue.trim()) {
             response.data = response.data.filter(
@@ -55,7 +49,7 @@ export default function TagSearch({ onChange }) {
           [value],
           response.data
         );
-        setSuggestions(response.data); // Assuming response.data contains the matched tags
+        setSuggestions(response.data);
       } catch (err) {
         console.error("Error fetching tag suggestions", err);
       }
@@ -89,13 +83,10 @@ export default function TagSearch({ onChange }) {
     onChange([...tags].filter((tag) => tag !== tagToDelete));
     setTags((prevTags) => prevTags.filter((tag) => tag !== tagToDelete));
     console.log("QuestionDialog: after setTag, tags are like this , ", tags);
-    // setOpen(false);
   };
 
   const selectSuggestion = (tag) => {
-    // setTagTextFieldValue(tag); // Fill the input with the selected tag
     addTag(tag);
-    // setSuggestions([]); // Hide suggestions after selecting
   };
 
   return (

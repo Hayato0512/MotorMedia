@@ -1,29 +1,25 @@
 import * as React from "react";
+
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemButton from "@mui/material/ListItemButton";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import { AuthContext } from "../../context/AuthContext";
-import { axiosInstance } from "../../config";
-import "./questionDialog.css";
 import {
   DialogContent,
   DialogContentText,
   DialogActions,
   TextField,
-  keyframes,
 } from "@mui/material";
+
 import TagSearch from "../TagSearch/TagSearch";
+import { AuthContext } from "../../context/AuthContext";
+import { axiosInstance } from "../../config";
+
+import "./questionDialog.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -34,28 +30,11 @@ export default function QuestionDialog({ isOpen, onClose, onPost }) {
   const [tags, setTags] = React.useState([]);
   const [title, setTitle] = React.useState("");
   const [body, setBody] = React.useState("");
-  const [tagTextFieldValue, setTagTextFieldValue] = React.useState("");
   const { user: currentUser } = React.useContext(AuthContext);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
     onClose();
-  };
-
-  const handleTagDeletion = (tagToDelete) => {
-    console.log("QuestionDialog: before setTag, tags are like this , ", tags);
-    setTags((prevTags) => prevTags.filter((tag) => tag !== tagToDelete));
-    console.log("QuestionDialog: after setTag, tags are like this , ", tags);
-    // setOpen(false);
-  };
-
-  const addTag = () => {
-    setTags((prevTags) => [...prevTags, tagTextFieldValue]);
-    //clear the field
-    setTagTextFieldValue("");
   };
 
   const handleSubmission = async () => {
@@ -89,9 +68,6 @@ export default function QuestionDialog({ isOpen, onClose, onPost }) {
 
   return (
     <React.Fragment>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open full-screen dialog
-      </Button> */}
       <Dialog
         fullScreen
         open={isOpen}
@@ -154,33 +130,6 @@ export default function QuestionDialog({ isOpen, onClose, onPost }) {
           />
 
           <TagSearch onChange={setTags} />
-          {/* <Stack direction="row" spacing={1}>
-            {tags.map((tag) => (
-              <Chip label={tag} onDelete={() => handleTagDeletion(tag)} />
-            ))}
-          </Stack>
-
-          <TextField
-            id="outlined-multiline-flexible"
-            label="tags"
-            multiline
-            value={tagTextFieldValue}
-            fullWidth
-            onChange={(e) => setTagTextFieldValue(e.target.value)}
-            sx={{
-              height: "40px", // Set the height of the TextField
-              "& .MuiOutlinedInput-root": {
-                height: "100%", // Ensure the outlined input field takes the full height
-                alignItems: "flex-start", // Aligns the input content to the top
-              },
-              "& .MuiOutlinedInput-input": {
-                height: "100%", // Ensure the input area takes the full height
-                overflowY: "scroll", // Enable vertical scrolling for overflowing content
-                boxSizing: "border-box", // Ensure padding is considered inside the height
-              },
-            }}
-          ></TextField>
-          <Button onClick={addTag}>Add Tag</Button> */}
         </DialogContent>
         <DialogActions>
           <Button type="submit" onClick={handleSubmission}>

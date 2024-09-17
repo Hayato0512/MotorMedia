@@ -1,11 +1,13 @@
 import { React, useEffect, useState, useCallback } from "react";
-import "../../pages/QuestionForum/questionForum.css";
-import { TextField, List, ListItem, ListItemButton } from "@mui/material";
-import { axiosInstance } from "../../config";
-import debounce from "lodash.debounce"; // Install lodash for debounce functionality
 import { useNavigate } from "react-router-dom";
 
-export default function QuestionTextSearch({ onChange }) {
+import { TextField, List, ListItem, ListItemButton } from "@mui/material";
+import debounce from "lodash.debounce"; // Install lodash for debounce functionality
+
+import { axiosInstance } from "../../config";
+import "../../pages/QuestionForum/questionForum.css";
+
+export default function QuestionTextSearch() {
   const [tagTextFieldValue, setTagTextFieldValue] = useState("");
   const [suggestions, setSuggestions] = useState([]); // Matching tag suggestions
   const [cache, setCache] = useState({}); // to store input
@@ -24,8 +26,6 @@ export default function QuestionTextSearch({ onChange }) {
       }
 
       try {
-        //here, no need to make a new schema, directly intertact with Question Schema. and actually fetch question.
-        // so that on click of those suggestion, we directly jump into the questionDetail page.
         const response = await axiosInstance.get(
           `/questions/suggest?search=${value}`
         );
