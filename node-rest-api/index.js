@@ -33,6 +33,7 @@ mongoose.connect(
 );
 
 app.use("/images", express.static(path.join(__dirname, "public/images/")));
+app.use(helmet());
 
 app.use(express.json());
 // app.use(helmet());

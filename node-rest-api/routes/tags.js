@@ -1,5 +1,4 @@
 const Tag = require("../models/Tag");
-
 const router = require("express").Router();
 
 router.get("/feed2", async (req, res) => {
