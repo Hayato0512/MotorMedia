@@ -144,7 +144,6 @@ export default function Rightbar({ user }) {
         } else {
         }
       } catch (error) {
-        console.log(`error occured in trycatch block in getFriends()`);
         console.log(error);
       }
     };
