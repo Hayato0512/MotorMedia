@@ -20,10 +20,11 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import JobDialog from "../../components/Dialog/JobDialog";
 
 /** Jobs.
  *  I wanna be able to :
- *      - create a job posting.
+ *      - create a job posting. should I re-use the QuestionDialog? or no ?
  *      - apply for a job posting.
  *      - delete a job posting.
  *      - bookmark a job.
@@ -42,7 +43,9 @@ export default function Job() {
   const [isQuestionPosted, setIsQuestionPosted] = useState(false);
   const { jobList, setJobList } = useState([]); //make custom hook for this one.
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const jobCreateClicked = () => {};
+  const jobCreateClicked = () => {
+    setIsDialogOpen(true);
+  };
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
   };
@@ -94,7 +97,7 @@ export default function Job() {
         </div>
         <QuestionRightbar isQuestionPosted={isQuestionPosted} />
       </div>
-      <QuestionDialog
+      <JobDialog
         isOpen={isDialogOpen}
         onClose={handleCloseDialog}
         onPost={setIsQuestionPosted}

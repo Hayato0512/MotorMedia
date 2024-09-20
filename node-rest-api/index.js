@@ -16,6 +16,7 @@ const messagePostRoute = require("./routes/messages");
 const commentRoute = require("./routes/comments");
 const questionRoute = require("./routes/questions");
 const tagRoute = require("./routes/tags");
+const jobRoute = require("./routes/jobs");
 const multer = require("multer");
 const path = require("path");
 var cors = require("cors");
@@ -137,6 +138,7 @@ app.use("/api/messages", messagePostRoute);
 app.use("/api/comments", commentRoute);
 app.use("/api/questions", questionRoute);
 app.use("/api/tags", tagRoute);
+app.use("/api/jobs", jobRoute);
 // app.get("/", (req, res) => {
 //   res.send("welcome to Home");
 // });
