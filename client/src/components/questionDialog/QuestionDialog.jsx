@@ -8,6 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+import GenericDialog from "../Dialog/GenericDialog";
+import QuestionForm from "../Dialog/QuestionForm";
 import {
   DialogContent,
   DialogContentText,
@@ -67,76 +69,92 @@ export default function QuestionDialog({ isOpen, onClose, onPost }) {
   };
 
   return (
-    <React.Fragment>
-      <Dialog
-        fullScreen
-        open={isOpen}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: "relative", bgcolor: "#ffc0cb" }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={onClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Create Question
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="email"
-            label="Title"
-            type="email"
-            fullWidth
-            variant="standard"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+    <GenericDialog
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmission}
+      dialogTitle="Post a Question"
+      submitButtonText="Post Question"
+    >
+      <QuestionForm
+        title={title}
+        setTitle={setTitle}
+        body={body}
+        setBody={setBody}
+        tags={tags}
+        setTags={setTags}
+      />
+    </GenericDialog>
+    // <React.Fragment>
+    //   <Dialog
+    //     fullScreen
+    //     open={isOpen}
+    //     onClose={handleClose}
+    //     TransitionComponent={Transition}
+    //   >
+    //     <AppBar sx={{ position: "relative", bgcolor: "#ffc0cb" }}>
+    //       <Toolbar>
+    //         <IconButton
+    //           edge="start"
+    //           color="inherit"
+    //           onClick={onClose}
+    //           aria-label="close"
+    //         >
+    //           <CloseIcon />
+    //         </IconButton>
+    //         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+    //           Create Question
+    //         </Typography>
+    //       </Toolbar>
+    //     </AppBar>
+    //     <DialogContent>
+    //       <DialogContentText>
+    //         To subscribe to this website, please enter your email address here.
+    //         We will send updates occasionally.
+    //       </DialogContentText>
+    //       <TextField
+    //         autoFocus
+    //         required
+    //         margin="dense"
+    //         id="name"
+    //         name="email"
+    //         label="Title"
+    //         type="email"
+    //         fullWidth
+    //         variant="standard"
+    //         value={title}
+    //         onChange={(e) => setTitle(e.target.value)}
+    //       />
 
-          <TextField
-            id="outlined-multiline-flexible"
-            label="Body"
-            multiline
-            fullWidth
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            sx={{
-              height: "200px", // Set the height of the TextField
-              "& .MuiOutlinedInput-root": {
-                height: "100%", // Ensure the outlined input field takes the full height
-                alignItems: "flex-start", // Aligns the input content to the top
-              },
-              "& .MuiOutlinedInput-input": {
-                height: "100%", // Ensure the input area takes the full height
-                overflowY: "scroll", // Enable vertical scrolling for overflowing content
-                boxSizing: "border-box", // Ensure padding is considered inside the height
-              },
-            }}
-          />
+    //       <TextField
+    //         id="outlined-multiline-flexible"
+    //         label="Body"
+    //         multiline
+    //         fullWidth
+    //         value={body}
+    //         onChange={(e) => setBody(e.target.value)}
+    //         sx={{
+    //           height: "200px", // Set the height of the TextField
+    //           "& .MuiOutlinedInput-root": {
+    //             height: "100%", // Ensure the outlined input field takes the full height
+    //             alignItems: "flex-start", // Aligns the input content to the top
+    //           },
+    //           "& .MuiOutlinedInput-input": {
+    //             height: "100%", // Ensure the input area takes the full height
+    //             overflowY: "scroll", // Enable vertical scrolling for overflowing content
+    //             boxSizing: "border-box", // Ensure padding is considered inside the height
+    //           },
+    //         }}
+    //       />
 
-          <TagSearch onChange={setTags} />
-        </DialogContent>
-        <DialogActions>
-          <Button type="submit" onClick={handleSubmission}>
-            Post
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
+    //       <TagSearch onChange={setTags} />
+    //     </DialogContent>
+    //     <DialogActions>
+    //       <Button type="submit" onClick={handleSubmission}>
+    //         Post
+    //       </Button>
+    //     </DialogActions>
+    //   </Dialog>
+    // </React.Fragment>
   );
 }

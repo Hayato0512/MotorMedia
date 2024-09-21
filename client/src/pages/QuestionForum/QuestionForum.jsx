@@ -9,7 +9,6 @@ import {
 } from "react";
 
 //important imports
-import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
 
 //MUI imports and UI related

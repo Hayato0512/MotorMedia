@@ -21,6 +21,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import JobDialog from "../../components/Dialog/JobDialog";
+import useFetchJobs from "../../hooks/useFetchJobs";
 
 /** Jobs.
  *  I wanna be able to :
@@ -41,8 +42,10 @@ export default function Job() {
   const [order, setOrder] = useState("");
   const [tags, setTags] = useState([]); //so I need these tags here, to show the chips. but also I wanna let the parent component
   const [isQuestionPosted, setIsQuestionPosted] = useState(false);
-  const { jobList, setJobList } = useState([]); //make custom hook for this one.
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  //let's use custom hook to fetch all the jobs here.
+  const { user: currentUser } = useContext(AuthContext);
+  const { jobList, setJobList } = useFetchJobs(currentUser, tags); // Using the custom hook
   const jobCreateClicked = () => {
     setIsDialogOpen(true);
   };
@@ -87,12 +90,11 @@ export default function Job() {
           </div>
           <TagSearch onChange={setTags} />
           <div className="jobList">
-            {/* {jobList.map(
+            {jobList.map(
               (job) =>
                 // <Question question={job} />
-                job
-            )} */}
-            jo
+                "adf"
+            )}
           </div>
         </div>
         <QuestionRightbar isQuestionPosted={isQuestionPosted} />
