@@ -12,7 +12,6 @@ import Community from "./pages/Community/Community";
 import DetailCommunity from "./pages/ DetailCommunity/DetailCommunity";
 import Bookmark from "./pages/Bookmark/Bookmark";
 import QuestionForum from "./pages/QuestionForum/QuestionForum";
-import Job from "./pages/Job/Job";
 import Events from "./pages/Events/Events";
 import Courses from "./pages/Courses/Courses";
 import {
@@ -27,6 +26,8 @@ import { AuthContext } from "./context/AuthContext";
 import SearchMotorCycle from "./pages/SearchMotorCycle/SearchMotorCycle";
 import FriendRequest from "./pages/FriendRequest/FriendRequest";
 import QuestionDetail from "./pages/QuestionDetail/QuestionDetail";
+import JobForum from "./pages/Job/JobForum";
+import JobDetail from "./components/JobDetail/JobDetail";
 
 //        <Route exact path="/" element={user ? <Home /> : <Register />} />
 function App() {
@@ -77,7 +78,8 @@ function App() {
         <Route exact path="/bookmark" element={<Bookmark />} />
         <Route exact path="/questionForum" element={<QuestionForum />} />
         <Route exact path="/questionDetail" element={<QuestionDetail />} />
-        <Route exact path="/job" element={<Job />} />
+        <Route exact path="/jobDetail" element={<JobDetail />} />
+        <Route exact path="/jobForum" element={<JobForum />} />
         <Route exact path="/events" element={<Events />} />
         <Route exact path="/courses" element={<Courses />} />
         <Route exact path="/friendRequest" element={<FriendRequest />} />

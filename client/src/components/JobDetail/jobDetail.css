@@ -1,0 +1,81 @@
+.jobDetailContainer {
+  display: flex;
+  flex: 12;
+  height: auto;
+}
+.jobDetailCenter {
+  flex: 9;
+  display: flex;
+  flex-direction: column;
+}
+.jobDetailTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  font-size: 32px;
+  flex: 1;
+}
+
+.jobDetailBody {
+  flex: 6;
+  position: relative;
+  display: flex;
+  padding: 24px;
+  background-color: antiquewhite;
+}
+.jobDetailBodyText {
+  padding: 12px;
+  font-size: 24px;
+}
+
+.jobDetailBodyUserInfo {
+  position: absolute;
+  padding: 12px;
+  background-color: rgb(199, 232, 246);
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  border-radius: 5px;
+}
+.jobDetailBodyUserInfoLower {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  border-radius: 5px;
+  align-items: center;
+}
+.jobDetailCommentContainer {
+  flex: 2;
+  background-color: rgb(249, 214, 214);
+}
+
+.jobDetailBodyVoteIconsContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  border-right: 1px solid grey;
+  margin-right: 10px;
+}
+.jobDetailBodyUserName {
+  margin-left: 10px;
+}
+.jobDetailCommentInputs {
+  display: flex;
+  width: 80%;
+  margin: 20px;
+  align-items: flex-end;
+  justify-content: end;
+}
+.jobDetailCommentInput {
+  width: 80%;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+.jobDetailsComments {
+  height: 100%;
+  overflow: scroll;
+}

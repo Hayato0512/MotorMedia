@@ -1,11 +1,4 @@
-import {
-  React,
-  useEffect,
-  useRef,
-  useState,
-  useContext,
-  useCallback,
-} from "react";
+import { React, useState, useContext } from "react";
 //important imports
 import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
@@ -15,13 +8,14 @@ import QuestionTextSearch from "../../components/QuestionTextSearch/QuestionText
 import QuestionRightbar from "../../components/QuestionRightbar/QuestionRightbar";
 import QuestionDialog from "../../components/questionDialog/QuestionDialog";
 import TagSearch from "../../components/TagSearch/TagSearch";
-import "./job.css";
+import "./jobForum.css";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import JobDialog from "../../components/Dialog/JobDialog";
 import useFetchJobs from "../../hooks/useFetchJobs";
+import Job from "../../components/Job/Job ";
 
 /** Jobs.
  *  I wanna be able to :
@@ -38,7 +32,7 @@ import useFetchJobs from "../../hooks/useFetchJobs";
  *  2, and keep doing it.
  *
  */
-export default function Job() {
+export default function JobForum() {
   const [order, setOrder] = useState("");
   const [tags, setTags] = useState([]); //so I need these tags here, to show the chips. but also I wanna let the parent component
   const [isQuestionPosted, setIsQuestionPosted] = useState(false);
@@ -90,11 +84,9 @@ export default function Job() {
           </div>
           <TagSearch onChange={setTags} />
           <div className="jobList">
-            {jobList.map(
-              (job) =>
-                // <Question question={job} />
-                "adf"
-            )}
+            {jobList.map((job) => (
+              <Job job={job} />
+            ))}
           </div>
         </div>
         <QuestionRightbar isQuestionPosted={isQuestionPosted} />

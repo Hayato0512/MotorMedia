@@ -72,7 +72,7 @@ export default function Sidebar() {
               <span className="sidebarListItemText">Question Forum</span>
             </li>
           </Link>
-          <Link style={{ textDecoration: "none" }} to="/job">
+          <Link style={{ textDecoration: "none" }} to="/jobForum">
             <li className="sidebarListItem">
               <WorkOutline className="sidebarIcon" />
               <span className="sidebarListItemText">Jobs</span>
