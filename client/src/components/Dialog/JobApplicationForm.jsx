@@ -1,6 +1,8 @@
 // JobForm.jsx
 import * as React from "react";
 import { TextField } from "@mui/material";
+import { logMessage } from "../../util/logging";
+import JobApplicationDialog from "./JobApplicationDialog";
 
 //what information we need to apply? name, email, and two files. (resume, cover letter)
 export default function JobApplicationForm({
@@ -10,7 +12,24 @@ export default function JobApplicationForm({
   setEmail,
   comment,
   setComment,
+  file,
+  setFile,
 }) {
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+
+    // Ensure there's a file before proceeding
+    if (file) {
+      logMessage(
+        `File selected: ${file},,,${file.name}, File type: ${file.type}, File size: ${file.size}`,
+        "INFO",
+        "JobApplicationForm"
+      );
+      setFile(file); // Set file to state
+    } else {
+      logMessage(`No File selected`, "ERROR", "JobApplicationForm");
+    }
+  };
   return (
     <>
       <TextField
@@ -33,6 +52,9 @@ export default function JobApplicationForm({
         onChange={(e) => setEmail(e.target.value)}
       />
       File Upload logic comes here
+      <form>
+        <input type="file" onChange={handleFileChange} />
+      </form>
       <TextField
         id="outlined-multiline-flexible"
         label="Comment"

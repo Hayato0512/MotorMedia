@@ -21,8 +21,17 @@ const multer = require("multer");
 const path = require("path");
 var cors = require("cors");
 dotenv.config();
+const AWS = require("aws-sdk");
+
 //FOR PACKAGE.JSON
 // "heroku-postbuild": "cd client && npm install && npm run build"
+
+// Configure AWS SDK
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: "us-west-1",
+});
 
 //connect to the DB here
 mongoose.connect(
@@ -40,6 +49,32 @@ app.use(express.json());
 // app.use(helmet());
 app.use(morgan("common"));
 app.use(cors({ origin: "*", credentials: true }));
+
+const awsStorage = multer.memoryStorage();
+const awsUpload = multer({ storage: awsStorage });
+
+// Upload route
+app.post("/api/aws/upload", awsUpload.single("file"), (req, res) => {
+  const file = req.body.file;
+
+  const params = {
+    Bucket: "job-application-bucket", // your bucket name
+    Key: `${Date.now()}-${file.name}`, // file name with timestamp
+    Body: file.buffer, // file data
+    ContentType: file.type, // file type
+  };
+
+  // Upload the file to S3
+  s3.upload(params, (err, data) => {
+    if (err) {
+      console.error("Error uploading file:", err);
+      return res.status(500).send("Error uploading file");
+    }
+
+    // File uploaded successfully
+    res.status(200).json({ message: "File uploaded", url: data.Location });
+  });
+});
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

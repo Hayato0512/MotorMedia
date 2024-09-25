@@ -11,14 +11,29 @@ export default function JobApplicationDialog({ isOpen, onClose, onPost }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
+  const [file, setFile] = useState(null);
   const { user: currentUser } = useContext(AuthContext);
 
   const handleSubmission = async () => {
     logMessage(
-      `Job Application: name: ${name}, email: ${email}, comment: ${comment}`,
+      `Job Application: name: ${name}, email: ${email}, comment: ${comment}, file: ${JSON.stringify(
+        file
+      )}`,
       "INFO",
       "JobApplicationDialog"
     );
+
+    const formData = new FormData();
+    formData.append("file", file); // Attach the file to the form data
+
+    try {
+      const response = await axiosInstance.post("/aws/upload", formData);
+
+      // const result = await response.json();
+      console.log("File uploaded successfully:", response);
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
     // const newApplication = {
     //   employerId: currentUser._id,
     //   title: title,
@@ -57,6 +72,8 @@ export default function JobApplicationDialog({ isOpen, onClose, onPost }) {
         setEmail={setEmail}
         comment={comment}
         setComment={setComment}
+        file={file}
+        setFile={setFile}
       />
     </GenericDialog>
   );
