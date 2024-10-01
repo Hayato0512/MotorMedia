@@ -7,7 +7,15 @@ import { AuthContext } from "../../context/AuthContext";
 import { logMessage } from "../../util/logging";
 import JobApplicationForm from "./JobApplicationForm";
 
-export default function JobApplicationDialog({ isOpen, onClose, onPost }) {
+const fileName = "JobApplicationDialog";
+
+export default function JobApplicationDialog({
+  isOpen,
+  onClose,
+  onPost,
+  employerId,
+  jobId,
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
@@ -16,15 +24,16 @@ export default function JobApplicationDialog({ isOpen, onClose, onPost }) {
 
   const handleSubmission = async () => {
     logMessage(
-      `Job Application: name: ${name}, email: ${email}, comment: ${comment}, file: ${JSON.stringify(
-        file
-      )}`,
+      `Job Application: name: ${name}, email: ${email}, comment: ${comment}, `,
       "INFO",
-      "JobApplicationDialog"
+      fileName
     );
 
     const formData = new FormData();
     formData.append("file", file); // Attach the file to the form data
+    formData.append("uploaderId", currentUser._id); // Attach the file to the form data
+    formData.append("employerId", employerId); // Attach the file to the form data
+    formData.append("jobId", jobId); // Attach the file to the form data
 
     try {
       const response = await axiosInstance.post("/aws/upload", formData);
@@ -57,6 +66,21 @@ export default function JobApplicationDialog({ isOpen, onClose, onPost }) {
     // }
   };
 
+  useEffect(() => {
+    if (file) {
+      logMessage(
+        `File State Updated: Name: ${file.name}, Type: ${file.type}, Size: ${file.size}`,
+        "INFO",
+        fileName
+      );
+    } else {
+      logMessage(
+        "File State Updated, but file is null or undefined",
+        "INFO",
+        fileName
+      );
+    }
+  }, [file]);
   return (
     <GenericDialog
       isOpen={isOpen}

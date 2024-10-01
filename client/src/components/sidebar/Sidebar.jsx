@@ -14,8 +14,6 @@ import {
   People,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { Users } from "../../dummyData";
-import CloseFriend from "../closeFriend/CloseFriend";
 import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import { axiosInstance } from "../../config";

@@ -4,6 +4,7 @@ import { TextField } from "@mui/material";
 import { logMessage } from "../../util/logging";
 import JobApplicationDialog from "./JobApplicationDialog";
 
+const fileName = "JobApplicationForm";
 //what information we need to apply? name, email, and two files. (resume, cover letter)
 export default function JobApplicationForm({
   name,
@@ -12,22 +13,21 @@ export default function JobApplicationForm({
   setEmail,
   comment,
   setComment,
-  file,
   setFile,
 }) {
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    const tempFile = e.target.files[0];
 
     // Ensure there's a file before proceeding
-    if (file) {
+    if (tempFile) {
       logMessage(
-        `File selected: ${file},,,${file.name}, File type: ${file.type}, File size: ${file.size}`,
+        `File selected: ${tempFile},,,${tempFile.name}, File type: ${tempFile.type}, File size: ${tempFile.size}`,
         "INFO",
-        "JobApplicationForm"
+        fileName
       );
-      setFile(file); // Set file to state
+      setFile(tempFile); // Set file to state
     } else {
-      logMessage(`No File selected`, "ERROR", "JobApplicationForm");
+      logMessage(`No File selected`, "ERROR", fileName);
     }
   };
   return (

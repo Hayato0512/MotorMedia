@@ -22,6 +22,7 @@ const path = require("path");
 var cors = require("cors");
 dotenv.config();
 const AWS = require("aws-sdk");
+const JobApplication = require("./models/JobApplication");
 
 //FOR PACKAGE.JSON
 // "heroku-postbuild": "cd client && npm install && npm run build"
@@ -55,25 +56,98 @@ const awsUpload = multer({ storage: awsStorage });
 
 // Upload route
 app.post("/api/aws/upload", awsUpload.single("file"), (req, res) => {
-  const file = req.body.file;
+  const file = req.file;
+  const uploaderId = req.body.uploaderId; // Assuming the uploader's ID is passed in the request body
+  const employerId = req.body.employerId; // Assuming the employer's ID is passed in the request body
+  const jobId = req.body.jobId; // Assuming the employer's ID is passed in the request body
 
+  if (file) {
+    console.log(
+      `index.js, NODE SIDE. api/aws/upload. file ${file}, uploaderId ${uploaderId}, employerId ${employerId}, jobId ${jobId}`
+    );
+  } else {
+    console.log(`index.js, NODE SIDE. api/aws/upload. file is NULL`);
+  }
+
+  const s3Key = `${Date.now()}-${file.originalname}`;
   const params = {
     Bucket: "job-application-bucket", // your bucket name
-    Key: `${Date.now()}-${file.name}`, // file name with timestamp
+    Key: s3Key, // file name with timestamp
     Body: file.buffer, // file data
     ContentType: file.type, // file type
   };
 
   // Upload the file to S3
-  s3.upload(params, (err, data) => {
+  s3.upload(params, async (err, data) => {
     if (err) {
       console.error("Error uploading file:", err);
       return res.status(500).send("Error uploading file");
     }
 
     // File uploaded successfully
-    res.status(200).json({ message: "File uploaded", url: data.Location });
+    // File uploaded successfully, save metadata to the database
+    try {
+      const newJobApplication = new JobApplication({
+        uploaderId: uploaderId, // User ID who uploaded the file
+        employerId: employerId, // Employer ID to whom the file belongs
+        jobId: jobId, // The job ID related to this application
+        fileName: s3Key, // The file name (timestamp added)
+        fileUrl: data.Location, // The S3 file URL
+      });
+
+      await newJobApplication.save();
+      res.status(200).json({ message: "File uploaded", url: data.Location });
+    } catch (e) {
+      console.error("Error saving file metadata to the database:", e);
+      return res.status(500).send("Error saving file metadata");
+    }
   });
+});
+
+app.get("/api/aws/files/get", async (req, res) => {
+  console.log("Full req.query:", req.query); // Log the entire query object
+
+  const { uploaderId, jobId, employerId } = req.query;
+
+  try {
+    console.log(
+      `index.js, before find application, uploaderId ${uploaderId}, employerId ${employerId}, jobId ${jobId}`
+    );
+    const application = await JobApplication.findOne({
+      uploaderId: uploaderId,
+      employerId: employerId,
+      jobId: jobId,
+    });
+    if (!application) {
+      console.log("HEYHEYHEYHEYHEY NO APPLICATION LIKE THAT");
+      return res.status(404).send("Job application not found");
+    }
+
+    const s3Key = application.fileName; // Assuming fileName is the S3 Key used for storage
+    console.log("S3 key is like this ", s3Key);
+
+    // 2. Fetch the file from S3
+    const params = {
+      Bucket: "job-application-bucket", // your bucket name
+      Key: s3Key, // the key you used when uploading the file
+    };
+    // Stream the file from S3
+    s3.getObject(params, (err, data) => {
+      if (err) {
+        console.error("Error fetching file from S3:", err);
+        return res.status(500).send("Error fetching file from S3");
+      }
+
+      // Set headers to prompt download or display in browser
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", `attachment; filename=${s3Key}`);
+      // Send the file data
+      res.send(data.Body);
+    });
+  } catch (err) {
+    console.error("Error fetching files:", err);
+    res.status(500).send("Error fetching files");
+  }
 });
 
 const storage = multer.diskStorage({
