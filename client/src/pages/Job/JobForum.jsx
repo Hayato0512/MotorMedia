@@ -16,6 +16,7 @@ import FormControl from "@mui/material/FormControl";
 import JobDialog from "../../components/Dialog/JobDialog";
 import useFetchJobs from "../../hooks/useFetchJobs";
 import Job from "../../components/Job/Job ";
+import JobRightbar from "../../components/JobRightbar/JobRightbar";
 
 /** Jobs.
  *  I wanna be able to :
@@ -89,7 +90,7 @@ export default function JobForum() {
             ))}
           </div>
         </div>
-        <QuestionRightbar isQuestionPosted={isQuestionPosted} />
+        <JobRightbar isQuestionPosted={isQuestionPosted} />
       </div>
       <JobDialog
         isOpen={isDialogOpen}

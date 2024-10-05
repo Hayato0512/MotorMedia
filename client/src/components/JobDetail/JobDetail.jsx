@@ -20,6 +20,7 @@ export default function JobDetail() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const inputRef = useRef();
   const [pdfUrl, setPdfUrl] = useState(null);
+  const [fileName, setFileName] = useState("application.pdf"); // Set a default file name
 
   //get currentUesr
   const { user: currentUser } = useContext(AuthContext);
@@ -80,6 +81,8 @@ export default function JobDetail() {
 
           setPdfUrl(fileURL);
 
+          setFileName(res.data.originalName);
+
           // Option 1: Open the PDF in a new tab
           // window.open(fileURL, "_blank");
 
@@ -122,6 +125,7 @@ export default function JobDetail() {
     }
   }, [job]);
   //if I set quesetionId, no infinite loop even though I also change questionId by setQuestionId. maybe if the new value is the same as old one, it doesn't make this re-render.
+  //
   //On the other hand, every single res might be different. that is why even though I am fetching the same data from cloud, it's not quite the same.
 
   const applyClicked = () => {
@@ -163,15 +167,14 @@ export default function JobDetail() {
                 </div>
               </div>
             </div>
+            {pdfUrl && (
+              <div>
+                <a href={pdfUrl} download={fileName}>
+                  View Your Application
+                </a>
+              </div>
+            )}
           </div>
-          {pdfUrl && (
-            <iframe
-              src={pdfUrl}
-              title="Job Application PDF"
-              width="100%"
-              height="600px"
-            />
-          )}
 
           {!pdfUrl && (
             <Button
