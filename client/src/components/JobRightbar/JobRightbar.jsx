@@ -18,9 +18,18 @@ export default function JobRightbar({ isQuestionPosted }) {
       try {
         //something like this.
         const res = await axiosInstance.get(
-          "/jobapplications/employer/alljobpostings" + currentUser._id
+          "/jobs/jobapplications/employer/alljobpostings/" + currentUser._id
         );
-        setApplications(res.data);
+        logMessage(
+          `Before setApplication, res.data is  ${JSON.stringify(res.data)}`,
+          "INFO",
+          fileName
+        );
+        if (Array.isArray(res.data)) {
+          setApplications(res.data);
+        } else {
+          logMessage("res.data is not an array!", "ERROR", fileName);
+        }
         logMessage(
           "Success in fetching user's postings applications",
           "INFO",
@@ -29,7 +38,11 @@ export default function JobRightbar({ isQuestionPosted }) {
       } catch (error) {
         //asdf
         //https://medium.com/@seniruabeywickrama/5-best-practices-for-logging-in-react-js-6cc26e7c7e94
-        logMessage("Error in fetching user's own jobs", "ERROR", fileName);
+        logMessage(
+          `Error in fetching jobApplication, ${error}`,
+          "ERROR",
+          fileName
+        );
       }
     }
   }, [currentUser, isQuestionPosted]);
@@ -42,8 +55,6 @@ export default function JobRightbar({ isQuestionPosted }) {
 
   return (
     <div className="questionRightbar">
-      here show all the documents applied for the job postings. and here, show
-      all the own postings.
       {applications.length > 0 && (
         <List
           sx={{
@@ -52,7 +63,10 @@ export default function JobRightbar({ isQuestionPosted }) {
           }}
         >
           {applications.map((application) => (
-            <JobRightbarItem jobApplication={application} />
+            <JobRightbarItem
+              jobApplication={application}
+              key={application._id}
+            />
           ))}
         </List>
       )}

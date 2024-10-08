@@ -129,6 +129,15 @@ router.get("/searchId/:searchId", async (req, res) => {
 //     res.status(500).json(err);
 //   }
 // });
+
+router.get("/name/:userId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    res.status(200).json(user.username);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 //get friends
 router.get("/friends/:userId", async (req, res) => {
   try {

@@ -18,12 +18,17 @@ export default function JobRightbarItem({ jobApplication }) {
         const applicantName = await axiosInstance.get(
           "/users/name/" + jobApplication.uploaderId
         );
-        setApplicantName(applicantName);
+        setApplicantName(applicantName.data);
         const jobTitle = await axiosInstance.get(
           "/jobs/title/" + jobApplication.jobId
         );
 
-        setJobTitle(jobTitle);
+        logMessage(
+          `jobTitle is like this ${jobTitle.data}`,
+          "INFO",
+          "JobRightbarItem"
+        );
+        setJobTitle(jobTitle.data);
       } catch (error) {
         logMessage(
           "Some error detected in fetchApplicationDetails",
@@ -45,8 +50,8 @@ export default function JobRightbarItem({ jobApplication }) {
   return (
     <ListItem key={jobApplication._id}>
       <ListItemButton onClick={() => selectJobPosting(jobId)}>
-        {applicantName}
         {jobTitle}
+        {/* {applicantName} */}
       </ListItemButton>
     </ListItem>
   );

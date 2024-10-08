@@ -1,4 +1,5 @@
 const Job = require("../models/Job");
+const JobApplication = require("../models/JobApplication");
 const router = require("express").Router();
 const { body, validationResult } = require("express-validator");
 
@@ -86,6 +87,44 @@ router.get("/alljobs", async (req, res) => {
   }
 });
 
+router.get(
+  "/jobapplications/employer/alljobpostings/:employerId",
+  async (req, res) => {
+    try {
+      const employerId = req.params.employerId;
+      // Fetch jobs and limit the result to 30
+      console.log("Jobs: EmployerId is ", employerId);
+      const jobApplications = await JobApplication.find({
+        employerId: employerId,
+      });
+
+      // Send the jobs in the response
+      res.status(200).json(jobApplications);
+    } catch (err) {
+      // Handle any errors
+      console.error(err);
+      res.status(500).json({ message: "Server error while fetching jobs." });
+    }
+  }
+);
+
+router.get("/title/:jobId", async (req, res) => {
+  try {
+    const jobId = req.params.jobId;
+    // Fetch jobs and limit the result to 30
+    const job = await Job.find({
+      jobId: jobId,
+    });
+
+    console.log("JOB TITLE ", job.title);
+    // Send the jobs in the response
+    res.status(200).json(job.title);
+  } catch (err) {
+    // Handle any errors
+    console.error(err);
+    res.status(500).json({ message: "Server error while fetching jobs." });
+  }
+});
 router.post(
   "/tags",
   body("tags").isArray().withMessage("Tags should be an array."),
