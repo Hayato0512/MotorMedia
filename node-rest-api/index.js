@@ -115,7 +115,7 @@ app.get("/api/aws/files/get", async (req, res) => {
     );
     const application = await JobApplication.findOne({
       uploaderId: uploaderId,
-      employerId: employerId,
+      // employerId: employerId,
       jobId: jobId,
     });
     if (!application) {

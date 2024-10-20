@@ -112,13 +112,14 @@ router.get("/title/:jobId", async (req, res) => {
   try {
     const jobId = req.params.jobId;
     // Fetch jobs and limit the result to 30
+    console.log("JOB ID ", jobId);
     const job = await Job.find({
-      jobId: jobId,
+      _id: jobId,
     });
 
-    console.log("JOB TITLE ", job.title);
+    console.log("JOB TITLE ", job[0].title);
     // Send the jobs in the response
-    res.status(200).json(job.title);
+    res.status(200).json(job[0].title);
   } catch (err) {
     // Handle any errors
     console.error(err);

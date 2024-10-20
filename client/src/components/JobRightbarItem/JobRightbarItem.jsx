@@ -44,14 +44,20 @@ export default function JobRightbarItem({ jobApplication }) {
   }, [fetchApplicationDetails]);
 
   const selectJobPosting = (id) => {
-    navigate("/jobDetail", { state: { jobId: id } });
+    navigate("/jobDetail", {
+      state: {
+        jobId: id,
+        applicantId: jobApplication.uploaderId,
+        isFromJobRightbar: true,
+      },
+    });
   };
 
   return (
     <ListItem key={jobApplication._id}>
       <ListItemButton onClick={() => selectJobPosting(jobId)}>
         {jobTitle}
-        {/* {applicantName} */}
+        {applicantName}
       </ListItemButton>
     </ListItem>
   );
