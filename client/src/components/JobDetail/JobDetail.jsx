@@ -22,6 +22,8 @@ export default function JobDetail() {
   const { user: currentUser } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { state } = useLocation();
+  // Determine if the current user is the employer for this job
+  const isEmployer = job && currentUser && job.employerId === currentUser._id;
 
   //get Job Http Request
   const fetchJob = useCallback(async () => {
@@ -86,7 +88,9 @@ export default function JobDetail() {
             )} */}
           </div>
           <JobDetailBottomPart
-            state={state}
+            job={job}
+            currentUser={currentUser}
+            isEmployer={isEmployer}
             setIsDialogOpen={setIsDialogOpen}
           />
 

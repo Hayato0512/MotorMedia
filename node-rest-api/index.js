@@ -115,7 +115,7 @@ app.get("/api/aws/files/get", async (req, res) => {
     );
     const application = await JobApplication.findOne({
       uploaderId: uploaderId,
-      // employerId: employerId,
+      employerId: employerId,
       jobId: jobId,
     });
     if (!application) {
@@ -145,6 +145,65 @@ app.get("/api/aws/files/get", async (req, res) => {
       res.send(data.Body);
     });
   } catch (err) {
+    console.error("Error fetching files:", err);
+    res.status(500).send("Error fetching files");
+  }
+});
+
+app.get("/api/aws/files/getAll", async (req, res) => {
+  const { employerId } = req.query;
+  try {
+    // 1. get all the job applications whose employerId is req.query.employerId.
+    //2. create an array containing all the file names that has been submitted.
+    const applications = await JobApplication.find({
+      employerId: employerId,
+    });
+
+    if (!applications.length) {
+      return res
+        .status(404)
+        .send("No job applications found for this employer.");
+    }
+
+    // 2. Extract the filenames from the applications
+    const fileNames = applications.map((app) => app.fileName);
+
+    // 3. Fetch all the files from S3
+    const filePromises = fileNames.map(async (fileName) => {
+      const params = {
+        Bucket: "job-application-bucket", // your bucket name
+        Key: fileName,
+      };
+      try {
+        const fileData = await s3.getObject(params).promise();
+        return {
+          fileName,
+          fileData: fileData.Body,
+        };
+      } catch (err) {
+        console.error(`Error fetching file ${fileName} from S3:`, err);
+        return null; // Return null for failed fetches
+      }
+    });
+
+    // Resolve all file fetch promises
+    const files = await Promise.all(filePromises);
+
+    // Filter out any failed fetches
+    const successfulFiles = files.filter((file) => file !== null);
+
+    if (!successfulFiles.length) {
+      return res.status(500).send("Failed to fetch files from S3.");
+    }
+    // 4. Send the files back to the client
+    res.setHeader("Content-Type", "application/json");
+    res.send(
+      successfulFiles.map(({ fileName, fileData }) => ({
+        fileName,
+        fileContent: fileData.toString("base64"), // Convert buffer to base64 string
+      }))
+    );
+  } catch (error) {
     console.error("Error fetching files:", err);
     res.status(500).send("Error fetching files");
   }

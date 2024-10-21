@@ -41,7 +41,7 @@ export default function JobDetailBottomPart({
     try {
       const res = await axiosInstance.get(`/aws/files/getAll`, {
         params: {
-          jobId: job._id,
+          employerId: job.employerId,
         },
       });
       setApplications(res.data);
@@ -60,8 +60,8 @@ export default function JobDetailBottomPart({
       const res = await axiosInstance.get(`/aws/files/get`, {
         params: {
           uploaderId: currentUser._id,
-          jobId: state.jobId,
-          // employerId: job.employerId,
+          jobId: job._id,
+          employerId: job.employerId,
         },
         responseType: "arraybuffer", // Try using 'arraybuffer' to ensure proper binary handling
       });
@@ -81,6 +81,7 @@ export default function JobDetailBottomPart({
         setPdfUrl(fileURL);
 
         setFileName(res.data.originalName);
+        setUserApplied(true);
 
         // Option 1: Open the PDF in a new tab
         // window.open(fileURL, "_blank");
@@ -108,19 +109,45 @@ export default function JobDetailBottomPart({
   };
   return (
     <div>
-      {pdfUrl && (
+      {isEmployer ? (
         <div>
-          <a href={pdfUrl} download={fileName}>
-            View Your Application
-          </a>
+          <h3>Applications for this Job</h3>
+          {applications.length > 0 ? (
+            <ul>
+              {applications.map((application, index) => (
+                <li key={index}>
+                  <a
+                    href={`/aws/files/download/${application.fileId}`}
+                    download={application.fileName}
+                  >
+                    {application.fileName}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No applications found.</p>
+          )}
+        </div>
+      ) : (
+        <div>
+          {userApplied && pdfUrl ? (
+            <div>
+              <a href={pdfUrl} download={fileName}>
+                View Your Application
+              </a>
+            </div>
+          ) : (
+            <Button
+              variant="contained"
+              endIcon={<Send />}
+              onClick={applyClicked}
+            >
+              Apply
+            </Button>
+          )}
         </div>
       )}
-      {!pdfUrl && (
-        <Button variant="contained" endIcon={<Send />} onClick={applyClicked}>
-          Apply
-        </Button>
-      )}
-      JobDetailBottomPart
     </div>
   );
 }
