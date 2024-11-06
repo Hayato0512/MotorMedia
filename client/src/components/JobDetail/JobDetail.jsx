@@ -63,7 +63,7 @@ export default function JobDetail() {
               {job ? job.body : "Loading..."}
             </div>
             <div className="jobDetailBodyUserInfo ">
-              <div className="jobDetailBodyAskedDate">asked Feb 3, 2024</div>
+              <div className="jobDetailBodyAskedDate">Posted Feb 3, 2024</div>
               <div className="jobDetailBodyUserInfoLower">
                 <img
                   src={
@@ -79,13 +79,6 @@ export default function JobDetail() {
                 </div>
               </div>
             </div>
-            {/* {pdfUrl && (
-              <div>
-                <a href={pdfUrl} download={fileName}>
-                  View Your Application
-                </a>
-              </div>
-            )} */}
           </div>
           <JobDetailBottomPart
             job={job}

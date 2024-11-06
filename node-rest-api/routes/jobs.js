@@ -3,6 +3,8 @@ const JobApplication = require("../models/JobApplication");
 const router = require("express").Router();
 const { body, validationResult } = require("express-validator");
 
+const s3 = require("../s3Config"); // Adjust the path as needed based on your folder structure
+
 router.post(
   "/create",
   [
@@ -82,6 +84,40 @@ router.get("/alljobs", async (req, res) => {
     res.status(200).json(jobs);
   } catch (err) {
     // Handle any errors
+    console.error(err);
+    res.status(500).json({ message: "Server error while fetching jobs." });
+  }
+});
+
+router.delete("/application/delete", async (req, res) => {
+  const { fileName, jobId, userId } = req.query; //fileName undefined
+  console.log("S3 instance:", s3); // Check if this prints an object with S3 functions
+  console.log("FILENAME:", fileName, jobId, userId); // Check if this prints an object with S3 functions
+
+  try {
+    const result = await JobApplication.findOneAndDelete({
+      jobId: jobId,
+      userId: userId,
+      fileName: fileName,
+    });
+    console.log("jobs.js: /application/delete: deletion successful");
+    //here, bring s3 into this file, and then complete deletion on AWS S3 as well.
+    // Set up parameters for the S3 delete operation
+    const params = {
+      Bucket: "job-application-bucket", // your S3 bucket name
+      Key: fileName, // the S3 key to delete
+    };
+    // Delete the file from S3
+    s3.deleteObject(params, (err, data) => {
+      if (err) {
+        console.error("Error deleting file from S3:", err);
+        return res.status(500).send("Error deleting file from S3");
+      }
+
+      console.log("File successfully deleted from S3:", data);
+      res.status(200).send("Job application and file deleted successfully");
+    });
+  } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error while fetching jobs." });
   }

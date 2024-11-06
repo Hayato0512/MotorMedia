@@ -21,18 +21,20 @@ const multer = require("multer");
 const path = require("path");
 var cors = require("cors");
 dotenv.config();
-const AWS = require("aws-sdk");
+// const AWS = require("aws-sdk");
 const JobApplication = require("./models/JobApplication");
 
 //FOR PACKAGE.JSON
 // "heroku-postbuild": "cd client && npm install && npm run build"
 
 // Configure AWS SDK
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: "us-west-1",
-});
+// const s3 = new AWS.S3({
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+//   region: "us-west-1",
+// });
+
+const s3 = require("./s3Config");
 
 //connect to the DB here
 mongoose.connect(
@@ -142,6 +144,7 @@ app.get("/api/aws/files/get", async (req, res) => {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader("Content-Disposition", `attachment; filename=${s3Key}`);
       // Send the file data
+      console.log("FETCHING FILE FROM S3 SUCCESS");
       res.send(data.Body);
     });
   } catch (err) {
@@ -151,12 +154,12 @@ app.get("/api/aws/files/get", async (req, res) => {
 });
 
 app.get("/api/aws/files/getAll", async (req, res) => {
-  const { employerId } = req.query;
+  const { jobId } = req.query;
   try {
     // 1. get all the job applications whose employerId is req.query.employerId.
     //2. create an array containing all the file names that has been submitted.
     const applications = await JobApplication.find({
-      employerId: employerId,
+      jobId: jobId,
     });
 
     if (!applications.length) {
@@ -327,3 +330,5 @@ app.listen(process.env.PORT || 8800, () => {
 
 //just in case you need it in package.json
 // "server": "nodemon index.js --ignore react-social"
+
+module.exports = s3;

@@ -41,7 +41,7 @@ export default function JobDetailBottomPart({
     try {
       const res = await axiosInstance.get(`/aws/files/getAll`, {
         params: {
-          employerId: job.employerId,
+          jobId: job._id,
         },
       });
       setApplications(res.data);
@@ -107,6 +107,27 @@ export default function JobDetailBottomPart({
   const applyClicked = () => {
     setIsDialogOpen(true);
   };
+
+  const deleteApplicationClicked = async () => {
+    // get the name of the file, userId, jobId.
+    try {
+      const res = await axiosInstance.delete(`/jobs/application/delete`, {
+        params: {
+          fileName: fileName,
+          jobId: job._id,
+          userId: currentUser._id,
+        },
+      });
+      logMessage(
+        "Application deletion successful.",
+        "INFO",
+        "JobDetailBottomPart"
+      ); // This should show the full URL with parameters
+    } catch (error) {
+      logMessage(error, "ERROR", "JobDetailBottomPart"); // This should show the full URL with parameters
+    }
+    // and then just throw that into server, and they will deal with it.
+  };
   return (
     <div>
       {isEmployer ? (
@@ -136,6 +157,13 @@ export default function JobDetailBottomPart({
               <a href={pdfUrl} download={fileName}>
                 View Your Application
               </a>
+              <Button
+                variant="contained"
+                endIcon={<Send />}
+                onClick={deleteApplicationClicked}
+              >
+                Delete Your Application
+              </Button>
             </div>
           ) : (
             <Button
