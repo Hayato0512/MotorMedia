@@ -80,6 +80,11 @@ export default function JobDetailBottomPart({
 
         setPdfUrl(fileURL);
 
+        logMessage(
+          `Setting file name here to ${res.data.originalName}`,
+          "INFO",
+          "JobDetailBottomPart"
+        );
         setFileName(res.data.originalName);
         setUserApplied(true);
 
@@ -111,6 +116,12 @@ export default function JobDetailBottomPart({
   const deleteApplicationClicked = async () => {
     // get the name of the file, userId, jobId.
     try {
+      //filename is undefined. find out why.
+      logMessage(
+        `before deletion, filename is ${fileName}`,
+        "INFO",
+        "JobDetailBottomPart"
+      );
       const res = await axiosInstance.delete(`/jobs/application/delete`, {
         params: {
           fileName: fileName,

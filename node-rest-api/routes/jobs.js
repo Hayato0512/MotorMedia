@@ -95,14 +95,6 @@ router.delete("/application/delete", async (req, res) => {
   console.log("FILENAME:", fileName, jobId, userId); // Check if this prints an object with S3 functions
 
   try {
-    const result = await JobApplication.findOneAndDelete({
-      jobId: jobId,
-      userId: userId,
-      fileName: fileName,
-    });
-    console.log("jobs.js: /application/delete: deletion successful");
-    //here, bring s3 into this file, and then complete deletion on AWS S3 as well.
-    // Set up parameters for the S3 delete operation
     const params = {
       Bucket: "job-application-bucket", // your S3 bucket name
       Key: fileName, // the S3 key to delete
@@ -113,10 +105,18 @@ router.delete("/application/delete", async (req, res) => {
         console.error("Error deleting file from S3:", err);
         return res.status(500).send("Error deleting file from S3");
       }
-
       console.log("File successfully deleted from S3:", data);
-      res.status(200).send("Job application and file deleted successfully");
+      console.log("SO LET's delete the METADATA as well", data);
+      // res.status(200).send("Job application and file deleted successfully");
     });
+    const result = await JobApplication.findOneAndDelete({
+      jobId: jobId,
+      userId: userId,
+      fileName: fileName,
+    });
+    console.log("jobs.js: /application/delete: deletion successful");
+    //here, bring s3 into this file, and then complete deletion on AWS S3 as well.
+    // Set up parameters for the S3 delete operation
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error while fetching jobs." });
