@@ -123,6 +123,27 @@ router.delete("/application/delete", async (req, res) => {
   }
 });
 
+router.get("/application/getone", async (req, res) => {
+  const { uploaderId, jobId, employerId } = req.query;
+
+  try {
+    console.log("OK LETS FIND AN APPLICATION FOR YA");
+    // Fetch jobs and limit the result to 30
+    const jobApplication = await JobApplication.findOne({
+      uploaderId: uploaderId,
+      jobId: jobId,
+      employerId: employerId,
+    });
+
+    // Send the jobs in the response
+    res.status(200).json(jobApplication);
+  } catch (err) {
+    // Handle any errors
+    console.error(err);
+    res.status(500).json({ message: "Server error while fetching jobs." });
+  }
+});
+
 router.get(
   "/jobapplications/employer/alljobpostings/:employerId",
   async (req, res) => {

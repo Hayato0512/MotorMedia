@@ -65,7 +65,7 @@ export default function JobDetailBottomPart({
         },
         responseType: "arraybuffer", // Try using 'arraybuffer' to ensure proper binary handling
       });
-      logMessage(res.config.url, "INFO", "JobDetail"); // This should show the full URL with parameters
+      logMessage(res.config.url, "INFO", "JobDetailBottomPart"); // This should show the full URL with parameters
 
       if (res) {
         // Revoke old Object URL if it exists
@@ -81,11 +81,29 @@ export default function JobDetailBottomPart({
         setPdfUrl(fileURL);
 
         logMessage(
-          `Setting file name here to ${res.data.originalName}`,
+          `res.data is  ${JSON.stringify(res)}`,
           "INFO",
           "JobDetailBottomPart"
         );
-        setFileName(res.data.originalName);
+        // here, fetch application, and then get the fileName.
+        // we have uploaderId: currentUser._id,
+        //jobId: job._id,
+        //employerId: job.employerId
+        try {
+          const res2 = await axiosInstance.get(`/jobs/application/getone`, {
+            params: {
+              uploaderId: currentUser._id,
+              jobId: job._id,
+              employerId: job.employerId,
+            },
+          });
+          logMessage(
+            `res2 received, res2.data is ${res2.data.fileName}`,
+            "INFO",
+            "JobDetailBottomPart"
+          );
+          setFileName(res2.data.fileName);
+        } catch (error) {}
         setUserApplied(true);
 
         // Option 1: Open the PDF in a new tab
@@ -139,6 +157,14 @@ export default function JobDetailBottomPart({
     }
     // and then just throw that into server, and they will deal with it.
   };
+
+  useEffect(() => {
+    logMessage(
+      `fileName changed to ${fileName}`,
+      "INFO",
+      "JobDetailBottomPart"
+    );
+  }, [fileName]);
   return (
     <div>
       {isEmployer ? (
