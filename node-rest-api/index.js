@@ -142,10 +142,14 @@ app.get("/api/aws/files/get", async (req, res) => {
 
       // Set headers to prompt download or display in browser
       res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", `attachment; filename=${s3Key}`);
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename=${encodeURIComponent(s3Key)}`
+      );
       // Send the file data
       console.log("FETCHING FILE FROM S3 SUCCESS");
       res.send(data.Body);
+      console.log(`SUCCESS, just sent data like this ${data.Body}`);
     });
   } catch (err) {
     console.error("Error fetching files:", err);

@@ -105,19 +105,7 @@ export default function JobDetailBottomPart({
           setFileName(res2.data.fileName);
         } catch (error) {}
         setUserApplied(true);
-
-        // Option 1: Open the PDF in a new tab
-        // window.open(fileURL, "_blank");
-
-        // Option 2: Trigger a download (if you want the user to download the file)
-        // const link = document.createElement('a');
-        // link.href = fileURL;
-        // link.setAttribute('download', 'application.pdf'); // Specify a filename
-        // document.body.appendChild(link);
-        // link.click();
-        // document.body.removeChild(link);
       }
-      // setJob(res.data)
     } catch (error) {
       logMessage(
         `FAILED TO FETCH JOB APPLICATION ${error}`,
