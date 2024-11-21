@@ -76,7 +76,7 @@ export default function QuestionForum() {
             </div>
           </div>
           <div className="questionSearchInputDiv">
-            <QuestionTextSearch />
+            <QuestionTextSearch page={"questions"} />
           </div>
           <div className="questionForumFilterContainer">
             <FormControl sx={{ width: "30%" }}>

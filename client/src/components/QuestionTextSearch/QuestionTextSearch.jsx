@@ -7,7 +7,7 @@ import debounce from "lodash.debounce"; // Install lodash for debounce functiona
 import { axiosInstance } from "../../config";
 import "../../pages/QuestionForum/questionForum.css";
 
-export default function QuestionTextSearch() {
+export default function QuestionTextSearch({ page }) {
   const [tagTextFieldValue, setTagTextFieldValue] = useState("");
   const [suggestions, setSuggestions] = useState([]); // Matching tag suggestions
   const [cache, setCache] = useState({}); // to store input
@@ -15,11 +15,11 @@ export default function QuestionTextSearch() {
   const navigate = useNavigate();
 
   // Debounced function to handle input changes
-  const debouncedFetchQuestions = debounce(async (value) => {
+  const debouncedFetchFunction = debounce(async (value) => {
     if (value.trim()) {
       if (cache[value]) {
         console.log(
-          "QuestionTextSearch: since the input already exist in the cache, no need to make api calls. "
+          "TextSearch: since the input already exist in the cache, no need to make api calls. "
         );
         setSuggestions(cache[value]);
         return;
@@ -27,9 +27,8 @@ export default function QuestionTextSearch() {
 
       try {
         const response = await axiosInstance.get(
-          `/questions/suggest?search=${value}`
+          `/${page}/suggest?search=${value}`
         );
-
         // just in case let's keep the cache logic. user input -> delete some input -> come back to the same input -> just get them from cache
         setCache((prevCache) => ({
           ...prevCache,
@@ -50,20 +49,24 @@ export default function QuestionTextSearch() {
   }, 300); // 300ms debounce
 
   //keep this, as if cache hasn't change, no need to re-create the debounce fetch function.
-  const memoizedFetchQuestions = useCallback(
-    (value) => debouncedFetchQuestions(value),
+  const memoizedFetchFunction = useCallback(
+    (value) => debouncedFetchFunction(value),
     [cache]
   );
 
   // Effect to fetch suggestions when the input changes
   useEffect(() => {
-    memoizedFetchQuestions(tagTextFieldValue);
-    return () => debouncedFetchQuestions.cancel(); // Cleanup debounce on unmount
+    memoizedFetchFunction(tagTextFieldValue);
+    return () => debouncedFetchFunction.cancel(); // Cleanup debounce on unmount
   }, [tagTextFieldValue]);
 
   const selectSuggestion = (id) => {
     //directly take the user to the QuestionDetail page here
-    navigate("/questionDetail", { state: { questionId: id } });
+    if (page == "questions") {
+      navigate("/questionDetail", { state: { questionId: id } });
+    } else if (page == "jobs") {
+      navigate("/jobDetail", { state: { jobId: id } });
+    }
   };
 
   return (

@@ -10,7 +10,7 @@ import debounce from "lodash.debounce"; // Install lodash for debounce functiona
 import { axiosInstance } from "../../config";
 import "../../pages/QuestionForum/questionForum.css";
 
-export default function TagSearch({ onChange }) {
+export default function TagSearch({ onChange, page }) {
   const [tags, setTags] = useState([]);
   const [tagTextFieldValue, setTagTextFieldValue] = useState("");
   const [suggestions, setSuggestions] = useState([]); // Matching tag suggestions

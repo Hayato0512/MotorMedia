@@ -117,6 +117,7 @@ router.delete("/application/delete", async (req, res) => {
     console.log("jobs.js: /application/delete: deletion successful");
     //here, bring s3 into this file, and then complete deletion on AWS S3 as well.
     // Set up parameters for the S3 delete operation
+    res.status(200).json({ message: "deletion successful." });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error while fetching jobs." });
@@ -211,6 +212,25 @@ router.post(
     }
   }
 );
+
+router.get("/suggest", async (req, res) => {
+  try {
+    const userInput = req.query.search;
+    if (!userInput) {
+      return res.status(400).json({ message: "INVALID INPUT" });
+    }
+    const escapeRegex = (input) => {
+      return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escape special characters
+    };
+    const safeInput = escapeRegex(userInput);
+    const matchingJobs = await Job.find({
+      title: { $regex: safeInput, $options: "i" },
+    }).limit(20);
+    res.json(matchingJobs);
+  } catch (error) {
+    res.status(400).json({ message: "Server error" });
+  }
+});
 
 router.get("/:id", async (req, res) => {
   try {

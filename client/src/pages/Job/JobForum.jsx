@@ -65,7 +65,7 @@ export default function JobForum() {
             </div>
           </div>
           <div className="jobSearchInputDiv">
-            <QuestionTextSearch />
+            <QuestionTextSearch page={"jobs"} />
           </div>
           <div className="jobFilterContainer">
             <FormControl sx={{ width: "30%" }}>
@@ -83,7 +83,7 @@ export default function JobForum() {
               </Select>
             </FormControl>
           </div>
-          <TagSearch onChange={setTags} />
+          <TagSearch onChange={setTags} page={"jobs"} />
           <div className="jobList">
             {jobList.map((job) => (
               <Job job={job} />

@@ -5,6 +5,7 @@ import { logMessage } from "../../util/logging";
 import { AuthContext } from "../../context/AuthContext";
 import { Button } from "@mui/material";
 import { Send } from "@material-ui/icons";
+import { Modal } from "react-bootstrap";
 
 export default function JobDetailBottomPart({
   job,
@@ -17,6 +18,10 @@ export default function JobDetailBottomPart({
   const [applications, setApplications] = useState([]); // For employer view
   const [userApplied, setUserApplied] = useState(false); // For applicant view
 
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
+
   useEffect(() => {
     if (job) {
       if (isEmployer) {
@@ -26,7 +31,7 @@ export default function JobDetailBottomPart({
       }
     } else {
     }
-  }, [job, isEmployer]);
+  }, [job, isEmployer, refreshTrigger]);
 
   // Cleanup the URL when the component unmounts or the pdfUrl changes
   useEffect(() => {
@@ -120,7 +125,6 @@ export default function JobDetailBottomPart({
   };
 
   const deleteApplicationClicked = async () => {
-    // get the name of the file, userId, jobId.
     try {
       //filename is undefined. find out why.
       logMessage(
@@ -140,10 +144,19 @@ export default function JobDetailBottomPart({
         "INFO",
         "JobDetailBottomPart"
       ); // This should show the full URL with parameters
+      //close the modal,
+      setShow(false);
+      // Trigger refresh
+      setUserApplied(false);
+      setRefreshTrigger((prev) => !prev); // Toggle refreshTrigger
     } catch (error) {
       logMessage(error, "ERROR", "JobDetailBottomPart"); // This should show the full URL with parameters
     }
     // and then just throw that into server, and they will deal with it.
+  };
+
+  const deleteCancelClicked = () => {
+    setShow(false);
   };
 
   useEffect(() => {
@@ -185,7 +198,7 @@ export default function JobDetailBottomPart({
               <Button
                 variant="contained"
                 endIcon={<Send />}
-                onClick={deleteApplicationClicked}
+                onClick={handleShow}
               >
                 Delete Your Application
               </Button>
@@ -201,6 +214,24 @@ export default function JobDetailBottomPart({
           )}
         </div>
       )}
+
+      <Modal show={show}>
+        <Modal.Header closeButton>
+          <Modal.Title>delete application?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <></>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={deleteApplicationClicked}>
+            delete
+          </Button>
+
+          <Button variant="secondary" onClick={deleteCancelClicked}>
+            cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
