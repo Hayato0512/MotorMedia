@@ -2,6 +2,7 @@ const Job = require("../models/Job");
 const JobApplication = require("../models/JobApplication");
 const router = require("express").Router();
 const { body, validationResult } = require("express-validator");
+const Tag = require("../models/Tag");
 
 const s3 = require("../s3Config"); // Adjust the path as needed based on your folder structure
 
@@ -32,10 +33,19 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+    const { tags } = req.body;
     try {
       const job = Job(req.body);
 
       const savedJob = await job.save();
+
+      for (const tag of tags) {
+        await Tag.updateOne(
+          { name: tag }, // Query condition: find the document where name matches the tag
+          { name: tag }, // Update operation: update the document with the new tag name (or leave it the same if it already exists)
+          { upsert: true } // create a tag if it doesn't already exist
+        );
+      }
 
       res.json(savedJob);
     } catch (err) {
@@ -44,7 +54,7 @@ router.post(
   }
 );
 
-router.post(
+router.get(
   "/tags",
   body("tags").isArray().withMessage("Tags should be an array."),
   async (req, res) => {

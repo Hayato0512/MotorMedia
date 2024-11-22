@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 import { axiosInstance } from "../config";
+import { logMessage } from "../util/logging";
 
 //My First Custom Hook!!! ^...^
 const useFetchJobs = (currentUser, tags) => {
@@ -23,6 +24,14 @@ const useFetchJobs = (currentUser, tags) => {
   useEffect(() => {
     fetchJobs();
   }, [fetchJobs]);
+
+  useEffect(() => {
+    logMessage(
+      `tags changed in useFetchJobs : ${tags}`,
+      "INFO",
+      "useFetchJobs"
+    );
+  }, [tags]);
 
   return { jobList, setJobList };
 };
