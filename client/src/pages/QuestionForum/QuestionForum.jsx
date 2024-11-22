@@ -52,8 +52,14 @@ export default function QuestionForum() {
 
   //Order Change logic here
   useEffect(() => {
-    const sortedQuestions = orderQuestionList(questionList, order);
-    setQuestionList(sortedQuestions);
+    const sortedQuestions = orderQuestionList([...questionList], order);
+    setQuestionList((prevQuestionList) => {
+      // Only update if the sorted list is different to avoid unnecessary renders
+      return JSON.stringify(sortedQuestions) !==
+        JSON.stringify(prevQuestionList)
+        ? sortedQuestions
+        : prevQuestionList;
+    });
   }, [order, questionList]);
 
   return (

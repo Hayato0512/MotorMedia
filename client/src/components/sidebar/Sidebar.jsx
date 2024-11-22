@@ -18,9 +18,15 @@ import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import { axiosInstance } from "../../config";
 import FavoriteBikes from "../FavoriteBikes/FavoriteBikes";
+import { logMessage } from "../../util/logging";
 
 export default function Sidebar() {
   const { user } = useContext(AuthContext);
+  logMessage(
+    "Sidebar, if you see this message infenetly, this compoent is called infinetly",
+    "INFO",
+    "Sidebar"
+  );
   const [followings, setFollowings] = useState([]);
   const followingsList = user.followings;
   useEffect(() => {

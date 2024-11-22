@@ -13,6 +13,10 @@ export default function JobDialog({ isOpen, onClose, onPost }) {
   const [tags, setTags] = useState([]);
   const { user: currentUser } = useContext(AuthContext);
 
+  useEffect(() => {
+    logMessage(`tags changed :${tags}`, "INFO", "JobDialog");
+  }, [tags]);
+
   const handleSubmission = async () => {
     const newJob = {
       employerId: currentUser._id,

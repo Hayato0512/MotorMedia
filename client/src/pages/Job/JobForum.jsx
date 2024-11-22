@@ -1,4 +1,4 @@
-import { React, useState, useContext } from "react";
+import { React, useState, useContext, useEffect } from "react";
 //important imports
 import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
@@ -17,6 +17,7 @@ import JobDialog from "../../components/Dialog/JobDialog";
 import useFetchJobs from "../../hooks/useFetchJobs";
 import Job from "../../components/Job/Job ";
 import JobRightbar from "../../components/JobRightbar/JobRightbar";
+import orderQuestionList from "../../util/sortQuestions";
 
 /** Jobs.
  *  I wanna be able to :
@@ -47,7 +48,19 @@ export default function JobForum() {
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
   };
-  const handleChange = () => {};
+  const handleChange = (event) => {
+    setOrder(event.target.value);
+  };
+
+  useEffect(() => {
+    const sortedJobs = orderQuestionList([...jobList], order);
+    setJobList((prevJobList) => {
+      // Only update if the sorted list is different to avoid unnecessary renders
+      return JSON.stringify(sortedJobs) !== JSON.stringify(prevJobList)
+        ? sortedJobs
+        : prevJobList;
+    });
+  }, [order, jobList]);
   return (
     <>
       <Topbar />
@@ -78,7 +91,6 @@ export default function JobForum() {
                 onChange={handleChange}
               >
                 <MenuItem value={"oldest"}>oldest</MenuItem>
-                <MenuItem value={"popular"}>most popular</MenuItem>
                 <MenuItem value={"newest"}>newest</MenuItem>
               </Select>
             </FormControl>
