@@ -9,6 +9,10 @@ import { AuthContext } from "../../context/AuthContext";
 import { axiosInstance } from "../../config";
 import { Modal, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import { logMessage } from "../../util/logging";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Job({ job, onChange }) {
   // const [like, setLike] = useState(question.likes.length);
   // const [isLiked, setIsLiked] = useState(false);
@@ -20,6 +24,9 @@ export default function Job({ job, onChange }) {
   //for pop up for post deletion
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Example useState for toast messages
 
   const likeHandler = async () => {
     //   try {
@@ -48,31 +55,36 @@ export default function Job({ job, onChange }) {
   };
 
   const deleteClicked = async (e) => {
-    //   e.preventDefault(); //what is this for?
-    //   console.log(
-    //     "debug: delete clicked, let's delete post by doing axiosInstance.delete(ostkjkjk )",
-    //     post._id
-    //   );
-    //   //geyt the post ID
-    //   console.log("currentUser._id", currentUser._id);
-    //   const data = new FormData();
-    //   data.append("userId", currentUser._id);
-    //   const bodyToPass = {
-    //     userId: currentUser._id,
-    //   };
-    //   try {
-    //     const res = await axiosInstance.delete(
-    //       `/posts/${post._id}/${currentUser._id}`,
-    //       {
-    //         userId: currentUser._id,
-    //       }
-    //     );
-    //     console.log(res);
-    //     setShow(false);
-    //     onChange();
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
+    if (isDeleting) return; // Prevent multiple calls if already in progress
+    setIsDeleting(true);
+    // delete the job, and jobapplications whose jobId matches, and delete all the documents from AWS S3, that is What I need to do.
+    //I think I only need jobId. as long as I know the jobId, all the operations can be done.
+    //oh, check if the currentUser Id matches the job EmployerId.
+    e.preventDefault(); //what is this for?
+    if (job.employerId !== currentUser._id) {
+      //show message, and then 2 seconds, close the dialog
+      //return
+      toast.error("You are not authorized to delete this job."); // Error toast
+      setTimeout(() => setShow(false), 1000); // Close the dialog after 1 second
+      setIsDeleting(false); // Reset after error
+
+      return; // Exit the function
+    } else {
+      try {
+        const res = await axiosInstance.delete(`/jobs/${job._id}`);
+        console.log(res);
+        toast.success("Job deleted successfully!"); // Success toast
+        setShow(false);
+        onChange();
+      } catch (error) {
+        console.log(error);
+        logMessage("Job Deletion Failed. ", "ERROR", "Job");
+        toast.error("Failed to delete the job."); // Error toast
+        setTimeout(() => setShow(false), 1000); // Close the dialog
+      } finally {
+        setIsDeleting(false); // Reset after error
+      }
+    }
   };
 
   // const commentClicked = () => {
@@ -89,6 +101,7 @@ export default function Job({ job, onChange }) {
 
   return (
     <div className="job">
+      <ToastContainer />
       <div className="jobWrapper">
         <div className="jobTop">
           <div className="jobTopleft">
