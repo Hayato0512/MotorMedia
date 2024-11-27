@@ -2,7 +2,7 @@ import "./job.css";
 import { useNavigate } from "react-router-dom";
 import { format } from "timeago.js";
 import { MoreVert, FavoriteBorder, TwoWheeler } from "@material-ui/icons";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
@@ -54,9 +54,18 @@ export default function Job({ job, onChange }) {
     setShow(false);
   };
 
+  const toastId = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      toast.dismiss(); // Clear toasts on component unmount
+    };
+  }, []);
+
   const deleteClicked = async (e) => {
     if (isDeleting) return; // Prevent multiple calls if already in progress
     setIsDeleting(true);
+
     // delete the job, and jobapplications whose jobId matches, and delete all the documents from AWS S3, that is What I need to do.
     //I think I only need jobId. as long as I know the jobId, all the operations can be done.
     //oh, check if the currentUser Id matches the job EmployerId.
@@ -70,34 +79,40 @@ export default function Job({ job, onChange }) {
 
       return; // Exit the function
     } else {
+      if (toastId.current) {
+        // Avoid duplicate toasts
+        toast.update(toastId.current, {
+          render: "Operation in progress...",
+          autoClose: false,
+        });
+      } else {
+        toastId.current = toast.info("Deleting job...", { autoClose: false });
+      }
       try {
         const res = await axiosInstance.delete(`/jobs/${job._id}`);
         console.log(res);
-        toast.success("Job deleted successfully!"); // Success toast
+        toast.update(toastId.current, {
+          render: "Job deleted successfully!",
+          type: "success",
+          autoClose: 3000,
+        });
         setShow(false);
         onChange();
       } catch (error) {
         console.log(error);
         logMessage("Job Deletion Failed. ", "ERROR", "Job");
-        toast.error("Failed to delete the job."); // Error toast
+        toast.update(toastId.current, {
+          render: "Failed to delete the job.",
+          type: "error",
+          autoClose: 3000,
+        });
         setTimeout(() => setShow(false), 1000); // Close the dialog
       } finally {
         setIsDeleting(false); // Reset after error
+        toastId.current = null; // Reset the toast ID
       }
     }
   };
-
-  // const commentClicked = () => {
-  //   //   console.log(`comment Button Clicekd, take the user to the comment page`);
-  //   //   var objectToPassToComment = {
-  //   //     post: post,
-  //   //     isCommunityPost: false,
-  //   //     isPost: true,
-  //   //     isProfile: false,
-  //   //     isHome: false,
-  //   //   };
-  //   //   navigate("/comment", { state: objectToPassToComment });
-  // };
 
   return (
     <div className="job">
